@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="my" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus TV - Premium Streaming Experience</title>
+    
+    <meta name="description" content="နောက်ဆုံးထွက် 4K ရုပ်ရှင်များ၊ ဇာတ်လမ်းတွဲများနှင့် တိုက်ရိုက်ဘောလုံးပွဲများကို သင့်ဖုန်း၊ Tablet နှင့် TV တွင် ကြည့်ရှုလိုက်ပါ။">
+    <meta name="theme-color" content="#E50914">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Noto+Sans+Myanmar:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 
+                        dark: '#0a0a0a',
+                        darker: '#000000',
+                        card: '#141414',
+                        cardHover: '#1f1f1f', 
+                        primary: '#E50914',
+                        accent: '#B8070F',
+                        borderGray: '#2a2a2a'
+                    },
+                    fontFamily: { 
+                        sans: ['"Inter"', '"Pyidaungsu"', '"Noto Sans Myanmar"', '"Padauk"', 'sans-serif'], 
+                        brand: ['"Bebas Neue"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(229, 9, 20, 0.3)',
+                        'glow-lg': '0 0 40px rgba(229, 9, 20, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            background-color: #0a0a0a; 
+            color: #ffffff; 
+            font-family: 'Inter', 'Pyidaungsu', 'Noto Sans Myanmar', 'Padauk', sans-serif !important;
+            -webkit-font-smoothing: antialiased; 
+            overflow-x: hidden; 
+            line-height: 1.6;
+        }
+
+        .font-brand {
+            font-family: 'Bebas Neue', sans-serif !important;
+        }
+        
+        /* Advanced Hero Background */
+        .hero-bg {
+            background-color: #000000;
+            background-image: 
+                radial-gradient(circle at center, rgba(229,9,20,0.1) 0%, rgba(0,0,0,0.8) 60%, #000000 100%),
+                linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(10,10,10,1) 100%),
+                url('assets/hero-bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+        }
+        
+        .hero-curve-container {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .hero-curve {
+            position: absolute;
+            top: 0;
+            left: -10%;
+            width: 120%;
+            height: 100%;
+            background-color: #0a0a0a;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            border-top: 2px solid rgba(229, 9, 20, 0.4);
+            box-shadow: 0 -20px 60px rgba(229, 9, 20, 0.15);
+        }
+        
+        .nav-scrolled { 
+            background-color: rgba(10, 10, 10, 0.85); 
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Refined Buttons */
+        .nexus-btn { 
+            border-radius: 6px; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            letter-spacing: 0.5px; 
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nexus-btn-red { 
+            background: linear-gradient(135deg, #E50914 0%, #B8070F 100%);
+            color: white; 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .nexus-btn-red:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5); 
+        }
+        .nexus-btn-gray { 
+            background-color: rgba(255, 255, 255, 0.08); 
+            color: white; 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .nexus-btn-gray:hover { 
+            background-color: rgba(255, 255, 255, 0.15); 
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .hover-card-fx { 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .hover-card-fx:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border-color: rgba(229, 9, 20, 0.3);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E50914; }
+
+        /* FAQ Accordion Styles */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary ~ * { animation: sweep .3s ease-in-out; }
+        @keyframes sweep {
+            0%    {opacity: 0; margin-top: -10px}
+            100%  {opacity: 1; margin-top: 0px}
+        }
+    </style>
+</head>
+<body class="selection:bg-primary selection:text-white relative">
+
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-gradient-to-b from-black/90 to-transparent py-2" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <span class="font-brand text-4xl text-primary tracking-wider drop-shadow-lg">NEXUS<span class="text-white">TV</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300">
+                <a href="#features" class="hover:text-primary transition-colors duration-300">ဝန်ဆောင်မှုများ</a>
+                <a href="#pricing" class="hover:text-primary transition-colors duration-300">အစီအစဉ်များ</a>
+                <a href="#payment-steps" class="hover:text-primary transition-colors duration-300">ဝယ်ယူနည်း</a>
+                <a href="#faq" class="hover:text-primary transition-colors duration-300">မေးခွန်းများ</a>
+            </div>
+            <a href="#download" class="nexus-btn nexus-btn-red px-6 py-2.5 font-medium text-sm gap-2">
+                <i class="fa-brands fa-android"></i> App ရယူရန်
+            </a>
+        </div>
+    </nav>
+
+    <section class="hero-bg pt-32 pb-32 lg:pt-48 lg:pb-40 min-h-screen flex flex-col items-center justify-center text-center px-4 relative overflow-hidden">
+        <div class="z-20 flex flex-col items-center max-w-4xl mx-auto mt-8">
+            
+            <div data-aos="fade-down" data-aos-duration="1000" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                <span class="text-xs font-semibold text-gray-300 tracking-wider uppercase">Beta 1.0 is Available Now</span>
+            </div>
+
+            <h1 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white drop-shadow-2xl leading-normal">
+                အကန့်အသတ်မဲ့ ရုပ်ရှင်များ၊<br class="hidden md:block">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#ff4b55]">တိုက်ရိုက်ဘောလုံးပွဲများ</span> နှင့် အခြားများစွာ
+            </h1>
+            
+            <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" class="text-base md:text-lg text-gray-300 mb-10 font-normal max-w-2xl drop-shadow-md leading-relaxed">
+                သင့်ဖုန်း၊ Tablet နှင့် Android TV များတွင် ကြော်ငြာမပါဘဲ အရည်အသွေးမြင့်မားစွာ ခံစားကြည့်ရှုလိုက်ပါ။
+            </p>
+            
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="flex flex-col sm:flex-row gap-5 w-full sm:w-auto mt-4">
+                <a href="#download" class="nexus-btn nexus-btn-red px-8 py-3.5 text-base font-medium gap-3">
+                    <i class="fa-solid fa-download text-lg"></i> App ဒေါင်းလုဒ်ဆွဲရန်
+                </a>
+                <a href="#pricing" class="nexus-btn nexus-btn-gray px-8 py-3.5 text-base font-medium gap-3">
+                    <i class="fa-solid fa-crown text-[#FFD700] text-lg"></i> Premium ဝယ်ယူမည်
+                </a>
+            </div>
+            
+            <p data-aos="fade-in" data-aos-delay="600" class="mt-8 text-sm text-gray-500 font-medium flex items-center gap-2">
+                <i class="fa-solid fa-shield-check"></i> 100% Secure & Ad-Free Experience
+            </p>
+        </div>
+
+        <div class="hero-curve-container">
+            <div class="hero-curve"></div>
+        </div>
+    </section>
+
+    <section class="bg-dark -mt-16 pb-20 relative z-20">
+        <div data-aos="zoom-in-up" data-aos-duration="1200" class="w-full max-w-5xl mx-auto px-4">
+            <img src="assets/app-mockup.png" alt="Nexus TV Interface" class="w-full h-auto drop-shadow-[0_30px_60px_rgba(0,0,0,0.9)] rounded-2xl border border-borderGray">
+        </div>
+    </section>
+
+    <div class="w-full h-px bg-gradient-to-r from-dark via-borderGray to-dark"></div>
+
+    <section id="features" class="py-24 bg-dark relative overflow-hidden">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Why Choose Us</span>
+                <h2 class="text-2xl md:text-4xl font-bold text-white tracking-wide leading-normal">အကောင်းဆုံး ရုပ်ထွက်နှင့် ဝန်ဆောင်မှု</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-card p-10 rounded-2xl hover-card-fx flex flex-col justify-between border border-borderGray">
+                    <div>
+                        <div class="w-14 h-14 rounded-lg bg-white/5 flex items-center justify-center mb-6 border border-white/10">
+                            <i class="fa-solid fa-mobile-screen-button text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">ဖုန်း၊ Tablet နှင့် TV အတွက်</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">ဖုန်း၊ Tablet စခရင်မှာဖြစ်စေ၊ Android TV (သို့) Box တွင်ဖြစ်စေ Remote ဖြင့် အလွယ်တကူ ထိန်းချုပ်အသုံးပြုနိုင်ရန် သေချာရေးဆွဲထားပါသည်။</p>
+                    </div>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-card p-10 rounded-2xl hover-card-fx flex flex-col justify-between border border-borderGray relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-bl-full blur-[30px]"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 border border-primary/20">
+                            <i class="fa-solid fa-futbol text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">Live ဘောလုံးပွဲများ</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">အရေးကြီးသော ပွဲစဉ်များကို လွတ်မသွားစေရန် Premium Server များဖြင့် ကြည်လင်ပြတ်သားစွာ တိုက်ရိုက် ပြသပေးနေပါသည်။</p>
+                    </div>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="300" class="bg-card p-10 rounded-2xl hover-card-fx flex flex-col justify-between border border-borderGray">
+                    <div>
+                        <div class="w-14 h-14 rounded-lg bg-white/5 flex items-center justify-center mb-6 border border-white/10">
+                            <i class="fa-solid fa-bolt text-2xl text-yellow-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">မြန်ဆန်သော Streaming</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">နောက်ဆုံးပေါ် Cloud Infrastructure ကို အသုံးပြုထားသဖြင့် အင်တာနက်လိုင်းအနည်းငယ် ကျနေချိန်၌ပင် ထစ်ငေါ့မှုမရှိဘဲ ချောမွေ့စွာ ကြည့်ရှုနိုင်ပါသည်။</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 bg-[#0d0d0d] border-t border-borderGray relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Pricing Plans</span>
+                <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-wide leading-normal">သင့်အတွက် အသင့်တော်ဆုံး အစီအစဉ်များ</h2>
+                <p class="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">လစဉ်ကြေးပေးသွင်းပြီး ကြော်ငြာလုံးဝမပါဝင်သော Premium အတွေ့အကြုံကို ယခုပဲ ခံစားလိုက်ပါ။</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-center max-w-5xl mx-auto" id="plans-container">
+                
+                <div data-aos="fade-right" data-aos-delay="100" class="bg-card rounded-2xl p-8 flex flex-col hover-card-fx h-[95%] border border-borderGray relative z-10">
+                    <h3 class="text-xl font-bold text-gray-300 mb-2">Basic</h3>
+                    <p class="text-gray-500 text-sm mb-6 uppercase tracking-widest font-semibold">1 Month</p>
+                    <div class="flex items-baseline mb-4">
+                        <span class="text-4xl font-black text-white">3,000</span>
+                        <span class="text-gray-500 font-medium ml-2 text-base">MMK</span>
+                    </div>
+                    <p class="text-gray-400 text-sm font-medium mb-6 pb-6 border-b border-borderGray leading-relaxed">၃၀ ရက် အသုံးပြုနိုင်သည်</p>
+                    
+                    <div class="space-y-4 mb-8 flex-1">
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-gray-500 mt-1"></i><span class="text-gray-300 text-sm leading-relaxed">ကြော်ငြာ လုံးဝမပါဝင်ပါ</span></div>
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-gray-500 mt-1"></i><span class="text-gray-300 text-sm leading-relaxed">HD Quality ရရှိနိုင်သည်</span></div>
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-gray-500 mt-1"></i><span class="text-gray-300 text-sm leading-relaxed">Live ဘောလုံးပွဲများ</span></div>
+                    </div>
+                    <a href="#payment-steps" class="w-full nexus-btn nexus-btn-gray py-3.5 font-medium text-sm mt-auto">ရွေးချယ်မည်</a>
+                </div>
+
+                <div data-aos="zoom-in" class="bg-gradient-to-b from-[#1a1a1a] to-card rounded-2xl p-10 flex flex-col relative z-20 transform md:scale-105 shadow-glow border border-primary/50 h-full">
+                    <div class="absolute -top-4 inset-x-0 flex justify-center">
+                        <span class="bg-primary text-white text-xs font-bold px-5 py-1.5 rounded-full shadow-lg uppercase tracking-wider">Most Popular</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Standard</h3>
+                    <p class="text-primary text-sm mb-6 uppercase tracking-widest font-bold">3 Months</p>
+                    <div class="flex items-baseline mb-4">
+                        <span class="text-5xl font-black text-white">8,000</span>
+                        <span class="text-gray-400 font-medium ml-2 text-base">MMK</span>
+                    </div>
+                    <p class="text-gray-300 text-sm font-medium mb-6 pb-6 border-b border-gray-700 leading-relaxed">၉၀ ရက် <span class="text-primary ml-1 text-xs bg-primary/10 px-2 py-1 rounded">(၁,၀၀၀ ကျပ် သက်သာ)</span></p>
+                    
+                    <div class="space-y-4 mb-8 flex-1">
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-primary mt-1"></i><span class="text-white text-sm leading-relaxed font-medium">ကြော်ငြာ လုံးဝမပါဝင်ပါ</span></div>
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-primary mt-1"></i><span class="text-white text-sm leading-relaxed font-medium">4K Quality အထိ ရရှိနိုင်သည်</span></div>
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-primary mt-1"></i><span class="text-white text-sm leading-relaxed font-medium">Live ဘောလုံးပွဲများ အပြည့်အဝ</span></div>
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-primary mt-1"></i><span class="text-white text-sm leading-relaxed font-medium">ဇာတ်ကားများ Download ရယူနိုင်သည်</span></div>
+                    </div>
+                    <a href="#payment-steps" class="w-full nexus-btn nexus-btn-red py-4 font-medium text-base mt-auto">ယခုပဲ ဝယ်ယူမည်</a>
+                </div>
+
+                <div data-aos="fade-left" data-aos-delay="100" class="bg-card rounded-2xl p-8 flex flex-col hover-card-fx h-[95%] border border-borderGray relative z-10">
+                    <h3 class="text-xl font-bold text-gray-300 mb-2">Premium</h3>
+                    <p class="text-gray-500 text-sm mb-6 uppercase tracking-widest font-semibold">1 Year</p>
+                    <div class="flex items-baseline mb-4">
+                        <span class="text-4xl font-black text-white">30,000</span>
+                        <span class="text-gray-500 font-medium ml-2 text-base">MMK</span>
+                    </div>
+                    <p class="text-gray-400 text-sm font-medium mb-6 pb-6 border-b border-borderGray leading-relaxed">၃၆၅ ရက် <span class="text-green-500 ml-1 text-xs bg-green-500/10 px-2 py-1 rounded">(၆,၀၀၀ ကျပ် သက်သာ)</span></p>
+                    
+                    <div class="space-y-4 mb-8 flex-1">
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-gray-500 mt-1"></i><span class="text-gray-300 text-sm leading-relaxed">အားသာချက်များ အားလုံးပါဝင်သည်</span></div>
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-gray-500 mt-1"></i><span class="text-gray-300 text-sm leading-relaxed">ရေရှည်အတွက် အသက်သာဆုံး</span></div>
+                        <div class="flex items-start gap-3"><i class="fa-solid fa-check text-gray-500 mt-1"></i><span class="text-gray-300 text-sm leading-relaxed">ဖုန်း၊ Tablet၊ TV အဆင်ပြေစွာ သုံးနိုင်သည်</span></div>
+                    </div>
+                    <a href="#payment-steps" class="w-full nexus-btn nexus-btn-gray py-3.5 font-medium text-sm mt-auto">ရွေးချယ်မည်</a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="payment-steps" class="py-24 bg-[#0a0a0a] border-t border-borderGray relative overflow-hidden">
+        <div class="absolute top-1/2 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-shield-halved"></i> Secure Checkout
+                </span>
+                <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-wide leading-normal">Premium ဝယ်ယူရန် အဆင့် (၃) ဆင့်</h2>
+                <p class="text-gray-400 text-base leading-relaxed">Nexus App ထဲတွင် အကောင့်ဖွင့်ထားပြီးမှသာ အောက်ပါအဆင့်များအတိုင်း ဝယ်ယူပေးပါ။</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 md:gap-12 relative">
+                <div class="hidden md:block absolute top-12 left-[16%] right-[16%] h-[2px] bg-gradient-to-r from-borderGray via-primary/30 to-borderGray z-0"></div>
+
+                <div class="bg-card border border-borderGray rounded-2xl p-8 relative hover-card-fx z-10 mt-6 md:mt-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 md:left-8 md:translate-x-0 w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center text-xl font-black text-white shadow-glow border border-white/10">1</div>
+                    <h4 class="text-lg font-bold text-white mt-6 mb-3 text-center md:text-left leading-normal">ငွေလွှဲပြောင်းပါ</h4>
+                    <p class="text-gray-400 text-sm mb-6 text-center md:text-left leading-relaxed">ရွေးချယ်ထားသော အစီအစဉ်အတွက် ကျသင့်ငွေကို အောက်ပါအကောင့်များသို့ လွှဲပေးပါ။ <br><span class="text-xs text-primary bg-primary/10 px-2 py-1 rounded inline-block mt-2 font-medium">Copy ကူးရန် ဂဏန်းပေါ်နှိပ်ပါ</span></p>
+                    
+                    <div id="payment-methods-container" class="space-y-3">
+                        <div class="bg-[#1a1a1a] border border-borderGray rounded-xl p-4 flex justify-between items-center group cursor-pointer copy-btn hover:border-white/20 transition-all" data-copy="09123456789">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-[#205199]/20 flex items-center justify-center">
+                                    <i class="fa-solid fa-wallet text-[#4285F4]"></i>
+                                </div>
+                                <div>
+                                    <div class="text-[10px] text-[#4285F4] font-bold mb-1 uppercase tracking-widest">Kpay</div>
+                                    <div class="font-mono text-base text-white font-bold tracking-wider">09123456789</div>
+                                </div>
+                            </div>
+                            <i class="fa-regular fa-copy text-gray-500 group-hover:text-white transition-colors"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-card border border-borderGray rounded-2xl p-8 relative hover-card-fx z-10 mt-6 md:mt-0" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 md:left-8 md:translate-x-0 w-12 h-12 bg-gradient-to-br from-[#1a1a1a] to-[#333] rounded-xl flex items-center justify-center text-xl font-black text-white border border-white/10 shadow-lg">2</div>
+                    <h4 class="text-lg font-bold text-white mt-6 mb-3 text-center md:text-left leading-normal">လုပ်ငန်းစဉ်အမှတ် မှတ်ပါ</h4>
+                    <p class="text-gray-400 text-sm text-center md:text-left leading-relaxed mb-6">
+                        ငွေလွှဲပြီးပါက ရရှိလာသော ငွေလွှဲဖြတ်ပိုင်း (e-Receipt) ပေါ်ရှိ Transaction ID ကို ကြည့်ပါ။
+                    </p>
+                    <div class="bg-black/50 border border-borderGray rounded-lg p-5 flex flex-col items-center justify-center border-dashed">
+                        <i class="fa-solid fa-receipt text-gray-600 text-3xl mb-3"></i>
+                        <p class="text-xs text-gray-500 mb-2">Transaction ID</p>
+                        <div class="flex items-center text-gray-400 font-mono tracking-widest">
+                            <span>2108...</span>
+                            <span class="bg-blue-500/10 text-blue-400 font-bold px-2 py-1 rounded border border-blue-500/20 mx-1">4589</span>
+                        </div>
+                        <p class="text-[11px] text-blue-400 mt-3 text-center font-medium">နောက်ဆုံး ဂဏန်း ၄ လုံးကို မှတ်ထားပါ</p>
+                    </div>
+                </div>
+
+                <div class="bg-card border border-borderGray rounded-2xl p-8 relative hover-card-fx z-10 mt-6 md:mt-0" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 md:left-8 md:translate-x-0 w-12 h-12 bg-gradient-to-br from-[#1a1a1a] to-[#333] rounded-xl flex items-center justify-center text-xl font-black text-white border border-white/10 shadow-lg">3</div>
+                    <h4 class="text-lg font-bold text-white mt-6 mb-3 text-center md:text-left leading-normal">App ထဲတွင် အတည်ပြုပါ</h4>
+                    <p class="text-gray-400 text-sm text-center md:text-left leading-relaxed mb-6">
+                        Nexus App ထဲသို့ပြန်ဝင်ကာ အောက်ပါအတိုင်း လုပ်ဆောင်ပါ။ မိနစ်ပိုင်းအတွင်း Premium အကောင့်အဖြစ် ပြောင်းလဲသွားပါမည်။
+                    </p>
+                    <div class="bg-gradient-to-br from-[#1a1a1a] to-black border-l-4 border-primary rounded-r-lg p-5 shadow-inner border border-y-borderGray border-r-borderGray">
+                        <ul class="space-y-3 text-sm text-gray-300 font-medium">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-gear text-gray-500 w-4"></i> Settings သို့ သွားပါ</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-crown text-[#FFD700] w-4"></i> Buy Premium ကိုနှိပ်ပါ</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-keyboard text-gray-500 w-4"></i> မှတ်ထားသော ၄ လုံး ထည့်ပါ</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-green-500 w-4"></i> Submit နှိပ်ပါ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 bg-[#0d0d0d] border-t border-borderGray">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 tracking-wide leading-normal">မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများ</h2>
+            </div>
+
+            <div class="space-y-4">
+                <details class="bg-card border border-borderGray rounded-xl group" data-aos="fade-up" data-aos-delay="100">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-white hover:text-primary transition-colors">
+                        <span>ငွေလွှဲပြီးပါက Premium ကို ချက်ချင်းရမှာလား။</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="text-gray-400 p-6 pt-0 text-sm leading-relaxed border-t border-borderGray mt-2">
+                        App ထဲတွင် Transaction ID ၄ လုံးကို မှန်ကန်စွာ ထည့်သွင်းပြီးပါက စနစ်မှ အလိုအလျောက် စစ်ဆေးပြီး မိနစ်ပိုင်းအတွင်း Premium အကောင့်အဖြစ် အသုံးပြုနိုင်မည် ဖြစ်ပါသည်။
+                    </div>
+                </details>
+
+                <details class="bg-card border border-borderGray rounded-xl group" data-aos="fade-up" data-aos-delay="200">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-white hover:text-primary transition-colors">
+                        <span>အကောင့်တစ်ခုကို စက်ဘယ်နှလုံး အသုံးပြုလို့ရမလဲ။</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="text-gray-400 p-6 pt-0 text-sm leading-relaxed border-t border-borderGray mt-2">
+                        Premium အကောင့်တစ်ခုကို စက်အများကြီးတွင် Log in ဝင်ထားနိုင်ပါသည်။ သို့သော် တစ်ကြိမ်လျှင် ဖုန်း၊ Tablet (သို့) TV တစ်လုံးတည်းတွင်သာ (One screen at a time) ကြည့်ရှုနိုင်မည် ဖြစ်ပါသည်။
+                    </div>
+                </details>
+
+                <details class="bg-card border border-borderGray rounded-xl group" data-aos="fade-up" data-aos-delay="300">
+                    <summary class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-white hover:text-primary transition-colors">
+                        <span>iOS (iPhone/iPad) အတွက် ရနိုင်မလား။</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <div class="text-gray-400 p-6 pt-0 text-sm leading-relaxed border-t border-borderGray mt-2">
+                        လက်ရှိအချိန်တွင် Android (ဖုန်း၊ Tablet နှင့် TV) များအတွက်သာ ရရှိနိုင်သေးပါသည်။ iOS version ကို မကြာမီ ထုတ်လုပ်ပေးသွားရန် စီစဉ်နေပါသည်။
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="py-24 bg-gradient-to-b from-[#0a0a0a] to-black border-t border-borderGray relative overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-2xl md:text-4xl font-bold mb-6 text-white tracking-wide leading-normal" data-aos="fade-up">အချိန်နေရာမရွေး ကြည့်ရှုရန်</h2>
+            <p class="text-gray-400 mb-12 text-base leading-relaxed" data-aos="fade-up" data-aos-delay="100">သင့်စက်နှင့် ကိုက်ညီသော ဗားရှင်းကို ရွေးချယ်ဒေါင်းလုဒ်ဆွဲပါ။</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16">
+                <a href="#" onclick="showComingSoon(event, 'Android Phone & Tablet')" data-aos="fade-up" data-aos-delay="100" class="bg-card border border-borderGray rounded-2xl p-6 flex flex-col items-center justify-center gap-4 hover-card-fx shadow-lg group relative overflow-hidden">
+                    <div class="absolute top-2 right-2 bg-gray-700/50 text-[10px] text-gray-300 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Coming Soon</div>
+                    <div class="w-16 h-16 rounded-full bg-[#3DDC84]/10 flex items-center justify-center group-hover:bg-[#3DDC84]/20 transition-colors">
+                        <i class="fa-brands fa-android text-3xl text-[#3DDC84]"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Download For</div>
+                        <div class="text-lg font-bold text-white group-hover:text-[#3DDC84] transition-colors">Android Phone & Tablet</div>
+                    </div>
+                </a>
+                
+                <a href="https://dl.auranov.site/NexusTV-Box.apk" data-aos="fade-up" data-aos-delay="200" class="bg-card border border-borderGray rounded-2xl p-6 flex flex-col items-center justify-center gap-4 hover-card-fx shadow-lg group">
+                    <div class="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
+                        <i class="fa-solid fa-tv text-3xl text-blue-400"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Download For</div>
+                        <div class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">Android TV / Box</div>
+                    </div>
+                </a>
+
+                <a href="#" onclick="showComingSoon(event, 'iOS')" data-aos="fade-up" data-aos-delay="300" class="bg-card border border-borderGray rounded-2xl p-6 flex flex-col items-center justify-center gap-4 hover-card-fx shadow-lg group relative overflow-hidden">
+                    <div class="absolute top-2 right-2 bg-gray-700/50 text-[10px] text-gray-300 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Coming Soon</div>
+                    <div class="w-16 h-16 rounded-full bg-gray-500/10 flex items-center justify-center group-hover:bg-gray-500/20 transition-colors">
+                        <i class="fa-brands fa-apple text-3xl text-gray-300"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Download For</div>
+                        <div class="text-lg font-bold text-white group-hover:text-gray-300 transition-colors">iPhone & iPad</div>
+                    </div>
+                </a>
+
+                <a href="#" onclick="showComingSoon(event, 'Windows PC')" data-aos="fade-up" data-aos-delay="400" class="bg-card border border-borderGray rounded-2xl p-6 flex flex-col items-center justify-center gap-4 hover-card-fx shadow-lg group relative overflow-hidden">
+                    <div class="absolute top-2 right-2 bg-gray-700/50 text-[10px] text-gray-300 px-2 py-0.5 rounded font-bold uppercase tracking-wider">Coming Soon</div>
+                    <div class="w-16 h-16 rounded-full bg-[#00a4ef]/10 flex items-center justify-center group-hover:bg-[#00a4ef]/20 transition-colors">
+                        <i class="fa-brands fa-windows text-3xl text-[#00a4ef]"></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Download For</div>
+                        <div class="text-lg font-bold text-white group-hover:text-[#00a4ef] transition-colors">Windows PC</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-borderGray pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-2">
+                    <div class="font-brand text-4xl text-primary tracking-wider mb-4">NEXUS<span class="text-white">TV</span> <span class="text-xs text-gray-500 font-sans font-medium tracking-normal align-middle ml-2 border border-gray-700 px-2 py-0.5 rounded">Beta 1.0</span></div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
+                        မြန်မာနိုင်ငံရှိ ရုပ်ရှင်ချစ်သူများနှင့် ဘောလုံးပရိသတ်များအတွက် အကောင်းဆုံးသော Streaming အတွေ့အကြုံကို ပေးစွမ်းရန် ရည်ရွယ်ပါသည်။
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://t.me/NexusSupport" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-primary hover:text-white transition-all"><i class="fa-brands fa-telegram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors font-medium">Home Page</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white text-sm transition-colors font-medium">Features</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white text-sm transition-colors font-medium">Pricing Plans</a></li>
+                        <li><a href="#payment-steps" class="text-gray-400 hover:text-white text-sm transition-colors font-medium">How to Buy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#faq" class="text-gray-400 hover:text-white text-sm transition-colors font-medium">FAQ / Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors font-medium">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors font-medium">Privacy Policy</a></li>
+                        <li><a href="https://t.me/NexusSupport" target="_blank" class="text-primary hover:text-white text-sm transition-colors font-medium"><i class="fa-regular fa-comment-dots mr-2"></i>Contact Admin</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-500">&copy; <span id="current-year"></span> Nexus TV Myanmar. All rights reserved.</p>
+                <p class="text-xs text-gray-600 font-medium tracking-widest uppercase">Designed for better experience</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toast-notification" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 translate-y-[150%] opacity-0 transition-all duration-300 z-[100] bg-card border border-borderGray rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] px-6 py-4 flex items-center gap-4 w-max max-w-[90vw]">
+        <div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-clock text-blue-400 text-lg"></i>
+        </div>
+        <div>
+            <h5 class="text-white font-bold text-sm mb-0.5">အသိပေးချက်</h5>
+            <p id="toast-message" class="text-sm font-medium text-gray-400 leading-relaxed"></p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            offset: 50,
+        });
+
+        // "Not Yet" Notification Handler
+        let toastTimeout;
+        function showComingSoon(e, platformName) {
+            e.preventDefault(); // Prevent page jump
+            const toast = document.getElementById('toast-notification');
+            const message = document.getElementById('toast-message');
+            
+            // Clear existing timeout if user clicks multiple times quickly
+            clearTimeout(toastTimeout);
+            
+            message.textContent = `${platformName} ဗားရှင်းကို လက်ရှိတွင် ရေးဆွဲနေဆဲဖြစ်ပြီး မကြာမီ ရရှိနိုင်ပါမည်။ စောင့်မျှော်ပေးပါဦးဗျာ။`;
+            
+            // Show toast
+            toast.classList.remove('translate-y-[150%]', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            // Hide toast after 4 seconds
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-[150%]', 'opacity-0');
+            }, 4000);
+        }
+
+        const API_URL = 'https://api.auranov.site'; 
+
+        async function fetchPaymentMethods() {
+            try {
+                const methodsRes = await fetch(`${API_URL}/payment-methods`);
+                if(methodsRes.ok) {
+                    const methods = await methodsRes.json();
+                    if(methods && methods.length > 0) {
+                        renderPaymentMethods(methods);
+                    }
+                }
+            } catch (error) {
+                console.warn('Failed to fetch methods, using default UI.');
+                attachCopyListeners(); // Attach to defaults if API fails
+            }
+        }
+
+        function renderPaymentMethods(methods) {
+            const container = document.getElementById('payment-methods-container');
+            container.innerHTML = ''; 
+            
+            methods.forEach(method => {
+                const isKpay = method.name.toLowerCase().includes('kpay');
+                const brandColor = isKpay ? '#4285F4' : '#fbbc05';
+                const bgIconClass = isKpay ? 'bg-[#205199]/20' : 'bg-[#fbbc05]/10';
+                const iconClass = isKpay ? 'fa-wallet' : 'fa-mobile-screen-button';
+                
+                const methodHTML = `
+                <div class="bg-[#1a1a1a] border border-borderGray rounded-xl p-4 flex justify-between items-center group cursor-pointer copy-btn hover:border-white/20 transition-all" data-copy="${method.phone}">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full ${bgIconClass} flex items-center justify-center">
+                            <i class="fa-solid ${iconClass} text-[${brandColor}]"></i>
+                        </div>
+                        <div>
+                            <div class="text-[10px] font-bold mb-1 uppercase tracking-widest" style="color: ${brandColor}">${method.name}</div>
+                            <div class="font-mono text-base text-white font-bold tracking-wider">${method.phone}</div>
+                        </div>
+                    </div>
+                    <i class="fa-regular fa-copy text-gray-500 group-hover:text-white transition-colors"></i>
+                </div>
+                `;
+                container.innerHTML += methodHTML;
+            });
+            
+            attachCopyListeners();
+        }
+
+        function attachCopyListeners() {
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+                
+                newBtn.addEventListener('click', function() {
+                    const textToCopy = this.getAttribute('data-copy');
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        const icon = this.querySelector('.fa-copy');
+                        const originalClass = icon.className;
+                        
+                        icon.className = 'fa-solid fa-check text-green-400';
+                        
+                        setTimeout(() => { 
+                            icon.className = originalClass; 
+                        }, 2000);
+                    });
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchPaymentMethods();
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('nav-scrolled');
+                nav.classList.remove('bg-gradient-to-b', 'from-black/90', 'to-transparent', 'py-2');
+                nav.classList.add('py-1');
+            } else {
+                nav.classList.add('bg-gradient-to-b', 'from-black/90', 'to-transparent', 'py-2');
+                nav.classList.remove('nav-scrolled', 'py-1');
+            }
+        });
+    </script>
+</body>
+</html>
