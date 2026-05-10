@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
             paymentMethods: 'https://api.auranov.site/payment-methods'
         },
         downloads: {
-            android: 'https://rapp.plyme.space/nexusSTR/nexus-mobile-release.apk',
-            tv: 'https://rapp.plyme.space/nexusSTR/nexus-release.apk'
+            android: 'https://rapp.plyme.space/app-arm64-v8a-release.apk',
+            tv: 'https://rapp.plyme.space/app-release.apk'
         },
         // ဤနေရာတွင် မိမိတို့၏ Social Media Link အမှန်များကို ပြောင်းလဲထည့်သွင်းပါ
         socials: {
@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
             telegram: 'https://t.me/NexusSupport'
         },
         defaultPayments: [
-            { name: "Kpay", phone: "09123456789" },
-            { name: "WavePay", phone: "09123456789" }
+            { name: "Kpay", phone: "not yet" },
+            { name: "WavePay", phone: "not yet" }
         ]
     };
 
