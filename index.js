@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             paymentMethods: 'https://api.auranov.site/payment-methods'
         },
         downloads: {
-            android: 'https://rapp.plyme.space/app-arm64-v8a-release.apk',
+            android: 'https://rapp.plyme.space/android-phone/nexus_code1_beta.apk',
             tv: 'https://rapp.plyme.space/app-release.apk'
         },
         // ဤနေရာတွင် မိမိတို့၏ Social Media Link အမှန်များကို ပြောင်းလဲထည့်သွင်းပါ
