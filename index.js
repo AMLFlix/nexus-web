@@ -1,5 +1,5 @@
 /**
- * Nexus TV - Premium UI Interactive Logic
+ * Nexus TV - iOS Theme Interactive Logic (v1.0 Beta)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Configuration
     const CONFIG = {
         downloads: {
-            android: 'https://rapp.plyme.space/android-phone/nexus_code1_beta.apk',
-            tv: 'https://rapp.plyme.space/app-release.apk'
+            // Android Direct APK download link
+            android: 'https://rapp.plyme.space/android-phone/app-arm64-v8a-release.apk',
+            tv: 'https://rapp.plyme.space/android-tv/app-release.apk'
         },
         socials: {
             facebook: 'https://www.facebook.com/NexusTVMyanmar',
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearEl = document.getElementById('current-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Fancy Toast Notification System
+    // iOS Style Notification System
     let toastTimer;
     window.showToast = (msg, isSuccess = true) => {
         const toast = document.getElementById('toast');
@@ -33,40 +34,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         toastMsg.textContent = msg;
         
-        // Dynamic Styling based on state
         if(isSuccess) {
-            toast.style.borderColor = 'rgba(255, 255, 255, 0.1)'; 
-            toast.style.backgroundColor = 'rgba(24, 24, 27, 0.9)'; // Dark Zinc
-            toastIconBg.style.backgroundColor = 'rgba(34, 197, 94, 0.2)'; // Green tint
-            toastIcon.className = "fa-solid fa-check text-green-500";
+            toastIconBg.className = "w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-iosBlue/20";
+            toastIcon.className = "fa-solid fa-check text-iosBlue text-sm";
         } else {
-            toast.style.borderColor = 'rgba(229, 9, 20, 0.3)'; 
-            toast.style.backgroundColor = 'rgba(24, 24, 27, 0.9)';
-            toastIconBg.style.backgroundColor = 'rgba(229, 9, 20, 0.2)'; // Red tint
-            toastIcon.className = "fa-solid fa-info text-[#E50914]";
+            toastIconBg.className = "w-8 h-8 rounded-full flex items-center justify-center shrink-0 bg-red-500/20";
+            toastIcon.className = "fa-solid fa-exclamation text-red-500 text-sm";
         }
 
         // Pop in animation
-        toast.classList.remove('-translate-y-[200%]', 'opacity-0');
+        toast.classList.remove('-translate-y-[150%]', 'opacity-0');
         
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => {
-            toast.classList.add('-translate-y-[200%]', 'opacity-0');
-        }, 3000);
+            toast.classList.add('-translate-y-[150%]', 'opacity-0');
+        }, 3500);
     };
 
     // Plan Selection UX
     window.selectPlan = (planName) => {
-        showToast(`Selected ${planName} Plan. Proceed to App to pay.`, true);
+        showToast(`${planName} Plan အားရွေးချယ်ပြီးပါပြီ။ App အတွင်းငွေချေပါ။`, true);
         const paymentSection = document.getElementById('payment');
         if(paymentSection) {
             setTimeout(() => {
                 paymentSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 600);
+            }, 500);
         }
     };
 
-    // Setup Download & Social Links
+    // Setup Social Links
     document.querySelectorAll('[data-social]').forEach(link => {
         const platform = link.getAttribute('data-social');
         if (CONFIG.socials[platform]) {
@@ -75,40 +71,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Fix Download Issue Logic
     document.querySelectorAll('[data-download]').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
             const platformType = btn.getAttribute('data-download');
             const url = CONFIG.downloads[platformType];
+            
             if (url) {
-                showToast('Initiating download...', true);
-                setTimeout(() => window.open(url, '_blank'), 500);
+                showToast('v1.0 Beta အား Download စတင်နေပါပြီ...', true);
+                
+                // Using location.href is more reliable for APK downloads than window.open
+                // which might be blocked by popup blockers.
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 800);
+
             } else {
-                showToast("Link unavailable", false);
+                showToast("Download link မရနိုင်သေးပါ။", false);
             }
         });
     });
 
-    // Smooth Accordion (One open at a time)
-    window.toggleFaq = (element) => {
-        document.querySelectorAll('details').forEach(item => {
-            if (item !== element) item.removeAttribute('open');
-        });
-    };
-
-    // --- UI/UX Enhancements ---
-
-    // 1. Scroll Animations (Intersection Observer for Fade-in)
+    // 1. Scroll Animations (Intersection Observer for smooth reveal)
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Only animate once
+                observer.unobserve(entry.target); 
             }
         });
     }, observerOptions);
@@ -117,29 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // 2. Floating Navbar & Mobile Nav Scroll Spy
-    const navbarWrapper = document.getElementById('navbar-wrapper');
-    const navbar = document.getElementById('navbar');
+    // 2. iOS Mobile Bottom Tab Bar Highlight Logic
     const mobileNavLinks = document.querySelectorAll('#mobile-nav .nav-item');
     const sections = document.querySelectorAll('section');
 
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         
-        // Desktop Navbar Style change on scroll
-        if (navbarWrapper && navbar) {
-            if (scrollY > 50) {
-                navbar.classList.add('nav-floating');
-                navbarWrapper.classList.remove('pt-4');
-                navbarWrapper.classList.add('pt-2');
-            } else {
-                navbar.classList.remove('nav-floating');
-                navbarWrapper.classList.add('pt-4');
-                navbarWrapper.classList.remove('pt-2');
-            }
-        }
-
-        // Mobile Nav Highlighting
         let currentSection = "home";
         sections.forEach(sec => {
             if (scrollY >= sec.offsetTop - window.innerHeight / 2.5) {
@@ -148,16 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         mobileNavLinks.forEach(item => {
-            // Reset state
-            item.classList.remove("text-white");
-            item.classList.add("text-zinc-500");
-            item.style.transform = "scale(1)";
+            item.classList.remove("text-iosBlue");
+            item.classList.add("text-iosGray");
             
-            // Active state
             if (item.getAttribute("href").includes(currentSection)) {
-                item.classList.remove("text-zinc-500");
-                item.classList.add("text-white");
-                item.style.transform = "scale(1.15)";
+                item.classList.remove("text-iosGray");
+                item.classList.add("text-iosBlue");
             }
         });
     }, { passive: true });
