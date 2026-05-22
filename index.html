@@ -48,12 +48,12 @@
     
     <style>
         body { 
-            background-color: #030712; /* Gray 950 */
+            background-color: #030712; 
             color: #F8FAFC; 
             overflow-x: hidden;
         }
 
-        /* Glass Navbar */
+        /* iOS Glass Navbar */
         .glass-nav {
             background: rgba(3, 7, 18, 0.7);
             backdrop-filter: blur(12px);
@@ -126,16 +126,14 @@
 
     <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-300 py-4 px-6 md:px-12">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
+            
             <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-light to-brand-dark flex items-center justify-center shadow-lg shadow-brand/30 group-hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-play text-white ml-1"></i>
-                </div>
+                <img src="assets/nexus-logo.png" alt="Nexus Logo" class="w-10 h-10 object-contain group-hover:scale-105 transition-transform" onerror="this.style.display='none'">
                 <span class="text-xl font-bold tracking-tight text-white">Nexus TV</span>
             </div>
             
             <div class="hidden md:flex gap-8 text-[15px] font-medium text-slate-300">
                 <a href="#features" class="hover:text-white transition-colors">Features</a>
-                <a href="#devices" class="hover:text-white transition-colors">Devices</a>
                 <a href="#pricing" class="hover:text-white transition-colors">Plans</a>
             </div>
             
@@ -256,9 +254,9 @@
                     <ul class="space-y-4 mb-8 text-slate-300 text-sm">
                         <li class="flex gap-3"><i class="fa-solid fa-check text-brand-light mt-0.5"></i> HD 720p Resolution</li>
                         <li class="flex gap-3"><i class="fa-solid fa-check text-brand-light mt-0.5"></i> Ad-Free Experience</li>
-                        <li class="flex gap-3 text-slate-500"><i class="fa-solid fa-minus mt-0.5"></i> 2 Device </li>
+                        <li class="flex gap-3 text-slate-500"><i class="fa-solid fa-minus mt-0.5"></i> 1 Device Only</li>
                     </ul>
-                    <button class="w-full py-3 rounded-xl font-semibold bg-surface-hover text-white hover:bg-slate-600 transition-colors">Select Basic</button>
+                    <button onclick="selectPlan('Basic')" class="w-full py-3 rounded-xl font-semibold bg-surface-hover text-white hover:bg-slate-600 transition-colors">Select Basic</button>
                 </div>
 
                 <div class="bento-card p-8 relative transform md:-translate-y-4 border-brand/50 shadow-[0_0_30px_rgba(37,99,235,0.15)] reveal" style="transition-delay: 100ms;">
@@ -273,7 +271,7 @@
                         <li class="flex gap-3"><i class="fa-solid fa-check text-brand-light mt-0.5"></i> 2 Devices Simultaneously</li>
                         <li class="flex gap-3"><i class="fa-solid fa-check text-brand-light mt-0.5"></i> Unlimited Downloads</li>
                     </ul>
-                    <button class="w-full py-3 rounded-xl font-semibold bg-brand text-white hover:bg-brand-light transition-colors shadow-lg shadow-brand/25">Get Standard</button>
+                    <button onclick="selectPlan('Standard')" class="w-full py-3 rounded-xl font-semibold bg-brand text-white hover:bg-brand-light transition-colors shadow-lg shadow-brand/25">Get Standard</button>
                 </div>
 
                 <div class="bento-card p-8 reveal" style="transition-delay: 200ms;">
@@ -287,18 +285,17 @@
                         <li class="flex gap-3"><i class="fa-solid fa-star text-yellow-500 mt-0.5"></i> Custom Profiles</li>
                         <li class="flex gap-3"><i class="fa-solid fa-star text-yellow-500 mt-0.5"></i> VIP Support Channel</li>
                     </ul>
-                    <button class="w-full py-3 rounded-xl font-semibold bg-surface-hover text-white hover:bg-slate-600 transition-colors">Select VIP</button>
+                    <button onclick="selectPlan('VIP')" class="w-full py-3 rounded-xl font-semibold bg-surface-hover text-white hover:bg-slate-600 transition-colors">Select VIP</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="border-t border-white/5 py-12 px-6 bg-[#020408]">
+    <footer class="border-t border-white/5 py-12 px-6 bg-[#020408] mb-16 md:mb-0">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            
             <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
-                    <i class="fa-solid fa-play text-white text-xs ml-0.5"></i>
-                </div>
+                <img src="assets/nexus-logo.png" alt="Nexus Logo" class="w-8 h-8 object-contain" onerror="this.style.display='none'">
                 <span class="text-lg font-bold text-white">Nexus TV</span>
             </div>
             
@@ -312,7 +309,7 @@
     </footer>
 
     <div id="mobile-nav" class="fixed bottom-0 left-0 w-full bg-surface-card/90 backdrop-blur-lg border-t border-white/10 z-50 flex justify-around items-center px-2 py-3 md:hidden pb-safe">
-        <a href="#" onclick="window.scrollTo(0,0)" class="flex flex-col items-center gap-1 text-brand">
+        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-1 text-brand">
             <i class="fa-solid fa-house text-lg"></i>
             <span class="text-[10px] font-medium">Home</span>
         </a>
