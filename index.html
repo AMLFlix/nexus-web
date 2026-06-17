@@ -1,369 +1,471 @@
 <!DOCTYPE html>
-<html lang="my" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nexus TV | The New Era</title>
+    <title>NEXUS - Myanmar Subtitle Movies & Series</title>
     
+    <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#4338ca', // Indigo 700
-                        secondary: '#06b6d4', // Cyan 500
-                        dark: '#0a0a0a',
-                        surface: '#171717',
-                        borderline: '#262626'
+                        nexus: {
+                            red: '#E50914',
+                            bg: '#050505',
+                            card: '#0D0D0D',
+                            border: '#1A1A1A',
+                            muted: '#A3A3A3'
+                        }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'Noto Sans Myanmar', 'sans-serif'],
-                        heading: ['Space Grotesk', 'sans-serif']
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.5, transform: 'scale(1)' },
+                            '50%': { opacity: 0.8, transform: 'scale(1.05)' },
+                        }
                     }
                 }
             }
         }
     </script>
 
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Myanmar:wght@400;500;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
-        body { 
-            background-color: #0a0a0a; 
-            color: #e5e5e5; 
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-
-        /* Hide scrollbar but keep functionality */
-        ::-webkit-scrollbar { width: 0px; background: transparent; }
-
-        /* Custom Gradients */
-        .text-gradient {
-            background: linear-gradient(135deg, #818cf8 0%, #22d3ee 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .bg-gradient-glow {
-            background: radial-gradient(circle at center, rgba(67, 56, 202, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
-        }
-
-        /* Tab Transitions */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        .tab-content.active { display: block; }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Ambient Glow */
+        .bg-glow {
+            background: radial-gradient(circle at 30% 20%, rgba(229, 9, 20, 0.15) 0%, rgba(5, 5, 5, 0) 50%);
+        }
+        .bg-glow-2 {
+            background: radial-gradient(circle at 80% 80%, rgba(229, 9, 20, 0.08) 0%, rgba(5, 5, 5, 0) 40%);
         }
 
-        /* Sidebar Glass */
-        .sidebar-glass {
-            background: rgba(23, 23, 23, 0.8);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid #262626;
+        /* Scroll Reveal Effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
         }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(13, 13, 13, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hide Scrollbar */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
     </style>
 </head>
-<body class="flex flex-col md:flex-row min-h-screen antialiased">
+<body class="font-sans relative">
 
-    <div id="toast" class="fixed top-6 right-6 flex items-center gap-3 px-5 py-3 rounded-lg bg-surface border border-borderline shadow-2xl transition-all duration-300 transform translate-x-full opacity-0 z-[100]">
-        <i id="toast-icon" class="text-secondary"></i>
-        <span id="toast-msg" class="text-sm font-medium"></span>
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-8 left-1/2 -translate-x-1/2 flex items-center gap-4 px-6 py-4 rounded-full glass shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-nexus-red/30 transition-all duration-500 transform -translate-y-[200%] opacity-0 z-[100]">
+        <div id="toast-icon-bg" class="w-8 h-8 rounded-full flex items-center justify-center bg-nexus-red/20 border border-nexus-red/30">
+            <i id="toast-icon" class="fa-solid fa-bell text-nexus-red text-sm"></i>
+        </div>
+        <span id="toast-msg" class="text-sm font-semibold tracking-wider text-white"></span>
     </div>
 
-    <aside class="sidebar-glass fixed left-0 top-0 h-screen w-24 hidden md:flex flex-col items-center py-8 z-50 justify-between">
-        <a href="#" class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.3)]">
-            <i class="fa-solid fa-play text-white text-xl"></i>
+    <!-- Background Glow -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
+        <div class="absolute w-[800px] h-[800px] -top-[200px] -left-[200px] bg-glow rounded-full animate-pulse-glow"></div>
+        <div class="absolute w-[600px] h-[600px] bottom-[10%] right-[5%] bg-glow-2 rounded-full animate-pulse-glow" style="animation-delay: 2s;"></div>
+    </div>
+
+    <!-- MOBILE Bottom Navigation -->
+    <nav class="md:hidden fixed bottom-0 left-0 w-full glass z-50 flex justify-around items-center px-4 py-3 pb-safe border-t border-nexus-border">
+        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-1 text-nexus-red transition-transform active:scale-95">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[10px] font-bold uppercase tracking-wider">Home</span>
         </a>
+        <a href="#app-info" class="flex flex-col items-center gap-1 text-nexus-muted hover:text-white transition-all active:scale-95">
+            <i class="fa-solid fa-circle-info text-lg"></i>
+            <span class="text-[10px] font-bold uppercase tracking-wider">Info</span>
+        </a>
+        <a href="#download" class="flex flex-col items-center gap-1 text-nexus-muted hover:text-white transition-all active:scale-95">
+            <i class="fa-solid fa-download text-lg"></i>
+            <span class="text-[10px] font-bold uppercase tracking-wider">Get App</span>
+        </a>
+        <a href="#payment" class="flex flex-col items-center gap-1 text-nexus-muted hover:text-white transition-all active:scale-95">
+            <i class="fa-solid fa-crown text-lg"></i>
+            <span class="text-[10px] font-bold uppercase tracking-wider">VIP</span>
+        </a>
+    </nav>
 
-        <nav class="flex flex-col gap-8">
-            <a href="#home" class="group relative flex justify-center" title="Home">
-                <i class="fa-solid fa-house text-neutral-500 group-hover:text-white transition-colors text-xl"></i>
+    <!-- DESKTOP Top Navigation -->
+    <nav class="hidden md:flex relative z-50 items-center justify-between px-16 py-8 max-w-7xl mx-auto">
+        <div class="text-3xl font-black text-nexus-red italic tracking-tighter hover:scale-105 transition-transform cursor-pointer">NEXUS</div>
+        <div class="flex items-center gap-10 text-sm font-semibold text-white/80 uppercase tracking-wider">
+            <a href="#app-info" class="flex items-center gap-2 hover:text-nexus-red transition-colors group">
+                <i class="fa-solid fa-circle-info group-hover:rotate-12 transition-transform"></i> App Info
             </a>
-            <a href="#features" class="group relative flex justify-center" title="Features">
-                <i class="fa-solid fa-layer-group text-neutral-500 group-hover:text-white transition-colors text-xl"></i>
+            <a href="#download" class="flex items-center gap-2 hover:text-nexus-red transition-colors group">
+                <i class="fa-solid fa-download group-hover:-translate-y-1 transition-transform"></i> Download
             </a>
-            <a href="#pricing" class="group relative flex justify-center" title="Plans">
-                <i class="fa-solid fa-tags text-neutral-500 group-hover:text-white transition-colors text-xl"></i>
+            <a href="#payment" class="flex items-center gap-2 hover:text-nexus-red transition-colors group">
+                <i class="fa-regular fa-credit-card group-hover:scale-110 transition-transform"></i> Payment Info
             </a>
-        </nav>
-
-        <div class="flex flex-col gap-6">
-            <a href="#" data-social="facebook" class="text-neutral-500 hover:text-[#1877F2] transition-colors"><i class="fa-brands fa-facebook-f text-lg"></i></a>
-            <a href="#" data-social="telegram" class="text-neutral-500 hover:text-[#229ED9] transition-colors"><i class="fa-brands fa-telegram text-lg"></i></a>
+            <a href="#social" class="flex items-center gap-2 hover:text-nexus-red transition-colors group">
+                <i class="fa-solid fa-user-group group-hover:rotate-6 transition-transform"></i> Social
+            </a>
         </div>
-    </aside>
+    </nav>
 
-    <main class="w-full md:ml-24 pb-24 md:pb-0 relative">
-        
-        <div class="fixed top-0 left-0 w-full h-full bg-gradient-glow pointer-events-none -z-10"></div>
-
-        <section id="home" class="min-h-screen flex items-center px-6 md:px-20 py-20 relative">
-            <div class="max-w-3xl">
-                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-surface border border-borderline mb-8">
-                    <span class="relative flex h-2.5 w-2.5">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
-                    </span>
-                    <span class="text-xs font-semibold tracking-widest uppercase text-neutral-300">Nexus OS 1.0</span>
-                </div>
-
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-[1.1] mb-8">
-                    Cinematic Reality <br>
-                    <span class="text-gradient">Redefined.</span>
-                </h1>
-                
-                <p class="text-lg md:text-xl text-neutral-400 mb-12 max-w-xl leading-[1.8]">
-                    ရုပ်ရှင်ရုံတစ်ခုလုံးကို သင့်အိမ်ခန်းထဲ သယ်ဆောင်လာသကဲ့သို့ 4K Ultra HD ရုပ်ထွက်၊ ကြော်ငြာလုံးဝမပါဝင်သော Premium အတွေ့အကြုံ။
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-5">
-                    <button data-download="android" class="group relative px-8 py-4 bg-white text-dark rounded-xl font-bold flex items-center justify-center gap-3 overflow-hidden transition-transform active:scale-95">
-                        <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-primary/20 to-secondary/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500"></div>
-                        <i class="fa-brands fa-android text-xl"></i>
-                        <span>Download APK</span>
-                    </button>
-                    <button data-download="tv" class="px-8 py-4 bg-surface border border-borderline hover:border-neutral-500 text-white rounded-xl font-bold flex items-center justify-center gap-3 transition-all active:scale-95">
-                        <i class="fa-solid fa-tv text-xl text-neutral-400"></i>
-                        <span>Get TV Version</span>
-                    </button>
-                </div>
+    <!-- HERO SECTION -->
+    <section class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 pt-12 pb-24 flex flex-col lg:flex-row items-center gap-12 min-h-[85vh]">
+        <div class="flex-1 reveal">
+            <div class="inline-flex items-center gap-2 border border-nexus-red/40 text-nexus-red text-[10px] font-bold tracking-widest px-4 py-1.5 rounded-full mb-8 uppercase bg-nexus-red/10 backdrop-blur-sm shadow-[0_0_20px_rgba(229,9,20,0.15)]">
+                <span class="w-1.5 h-1.5 rounded-full bg-nexus-red animate-pulse"></span>
+                Official App Release
             </div>
             
-            <div class="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-borderline rounded-full opacity-20">
-                <div class="absolute inset-10 border border-primary rounded-full animate-[spin_60s_linear_infinite]"></div>
-                <div class="absolute inset-20 border border-secondary rounded-full animate-[spin_40s_linear_infinite_reverse]"></div>
+            <h1 class="text-5xl md:text-7xl lg:text-[80px] font-black leading-[1.05] mb-6 tracking-tight">
+                Myanmar Subtitle <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-nexus-red to-red-500">Movies & Series</span>
+            </h1>
+            
+            <p class="text-nexus-muted text-lg mb-12 max-w-lg leading-relaxed font-medium">
+                Enjoy the latest movies and series with Myanmar subtitles. Available on Android Phone and Android TV with Zero Buffering.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                <button data-action="download-mobile" class="group relative bg-nexus-red hover:bg-red-700 text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-4 transition-all duration-300 active:scale-95 shadow-[0_0_30px_rgba(229,9,20,0.3)] hover:shadow-[0_0_40px_rgba(229,9,20,0.5)] overflow-hidden">
+                    <div class="absolute inset-0 w-full h-full bg-white/20 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                    <i class="fa-solid fa-mobile-screen-button text-2xl group-hover:-translate-y-1 transition-transform"></i>
+                    <div class="text-left leading-tight">
+                        <div class="text-[10px] uppercase font-semibold text-white/80">Download</div>
+                        <div class="text-sm tracking-wide">MOBILE APK</div>
+                    </div>
+                </button>
+                <button data-action="download-tv" class="group bg-nexus-card border border-nexus-border hover:border-nexus-red/50 hover:bg-nexus-red/10 text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-4 transition-all duration-300 active:scale-95">
+                    <i class="fa-solid fa-tv text-2xl text-nexus-muted group-hover:text-nexus-red transition-colors"></i>
+                    <div class="text-left leading-tight">
+                        <div class="text-[10px] uppercase font-semibold text-nexus-muted group-hover:text-nexus-red transition-colors">Download</div>
+                        <div class="text-sm tracking-wide">TV APK</div>
+                    </div>
+                </button>
             </div>
-        </section>
 
-        <section id="features" class="py-24 px-6 md:px-20 border-t border-borderline">
-            <h2 class="text-3xl md:text-5xl font-heading font-bold mb-16 text-white">The Architecture</h2>
-
-            <div class="flex flex-col gap-12">
-                <div class="flex flex-col md:flex-row items-center gap-10 bg-surface border border-borderline rounded-3xl p-8 md:p-12">
-                    <div class="flex-1">
-                        <div class="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mb-6">
-                            <i class="fa-solid fa-mobile-screen text-primary text-xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-white">Cross-Device Sync</h3>
-                        <p class="text-neutral-400 leading-[1.8]">ဖုန်းမှာကြည့်လက်စ ဇာတ်ကားကို Android TV ပေါ်မှာ အချိန်အတိအကျကနေ ဆက်လက်ကြည့်ရှုနိုင်တဲ့စနစ်။ (No refreshing needed)</p>
-                    </div>
-                    <div class="flex-1 w-full bg-dark h-48 rounded-2xl border border-borderline flex items-center justify-center relative overflow-hidden">
-                        <div class="w-full h-[1px] bg-primary/50 absolute top-1/2 -translate-y-1/2"></div>
-                        <i class="fa-solid fa-arrows-rotate text-4xl text-neutral-700 animate-spin" style="animation-duration: 3s;"></i>
-                    </div>
+            <div class="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm inline-flex">
+                <div class="flex -space-x-3">
+                    <img class="w-10 h-10 rounded-full border-2 border-nexus-bg object-cover" src="assets/avatars.png" alt="Users" onerror="this.outerHTML='<div class=\'flex -space-x-2\'><div class=\'w-8 h-8 rounded-full bg-gray-600 border-2 border-black\'></div><div class=\'w-8 h-8 rounded-full bg-gray-500 border-2 border-black\'></div><div class=\'w-8 h-8 rounded-full bg-gray-400 border-2 border-black\'></div></div>'">
                 </div>
-
-                <div class="flex flex-col md:flex-row-reverse items-center gap-10 bg-surface border border-borderline rounded-3xl p-8 md:p-12">
-                    <div class="flex-1">
-                        <div class="w-14 h-14 rounded-full bg-secondary/20 flex items-center justify-center mb-6">
-                            <i class="fa-solid fa-bolt text-secondary text-xl"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-4 text-white">Zero-Buffering Engine</h3>
-                        <p class="text-neutral-400 leading-[1.8]">Dolby Atmos အသံစနစ်နှင့် အဆင့်မြင့် Server နည်းပညာဖြင့် 4K အရည်အသွေးကို လိုင်းမကောင်းချိန်မှာတောင် အကောင်းဆုံး ထိန်းညှိပေးသည်။</p>
-                    </div>
-                    <div class="flex-1 w-full bg-dark h-48 rounded-2xl border border-borderline flex items-center justify-center relative overflow-hidden">
-                        <div class="w-32 h-32 rounded-full border-4 border-secondary/30 border-t-secondary animate-spin"></div>
-                    </div>
+                <div class="text-xs text-nexus-muted leading-relaxed">
+                    Trusted by <strong class="text-white">10,000+</strong><br> movie lovers in Myanmar.
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="pricing" class="py-24 px-6 md:px-20 border-t border-borderline min-h-screen flex flex-col justify-center">
-            <div class="max-w-4xl w-full mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-6 text-white">Choose Your Plan</h2>
-                    <p class="text-neutral-400">ရိုးရှင်းသော ဈေးနှုန်းများ။ အရှုပ်အရှင်းမရှိပါ။</p>
+        <div class="flex-1 relative lg:h-[600px] flex items-center justify-center reveal" style="transition-delay: 200ms;">
+            <div class="absolute w-[80%] h-[80%] bg-nexus-red/5 rounded-full blur-3xl z-0"></div>
+            <img src="assets/hero-mockup.png" alt="Nexus App Interface" class="w-full h-auto object-contain z-10 animate-float drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]" onerror="this.outerHTML='<div class=\'w-full aspect-[4/3] bg-nexus-card/50 backdrop-blur border border-nexus-border rounded-3xl flex flex-col items-center justify-center text-nexus-muted z-10 animate-float shadow-2xl\'><i class=\'fa-solid fa-image text-4xl mb-4\'></i><span>Put assets/hero-mockup.png here</span></div>'">
+        </div>
+    </section>
+
+    <!-- APP INFO SECTION -->
+    <section id="app-info" class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 py-24 border-t border-nexus-border/50">
+        <div class="text-center mb-16 reveal">
+            <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-3"><i class="fa-solid fa-sparkles mr-2"></i>App Info</div>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Why Choose Nexus?</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal">
+                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <i class="fa-solid fa-closed-captioning text-nexus-muted group-hover:text-nexus-red text-xl transition-colors"></i>
                 </div>
-
-                <div class="flex justify-center mb-10">
-                    <div class="inline-flex bg-surface p-1.5 rounded-xl border border-borderline gap-1">
-                        <button class="tab-btn active px-6 py-3 rounded-lg text-sm font-semibold transition-all bg-dark text-white shadow" data-target="tab-basic">Basic</button>
-                        <button class="tab-btn px-6 py-3 rounded-lg text-sm font-semibold transition-all text-neutral-400 hover:text-white" data-target="tab-standard">Standard</button>
-                        <button class="tab-btn px-6 py-3 rounded-lg text-sm font-semibold transition-all text-neutral-400 hover:text-white" data-target="tab-vip">VIP</button>
-                    </div>
-                </div>
-
-                <div class="bg-surface border border-borderline rounded-3xl p-8 md:p-16 relative overflow-hidden">
-                    
-                    <div id="tab-basic" class="tab-content active">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-borderline pb-8 mb-8">
-                            <div>
-                                <h3 class="text-2xl font-bold text-white mb-2">Basic Tier</h3>
-                                <p class="text-neutral-400">တစ်ကိုယ်တော်ကြည့်ရှုသူများအတွက်။</p>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-5xl font-heading font-bold text-white">3,000</div>
-                                <div class="text-neutral-500 mt-1">MMK / လ</div>
-                            </div>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-6 mb-10">
-                            <div class="flex items-center gap-3 text-neutral-300"><i class="fa-solid fa-check text-neutral-600"></i> HD 720p Resolution</div>
-                            <div class="flex items-center gap-3 text-neutral-300"><i class="fa-solid fa-check text-neutral-600"></i> 1 Mobile Device</div>
-                            <div class="flex items-center gap-3 text-neutral-300"><i class="fa-solid fa-check text-neutral-600"></i> Ad-Free</div>
-                        </div>
-                        <button class="w-full py-4 bg-white text-dark rounded-xl font-bold transition-transform active:scale-95">Select Basic</button>
-                    </div>
-
-                    <div id="tab-standard" class="tab-content">
-                        <div class="absolute top-0 right-0 bg-secondary text-white text-xs font-bold px-4 py-2 rounded-bl-2xl">MOST POPULAR</div>
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-borderline pb-8 mb-8">
-                            <div>
-                                <h3 class="text-2xl font-bold text-secondary mb-2">Standard Tier</h3>
-                                <p class="text-neutral-400">အိမ်သားများ၊ သူငယ်ချင်းများနှင့် မျှဝေကြည့်ရန်။</p>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-5xl font-heading font-bold text-white">8,000</div>
-                                <div class="text-secondary mt-1">MMK / ၃ လ</div>
-                            </div>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-6 mb-10">
-                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-check text-secondary"></i> 4K Ultra HD</div>
-                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-check text-secondary"></i> 2 Devices Simultaneously</div>
-                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-check text-secondary"></i> Offline Downloads</div>
-                        </div>
-                        <button class="w-full py-4 bg-secondary text-white rounded-xl font-bold transition-transform active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.3)]">Get Standard</button>
-                    </div>
-
-                    <div id="tab-vip" class="tab-content">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-borderline pb-8 mb-8">
-                            <div>
-                                <h3 class="text-2xl font-bold text-primary mb-2">VIP Annual</h3>
-                                <p class="text-neutral-400">အကောင်းဆုံး ဝန်ဆောင်မှု အပြည့်အဝရယူရန်။</p>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-5xl font-heading font-bold text-white">30,000</div>
-                                <div class="text-primary mt-1">MMK / နှစ်</div>
-                            </div>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-6 mb-10">
-                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-star text-primary"></i> Priority Server Speed</div>
-                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-star text-primary"></i> VIP Custom Profiles</div>
-                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-star text-primary"></i> 24/7 Dedicated Support</div>
-                        </div>
-                        <button class="w-full py-4 bg-primary text-white rounded-xl font-bold transition-transform active:scale-95">Upgrade to VIP</button>
-                    </div>
-
-                </div>
+                <h3 class="font-bold text-sm mb-3 text-white">Myanmar Subtitles</h3>
+                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Thousands of movies and series perfectly translated.</p>
             </div>
-        </section>
-
-        <footer class="py-10 px-6 md:px-20 border-t border-borderline">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-500">
-                <p>© <span id="current-year"></span> Nexus OS. All rights reserved.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
-                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+            
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal" style="transition-delay: 100ms;">
+                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <div class="border-2 border-nexus-muted group-hover:border-nexus-red rounded uppercase text-[10px] font-black px-1.5 transition-colors text-nexus-muted group-hover:text-nexus-red">4K</div>
                 </div>
+                <h3 class="font-bold text-sm mb-3 text-white">Ultra HD Streaming</h3>
+                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Enjoy crystal clear streaming with zero buffering technology.</p>
             </div>
-        </footer>
+            
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal" style="transition-delay: 200ms;">
+                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner relative overflow-hidden">
+                    <i class="fa-solid fa-fire text-nexus-muted group-hover:text-nexus-red text-xl transition-colors relative z-10"></i>
+                    <div class="absolute bottom-0 w-full h-0 group-hover:h-1/3 bg-nexus-red/20 transition-all duration-300 blur-sm"></div>
+                </div>
+                <h3 class="font-bold text-sm mb-3 text-white">Daily Updates</h3>
+                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Fresh trending movies and series added every single day.</p>
+            </div>
+            
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal" style="transition-delay: 300ms;">
+                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <i class="fa-solid fa-tv text-nexus-muted group-hover:text-nexus-red text-xl transition-colors"></i>
+                </div>
+                <h3 class="font-bold text-sm mb-3 text-white">Android TV Ready</h3>
+                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Optimized for Google TV & Android TV for the big screen.</p>
+            </div>
+            
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal" style="transition-delay: 400ms;">
+                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <i class="fa-solid fa-mobile-screen text-nexus-muted group-hover:text-nexus-red text-xl transition-colors"></i>
+                </div>
+                <h3 class="font-bold text-sm mb-3 text-white">Mobile Optimized</h3>
+                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Fluid performance on all Android smartphones and tablets.</p>
+            </div>
+        </div>
+    </section>
 
-    </main>
+    <!-- DOWNLOAD SECTION -->
+    <section id="download" class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 py-24 border-t border-nexus-border/50">
+        <div class="text-center mb-16 flex items-center justify-center gap-6 reveal">
+            <div class="h-px bg-gradient-to-l from-nexus-border to-transparent flex-1 max-w-[150px]"></div>
+            <div>
+                <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-2">Install Now</div>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Available Platforms</h2>
+            </div>
+            <div class="h-px bg-gradient-to-r from-nexus-border to-transparent flex-1 max-w-[150px]"></div>
+        </div>
 
-    <div class="md:hidden fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-lg border-t border-borderline z-50 flex justify-around p-4 pb-safe">
-        <a href="#home" class="flex flex-col items-center gap-1 text-white">
-            <i class="fa-solid fa-house"></i>
-            <span class="text-[10px]">Home</span>
-        </a>
-        <a href="#features" class="flex flex-col items-center gap-1 text-neutral-500 hover:text-white">
-            <i class="fa-solid fa-layer-group"></i>
-            <span class="text-[10px]">Features</span>
-        </a>
-        <a href="#pricing" class="flex flex-col items-center gap-1 text-neutral-500 hover:text-white">
-            <i class="fa-solid fa-tags"></i>
-            <span class="text-[10px]">Plans</span>
-        </a>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const CONFIG = {
-                downloads: {
-                    android: 'https://app.nexusmm.xyz/android-phone/app-arm64-v8a-release.apk',
-                    tv: 'https://app.nexusmm.xyz/android-tv/app-release.apk'
-                },
-                socials: {
-                    facebook: 'https://www.facebook.com/NexusTVMyanmar',
-                    telegram: 'https://t.me/NexusCareOfficial'
-                }
-            };
-
-            // Year
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-
-            // Custom Toast System
-            let toastTimer;
-            window.showToast = (msg, isError = false) => {
-                const toast = document.getElementById('toast');
-                const msgEl = document.getElementById('toast-msg');
-                const iconEl = document.getElementById('toast-icon');
-
-                msgEl.textContent = msg;
-                if (isError) {
-                    iconEl.className = "fa-solid fa-circle-exclamation text-red-500";
-                    toast.classList.add('border-red-500/30');
-                } else {
-                    iconEl.className = "fa-solid fa-circle-check text-secondary";
-                    toast.classList.remove('border-red-500/30');
-                }
-
-                toast.classList.remove('translate-x-full', 'opacity-0');
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="group bg-nexus-card border border-nexus-border hover:border-nexus-red/30 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-10 transition-all duration-500 shadow-2xl reveal relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-nexus-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 
-                clearTimeout(toastTimer);
-                toastTimer = setTimeout(() => {
-                    toast.classList.add('translate-x-full', 'opacity-0');
-                }, 3000);
-            };
-
-            // Tab Switching Logic
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const tabContents = document.querySelectorAll('.tab-content');
-
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Remove active from all
-                    tabBtns.forEach(b => {
-                        b.classList.remove('bg-dark', 'text-white', 'shadow');
-                        b.classList.add('text-neutral-400');
-                    });
-                    tabContents.forEach(c => c.classList.remove('active'));
-
-                    // Add active to clicked
-                    btn.classList.remove('text-neutral-400');
-                    btn.classList.add('bg-dark', 'text-white', 'shadow');
+                <div class="w-40 flex-shrink-0 relative z-10">
+                    <img src="assets/phone-mockup.png" alt="Phone" class="w-full h-auto drop-shadow-2xl group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-32 h-64 mx-auto bg-[#111] border border-nexus-border rounded-2xl flex items-center justify-center text-nexus-red text-5xl font-black shadow-inner\'>N</div>'">
+                </div>
+                
+                <div class="flex-1 w-full relative z-10 text-center md:text-left">
+                    <div class="text-nexus-red text-[10px] font-bold tracking-widest uppercase mb-3 flex items-center justify-center md:justify-start gap-2">
+                        <i class="fa-solid fa-mobile-screen"></i> Nexus Mobile
+                    </div>
+                    <h3 class="text-3xl font-bold mb-6 text-white tracking-tight">Android Phone</h3>
                     
-                    const targetId = btn.getAttribute('data-target');
-                    document.getElementById(targetId).classList.add('active');
-                });
-            });
+                    <ul class="space-y-4 text-sm text-nexus-muted mb-8 font-medium inline-block text-left">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Requires Android 8.0+</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Version 1.2 (Stable)</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Tiny Size: 35 MB</li>
+                    </ul>
+                    
+                    <button data-action="download-mobile" class="w-full bg-transparent border-2 border-nexus-red text-nexus-red hover:bg-nexus-red hover:text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all active:scale-95">
+                        <i class="fa-solid fa-download"></i> DOWNLOAD MOBILE APK
+                    </button>
+                </div>
+            </div>
 
-            // Handlers
-            document.querySelectorAll('[data-download]').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const platform = btn.getAttribute('data-download');
-                    if (CONFIG.downloads[platform]) {
-                        showToast(`Downloading for ${platform}...`);
-                        setTimeout(() => { window.location.href = CONFIG.downloads[platform]; }, 800);
-                    } else {
-                        showToast("Link unavailable.", true);
-                    }
-                });
-            });
+            <div class="group bg-nexus-card border border-nexus-border hover:border-nexus-red/30 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-10 transition-all duration-500 shadow-2xl reveal" style="transition-delay: 200ms;">
+                <div class="absolute inset-0 bg-gradient-to-bl from-nexus-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-            document.querySelectorAll('[data-social]').forEach(link => {
-                const platform = link.getAttribute('data-social');
-                if (CONFIG.socials[platform]) {
-                    link.href = CONFIG.socials[platform];
-                    link.target = '_blank';
-                }
-            });
-        });
-    </script>
+                <div class="w-56 md:w-64 flex-shrink-0 relative z-10">
+                    <img src="assets/tv-mockup.png" alt="TV" class="w-full h-auto drop-shadow-2xl group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-full aspect-video bg-[#111] border border-nexus-border rounded-xl flex items-center justify-center text-nexus-red text-6xl font-black shadow-inner\'>N</div>'">
+                </div>
+                
+                <div class="flex-1 w-full relative z-10 text-center md:text-left">
+                    <div class="text-nexus-red text-[10px] font-bold tracking-widest uppercase mb-3 flex items-center justify-center md:justify-start gap-2">
+                        <i class="fa-solid fa-tv"></i> Nexus TV
+                    </div>
+                    <h3 class="text-3xl font-bold mb-6 text-white tracking-tight">Android TV</h3>
+                    
+                    <ul class="space-y-4 text-sm text-nexus-muted mb-8 font-medium inline-block text-left">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Android TV & Google TV</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Version 1.2 (Stable)</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Optimized Size: 28 MB</li>
+                    </ul>
+                    
+                    <button data-action="download-tv" class="w-full bg-nexus-red hover:bg-red-700 text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_10px_20px_rgba(229,9,20,0.2)] hover:shadow-[0_10px_30px_rgba(229,9,20,0.4)]">
+                        <i class="fa-solid fa-download"></i> DOWNLOAD TV APK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAYMENT INFO SECTION -->
+    <section id="payment" class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 py-24 border-t border-nexus-border/50">
+        <div class="text-center mb-16 reveal">
+            <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-3"><i class="fa-solid fa-crown mr-2"></i>VIP Access</div>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Premium Membership</h2>
+            <p class="text-nexus-muted text-sm max-w-xl mx-auto leading-relaxed">Unlock the ultimate cinematic experience. Direct payment accepted via trusted local platforms.</p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-16 items-center justify-between">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 flex-1 w-full reveal">
+                <div class="bg-nexus-card border border-nexus-border hover:border-blue-500/50 rounded-2xl p-8 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2 shadow-lg group cursor-pointer relative overflow-hidden" onclick="showToast('KBZ Pay Info: 09123456789 (NexusTV)')">
+                    <div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-full bg-[#0055A5]/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform relative z-10">
+                        <img src="assets/kbz-pay.png" alt="KBZ Pay" class="h-8 object-contain" onerror="this.outerHTML='<div class=\'text-[#0055A5] font-black text-xl italic\'>KBZ</div>'">
+                    </div>
+                    <span class="text-sm font-bold text-white tracking-wide relative z-10">KBZ Pay</span>
+                    <span class="absolute bottom-3 text-[9px] text-nexus-muted opacity-0 group-hover:opacity-100 transition-opacity">Click to view Details</span>
+                </div>
+                
+                <div class="bg-nexus-card border border-nexus-border hover:border-red-600/50 rounded-2xl p-8 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2 shadow-lg group cursor-pointer relative overflow-hidden" onclick="showToast('AYA Pay Info: 09123456789 (NexusTV)')">
+                    <div class="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-full bg-[#E31837]/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform relative z-10">
+                        <img src="assets/aya-pay.png" alt="AYA Pay" class="h-8 object-contain" onerror="this.outerHTML='<div class=\'text-[#E31837] font-black text-2xl\'><i class=\'fa-solid fa-p\'></i></div>'">
+                    </div>
+                    <span class="text-sm font-bold text-white tracking-wide relative z-10">AYA Pay</span>
+                    <span class="absolute bottom-3 text-[9px] text-nexus-muted opacity-0 group-hover:opacity-100 transition-opacity">Click to view Details</span>
+                </div>
+                
+                <div class="bg-nexus-card border border-yellow-500/30 rounded-2xl p-8 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2 shadow-[0_0_40px_rgba(255,204,0,0.1)] group cursor-pointer relative overflow-hidden" onclick="showToast('Wave Pay Info: 09123456789 (NexusTV)')">
+                    <div class="absolute -top-10 -right-10 w-20 h-20 bg-yellow-500/10 rounded-full blur-2xl"></div>
+                    <div class="absolute inset-0 bg-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-full bg-[#FFB800]/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform relative z-10">
+                        <img src="assets/wave-pay.png" alt="Wave Pay" class="h-8 object-contain" onerror="this.outerHTML='<div class=\'w-8 h-8 rounded-full bg-[#FFB800]\'></div>'">
+                    </div>
+                    <span class="text-sm font-bold text-[#FFB800] tracking-wide relative z-10">Wave Pay</span>
+                    <span class="absolute bottom-3 text-[9px] text-nexus-muted opacity-0 group-hover:opacity-100 transition-opacity">Click to view Details</span>
+                </div>
+            </div>
+
+            <div class="lg:w-1/3 w-full bg-nexus-card/50 p-8 rounded-3xl border border-nexus-border reveal" style="transition-delay: 200ms;">
+                <h3 class="text-xl font-bold mb-8 text-white border-b border-nexus-border pb-4">VIP Benefits</h3>
+                <ul class="space-y-6 text-sm text-nexus-muted font-medium">
+                    <li class="flex items-center gap-4 group">
+                        <div class="w-8 h-8 rounded-full bg-nexus-red/10 flex items-center justify-center border border-nexus-red/20 group-hover:bg-nexus-red group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-ban text-nexus-red group-hover:text-white"></i>
+                        </div>
+                        <span class="group-hover:text-white transition-colors">100% Ad-Free Experience</span>
+                    </li>
+                    <li class="flex items-center gap-4 group">
+                        <div class="w-8 h-8 rounded-full bg-nexus-red/10 flex items-center justify-center border border-nexus-red/20 group-hover:bg-nexus-red group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-bolt text-nexus-red group-hover:text-white"></i>
+                        </div>
+                        <span class="group-hover:text-white transition-colors">Ultra-Fast VIP Servers</span>
+                    </li>
+                    <li class="flex items-center gap-4 group">
+                        <div class="w-8 h-8 rounded-full bg-nexus-red/10 flex items-center justify-center border border-nexus-red/20 group-hover:bg-nexus-red group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-star text-nexus-red group-hover:text-white"></i>
+                        </div>
+                        <span class="group-hover:text-white transition-colors">Early Access to New Series</span>
+                    </li>
+                    <li class="flex items-center gap-4 group">
+                        <div class="w-8 h-8 rounded-full bg-nexus-red/10 flex items-center justify-center border border-nexus-red/20 group-hover:bg-nexus-red group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-headset text-nexus-red group-hover:text-white"></i>
+                        </div>
+                        <span class="group-hover:text-white transition-colors">24/7 Priority Support</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL COMMUNITY SECTION -->
+    <section id="social" class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 py-24 border-t border-nexus-border/50 mb-16 md:mb-0">
+        <div class="text-center mb-16 flex items-center justify-center gap-6 reveal">
+            <div class="h-px bg-gradient-to-l from-nexus-border to-transparent flex-1 max-w-[150px]"></div>
+            <div>
+                <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-2">Connect</div>
+                <h2 class="text-3xl font-bold tracking-tight">Join Our Community</h2>
+            </div>
+            <div class="h-px bg-gradient-to-r from-nexus-border to-transparent flex-1 max-w-[150px]"></div>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4 reveal" style="transition-delay: 100ms;">
+            <a href="#" data-social="telegram" class="bg-nexus-card border border-nexus-border hover:border-[#229ED9] hover:bg-[#229ED9]/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-[#229ED9] flex items-center justify-center shadow-[0_0_15px_rgba(34,158,217,0.4)] group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-telegram text-white text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-sm font-bold text-white mb-1">Telegram Channel</div>
+                    <div class="text-[11px] text-nexus-muted font-medium uppercase tracking-wider">Join Now</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-[#229ED9] group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+            <a href="#" data-social="support" class="bg-nexus-card border border-nexus-border hover:border-nexus-red hover:bg-nexus-red/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-nexus-red flex items-center justify-center shadow-[0_0_15px_rgba(229,9,20,0.4)] group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-headset text-white text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-sm font-bold text-white mb-1">Nexus Care</div>
+                    <div class="text-[11px] text-nexus-muted font-medium uppercase tracking-wider">Get Support</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-nexus-red group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+            <a href="#" data-social="facebook" class="bg-nexus-card border border-nexus-border hover:border-[#1877F2] hover:bg-[#1877F2]/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-[#1877F2] flex items-center justify-center shadow-[0_0_15px_rgba(24,119,242,0.4)] group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-facebook-f text-white text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-sm font-bold text-white mb-1">Facebook Page</div>
+                    <div class="text-[11px] text-nexus-muted font-medium uppercase tracking-wider">Follow Us</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-[#1877F2] group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+            <a href="#" data-social="tiktok" class="bg-nexus-card border border-nexus-border hover:border-white/50 hover:bg-white/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-tiktok text-white text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-sm font-bold text-white mb-1">TikTok</div>
+                    <div class="text-[11px] text-nexus-muted font-medium uppercase tracking-wider">Follow Us</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-white group-hover:translate-x-1 transition-all"></i>
+            </a>
+
+            <a href="#" data-social="youtube" class="bg-nexus-card border border-nexus-border hover:border-[#FF0000] hover:bg-[#FF0000]/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-[#FF0000] flex items-center justify-center shadow-[0_0_15px_rgba(255,0,0,0.4)] group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-youtube text-white text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-sm font-bold text-white mb-1">YouTube Channel</div>
+                    <div class="text-[11px] text-nexus-muted font-medium uppercase tracking-wider">Subscribe</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-[#FF0000] group-hover:translate-x-1 transition-all"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-nexus-border bg-[#020202] relative z-10 pb-20 md:pb-0">
+        <div class="max-w-7xl mx-auto px-6 md:px-16 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="text-center md:text-left">
+                <div class="text-3xl font-black text-nexus-red italic tracking-tighter mb-2">NEXUS</div>
+                <div class="text-[10px] text-nexus-muted mb-4 uppercase tracking-widest font-bold">Watch. Stream. Enjoy.</div>
+                <div class="text-xs text-nexus-muted font-medium">© <span id="year"></span> Nexus Entertainment. All Rights Reserved.</div>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-xs font-bold text-nexus-muted uppercase tracking-wider">
+                <a href="#app-info" class="hover:text-white transition-colors">App Info</a>
+                <a href="#download" class="hover:text-white transition-colors">Download</a>
+                <a href="#payment" class="hover:text-white transition-colors">Payment</a>
+                <a href="#social" class="hover:text-white transition-colors">Community</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EXTERNAL JS ဖိုင်ကို လှမ်းချိတ်ခြင်း -->
+    <script src="index.js"></script>
 </body>
 </html>
