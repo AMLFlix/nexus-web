@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Configuration Links
     const CONFIG = {
         downloads: {
-            android: 'https://rapp.plyme.space/android-phone/app-arm64-v8a-release.apk',
-            tv: 'https://rapp.plyme.space/android-tv/app-release.apk'
+            android: 'https://app.nexusmm.xyz/android-phone/app-arm64-v8a-release.apk',
+            tv: 'https://app.nexusmm.xyz/android-tv/app-release.apk'
         },
         socials: {
             facebook: 'https://www.facebook.com/NexusTVMyanmar',
