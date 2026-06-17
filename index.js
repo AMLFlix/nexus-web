@@ -1,120 +1,102 @@
-/**
- * Nexus TV - Production Grade Logic
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-    'use strict';
+    // 1. Update Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Configuration Links
+    // 2. Configuration (URLs တွေ ပြင်ရန်)
     const CONFIG = {
         downloads: {
-            android: 'https://app.nexusmm.xyz/android-phone/app-arm64-v8a-release.apk',
-            tv: 'https://app.nexusmm.xyz/android-tv/app-release.apk'
+            'download-mobile': 'https://app.nexusmm.xyz/android-phone/app-arm64-v8a-release.apk',
+            'download-tv': 'https://app.nexusmm.xyz/android-tv/app-release.apk'
         },
         socials: {
-            facebook: 'https://www.facebook.com/NexusTVMyanmar',
-            telegram: 'https://t.me/NexusCareOfficial'
+            facebook: 'https://facebook.com/nexus',
+            telegram: 'https://t.me/NexusCareOfficial',
+            support: 'https://t.me/NexusCareOfficial',
+            tiktok: 'https://tiktok.com/@nexus',
+            youtube: 'https://youtube.com/@nexus'
         }
     };
 
-    // 1. Auto update copyright year
-    const yearEl = document.getElementById('current-year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-    // 2. Premium Toast Notification System
+    // 3. Enhanced Toast System (Notification ပြသည့်စနစ်)
     let toastTimer;
-    window.showToast = (msg, type = 'info') => {
+    const showToast = (msg, isError = false) => {
         const toast = document.getElementById('toast');
-        const toastMsg = document.getElementById('toast-msg');
-        const toastIconBg = document.getElementById('toast-icon-bg');
-        const toastIcon = document.getElementById('toast-icon');
-        
-        if (!toast) return;
+        const msgEl = document.getElementById('toast-msg');
+        const iconBg = document.getElementById('toast-icon-bg');
+        const icon = document.getElementById('toast-icon');
 
-        toastMsg.textContent = msg;
-        
-        // Styling based on type
-        if(type === 'success') {
-            toastIconBg.className = "w-8 h-8 rounded-full flex items-center justify-center bg-emerald-500/20 border border-emerald-500/30";
-            toastIcon.className = "fa-solid fa-check text-emerald-400 text-sm";
-        } else if (type === 'error') {
-            toastIconBg.className = "w-8 h-8 rounded-full flex items-center justify-center bg-red-500/20 border border-red-500/30";
-            toastIcon.className = "fa-solid fa-triangle-exclamation text-red-400 text-sm";
+        msgEl.textContent = msg;
+
+        if (isError) {
+            iconBg.className = "w-8 h-8 rounded-full flex items-center justify-center bg-red-500/20 border border-red-500/30";
+            icon.className = "fa-solid fa-triangle-exclamation text-red-500 text-sm";
+            toast.classList.replace('border-nexus-red/30', 'border-red-500/30');
         } else {
-            // Default Info (Brand blue)
-            toastIconBg.className = "w-8 h-8 rounded-full flex items-center justify-center bg-brand/20 border border-brand/30";
-            toastIcon.className = "fa-solid fa-info text-brand-light text-sm";
+            iconBg.className = "w-8 h-8 rounded-full flex items-center justify-center bg-green-500/20 border border-green-500/30";
+            icon.className = "fa-solid fa-check text-green-500 text-sm";
+            toast.classList.replace('border-red-500/30', 'border-nexus-red/30'); // Revert to default
         }
 
         // Animate In
         toast.classList.remove('-translate-y-[200%]', 'opacity-0');
         
-        // Auto Hide
+        // Animate Out
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => {
             toast.classList.add('-translate-y-[200%]', 'opacity-0');
         }, 3500);
     };
 
-    // 3. Download Handling (Directing to correct APK)
-    document.querySelectorAll('[data-download]').forEach(btn => {
+    // 4. Download Handlers (with visual feedback)
+    document.querySelectorAll('[data-action^="download"]').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            const platformType = btn.getAttribute('data-download');
-            const url = CONFIG.downloads[platformType];
+            const type = btn.getAttribute('data-action');
+            const url = CONFIG.downloads[type];
             
             if (url) {
-                const deviceName = platformType === 'tv' ? 'Android TV' : 'Android Phone';
-                showToast(`${deviceName} အတွက် Download စတင်နေပါပြီ...`, 'success');
+                const deviceName = type === 'download-tv' ? 'Android TV' : 'Android Phone';
+                showToast(`Preparing ${deviceName} APK download...`);
                 
-                // Use location.href for reliable APK download triggering
+                // Simulate delay for smooth UX
                 setTimeout(() => {
                     window.location.href = url;
-                }, 800);
+                }, 1200);
             } else {
-                showToast("Download link မရနိုင်သေးပါ။", 'error');
+                showToast("Download link not configured.", true);
             }
         });
     });
 
-    // 4. Social Links Setup
+    // 5. Social Link Handlers
     document.querySelectorAll('[data-social]').forEach(link => {
-        const platform = link.getAttribute('data-social');
-        if (CONFIG.socials[platform]) {
-            link.href = CONFIG.socials[platform];
-            link.target = '_blank';
-        }
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const platform = link.getAttribute('data-social');
+            const url = CONFIG.socials[platform];
+            if (url) {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            }
+        });
     });
 
-    // 5. Scroll Reveal Animation (Intersection Observer)
+    // 6. Scroll Reveal Animation (Intersection Observer)
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15
+        threshold: 0.15 // Trigger when 15% of element is visible
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Run once
             }
         });
     }, observerOptions);
 
+    // Apply observer to all elements with 'reveal' class
     document.querySelectorAll('.reveal').forEach(el => {
         observer.observe(el);
     });
-
-    // 6. Sticky Glass Navbar Behavior
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('glass-nav', 'py-3');
-            navbar.classList.remove('py-4');
-        } else {
-            navbar.classList.remove('glass-nav', 'py-3');
-            navbar.classList.add('py-4');
-        }
-    }, { passive: true });
 });
