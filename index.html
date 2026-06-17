@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Nexus TV - Premium Streaming Experience</title>
+    <title>Nexus TV | Premium Streaming</title>
     
-    <meta name="theme-color" content="#030712">
+    <meta name="theme-color" content="#000000">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -14,29 +14,17 @@
                 extend: {
                     colors: {
                         brand: {
-                            DEFAULT: '#2563EB', // Royal Blue
-                            light: '#3B82F6',
-                            dark: '#1D4ED8',
-                            glow: 'rgba(37, 99, 235, 0.5)'
+                            DEFAULT: '#E50914', // Cinematic Red (Netflix style)
+                            hover: '#B20710',
                         },
-                        surface: {
-                            DEFAULT: '#0F172A', // Slate 900
-                            card: '#1E293B',    // Slate 800
-                            hover: '#334155'    // Slate 700
+                        dark: {
+                            bg: '#050505', // Deep rich black
+                            card: '#121212',
+                            border: '#262626'
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'Noto Sans Myanmar', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
                     }
                 }
             }
@@ -44,285 +32,210 @@
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Myanmar:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Myanmar:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         body { 
-            background-color: #030712; 
-            color: #F8FAFC; 
+            background-color: #050505; 
+            color: #FFFFFF; 
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* iOS Glass Navbar */
-        .glass-nav {
-            background: rgba(3, 7, 18, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        /* Subtle Hero Gradient Overlay */
+        .hero-gradient {
+            background: radial-gradient(circle at top, rgba(229, 9, 20, 0.08) 0%, rgba(5, 5, 5, 1) 60%);
+        }
+
+        /* Refined Card Hover */
+        .premium-card {
+            transition: all 0.3s ease;
+        }
+        .premium-card:hover {
+            transform: translateY(-4px);
+            background-color: #1a1a1a;
+            border-color: #404040;
+        }
+
+        /* Navbar Blur */
+        .nav-blur {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Cinematic Glowing Background */
-        .bg-mesh {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-        .orb-1 {
-            position: absolute;
-            top: -10%;
-            left: 20%;
-            width: 50vw;
-            height: 50vw;
-            background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, rgba(3,7,18,0) 70%);
-            border-radius: 50%;
-        }
-        .orb-2 {
-            position: absolute;
-            bottom: -20%;
-            right: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(3,7,18,0) 70%);
-            border-radius: 50%;
-        }
-
-        /* Modern Bento Cards */
-        .bento-card {
-            background: linear-gradient(145deg, rgba(30,41,59,0.7) 0%, rgba(15,23,42,0.9) 100%);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 24px;
-            transition: all 0.4s ease;
-        }
-        .bento-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(37, 99, 235, 0.3);
-            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.7), 0 0 20px rgba(37,99,235,0.1);
-        }
-
-        /* Smooth Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
         }
     </style>
 </head>
-<body class="selection:bg-brand selection:text-white font-sans antialiased">
+<body class="font-sans selection:bg-brand selection:text-white">
 
-    <div id="toast" class="fixed top-24 left-1/2 -translate-x-1/2 flex items-center gap-4 text-white px-6 py-4 rounded-2xl bg-surface-card/95 backdrop-blur-md border border-white/10 shadow-2xl transition-all duration-500 transform -translate-y-[200%] opacity-0 z-[100]">
-        <div id="toast-icon-bg" class="w-8 h-8 rounded-full flex items-center justify-center bg-brand/20">
-            <i id="toast-icon" class="fa-solid fa-info text-brand text-sm"></i>
-        </div>
-        <span id="toast-msg" class="font-medium text-sm tracking-wide">Message</span>
-    </div>
-
-    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-300 py-4 px-6 md:px-12">
+    <nav class="fixed w-full z-50 top-0 nav-blur transition-all duration-300 py-4 px-6 md:px-12">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            
-            <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                <img src="assets/nexus-logo.png" alt="Nexus Logo" class="w-10 h-10 object-contain group-hover:scale-105 transition-transform" onerror="this.style.display='none'">
-                <span class="text-xl font-bold tracking-tight text-white">Nexus TV</span>
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <i class="fa-solid fa-play text-brand text-2xl"></i>
+                <span class="text-xl font-bold tracking-tight text-white">NEXUS</span>
             </div>
             
-            <div class="hidden md:flex gap-8 text-[15px] font-medium text-slate-300">
+            <div class="hidden md:flex gap-8 text-[14px] font-medium text-gray-400">
                 <a href="#features" class="hover:text-white transition-colors">Features</a>
                 <a href="#pricing" class="hover:text-white transition-colors">Plans</a>
             </div>
             
             <div class="hidden md:block">
-                <a href="#download-section" class="bg-white text-slate-900 hover:bg-slate-200 px-6 py-2.5 rounded-full text-sm font-semibold transition-all">
-                    Get Started
+                <a href="#download" class="bg-white text-black hover:bg-gray-200 px-6 py-2.5 rounded-full text-sm font-semibold transition-colors">
+                    Sign In
                 </a>
             </div>
         </div>
     </nav>
 
-    <section class="relative min-h-[90svh] flex flex-col items-center justify-center px-6 pt-24 pb-12 overflow-hidden text-center">
-        <div class="bg-mesh">
-            <div class="orb-1 animate-pulse-slow"></div>
-            <div class="orb-2 animate-float"></div>
-        </div>
-
-        <div class="relative z-10 max-w-4xl mx-auto reveal">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand/30 bg-brand/10 backdrop-blur-sm mb-8">
-                <span class="w-2 h-2 rounded-full bg-brand-light animate-pulse"></span>
-                <span class="text-xs font-semibold text-brand-light uppercase tracking-wider">Version 1.0 Beta is Live</span>
-            </div>
-
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
-                Cinematic Quality.<br>Anywhere.
+    <section class="relative min-h-[90vh] flex flex-col items-center justify-center px-6 pt-24 pb-12 hero-gradient text-center">
+        <div class="relative z-10 max-w-4xl mx-auto mt-12">
+            <p class="text-brand font-semibold text-sm tracking-widest uppercase mb-4">Version 1.0 Beta</p>
+            
+            <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6 tracking-tight text-white">
+                ရုပ်ရှင်ရုံထဲကလို ခံစားမှုကို<br>
+                <span class="text-gray-400">သင့်လက်ထဲမှာ</span>
             </h1>
             
-            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">
-                ရုပ်ရှင်များနှင့် ဇာတ်လမ်းတွဲများကို ကြော်ငြာလုံးဝမပါဘဲ <strong class="text-white">4K Ultra HD</strong> ဖြင့် ရုပ်ရှင်ရုံထဲရောက်နေသကဲ့သို့ ခံစားကြည့်ရှုလိုက်ပါ။
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 font-normal leading-[1.8]">
+                ရုပ်ရှင်များနှင့် ဇာတ်လမ်းတွဲများကို ကြော်ငြာလုံးဝမပါဘဲ <span class="text-white font-medium">4K Ultra HD</span> ဖြင့် အကောင်းဆုံး ရုပ်ထွက်အရည်အသွေးအတိုင်း ကြည့်ရှုလိုက်ပါ။
             </p>
             
-            <div id="download-section" class="flex flex-col sm:flex-row items-center justify-center gap-5">
-                <button data-download="android" class="w-full sm:w-auto bg-brand hover:bg-brand-light text-white px-8 py-4 rounded-2xl text-[16px] font-semibold flex items-center justify-center gap-3 transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] hover:-translate-y-1">
-                    <i class="fa-brands fa-android text-xl"></i>
-                    <div class="text-left leading-tight">
-                        <div class="text-[10px] uppercase tracking-wider text-blue-200">Download for</div>
-                        <div>Android Phone</div>
-                    </div>
+            <div id="download" class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button class="w-full sm:w-auto bg-brand hover:bg-brand-hover text-white px-8 py-3.5 rounded-full text-[15px] font-semibold flex items-center justify-center gap-3 transition-colors">
+                    <i class="fa-brands fa-android text-lg"></i>
+                    <span>Download for Android</span>
                 </button>
                 
-                <button data-download="tv" class="w-full sm:w-auto bg-surface-card hover:bg-surface-hover border border-white/10 text-white px-8 py-4 rounded-2xl text-[16px] font-semibold flex items-center justify-center gap-3 transition-all hover:-translate-y-1">
-                    <i class="fa-solid fa-tv text-xl"></i>
-                    <div class="text-left leading-tight">
-                        <div class="text-[10px] uppercase tracking-wider text-slate-400">Download for</div>
-                        <div>Android TV</div>
-                    </div>
+                <button class="w-full sm:w-auto bg-dark-card hover:bg-gray-800 border border-dark-border text-white px-8 py-3.5 rounded-full text-[15px] font-medium flex items-center justify-center gap-3 transition-colors">
+                    <i class="fa-solid fa-tv text-lg text-gray-400"></i>
+                    <span>Android TV App</span>
                 </button>
             </div>
-            
-            <p class="text-sm text-slate-500 mt-6"><i class="fa-solid fa-shield-check mr-1"></i> Requires Android 8.0 or higher. 100% Secure.</p>
         </div>
     </section>
 
-    <section id="features" class="py-24 px-6 md:px-12 relative z-10 border-t border-white/5 bg-surface/50">
+    <section id="features" class="py-24 px-6 md:px-12 border-t border-dark-border bg-dark-bg">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">Engineered for viewers.</h2>
-                <p class="text-slate-400 text-lg">အသေးစိတ်ကအစ ဂရုတစိုက်ဖန်တီးထားသော လုပ်ဆောင်ချက်များ။</p>
+            <div class="mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">အသေးစိတ် ဖန်တီးထားမှုများ</h2>
+                <p class="text-gray-400 text-lg">ကြည့်ရှုသူများအတွက် အကောင်းဆုံး အတွေ့အကြုံကို ပေးစွမ်းနိုင်ရန်။</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-                <div class="bento-card p-8 md:p-10 md:col-span-8 flex flex-col md:flex-row items-center gap-8 reveal">
-                    <div class="flex-1">
-                        <div class="w-12 h-12 rounded-full bg-brand/20 flex items-center justify-center mb-6 border border-brand/30">
-                            <i class="fa-solid fa-rotate-right text-brand-light text-xl"></i>
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">Seamless Syncing</h3>
-                        <p class="text-slate-400 font-medium leading-relaxed">ဖုန်းတွင်ကြည့်လက်စ ဇာတ်ကားကို Android TV တွင် မှတ်သားထားစရာမလိုဘဲ အလွယ်တကူ ဆက်လက်ကြည့်ရှုနိုင်ပါသည်။</p>
-                    </div>
-                    <div class="flex-1 w-full flex justify-center opacity-80">
-                        <i class="fa-solid fa-tablet-screen-button text-6xl text-slate-600 mr-4"></i>
-                        <i class="fa-solid fa-arrow-right-arrow-left text-3xl text-brand mt-4 mr-4"></i>
-                        <i class="fa-solid fa-tv text-7xl text-slate-500"></i>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="premium-card bg-dark-card border border-dark-border p-8 rounded-2xl">
+                    <i class="fa-solid fa-rotate-right text-brand text-2xl mb-6"></i>
+                    <h3 class="text-xl font-bold text-white mb-3">Seamless Syncing</h3>
+                    <p class="text-gray-400 text-sm leading-[1.8]">
+                        ဖုန်းတွင်ကြည့်လက်စ ဇာတ်ကားကို Android TV တွင် မှတ်သားထားစရာမလိုဘဲ အလွယ်တကူ ဆက်လက်ကြည့်ရှုနိုင်ပါသည်။
+                    </p>
                 </div>
 
-                <div class="bento-card p-8 md:p-10 md:col-span-4 reveal" style="transition-delay: 100ms;">
-                    <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mb-6 border border-purple-500/30">
-                        <i class="fa-solid fa-cloud-arrow-down text-purple-400 text-xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Offline Vault</h3>
-                    <p class="text-slate-400 font-medium leading-relaxed">အင်တာနက်မရှိချိန်တွင်ပါ ကြည့်ရှုနိုင်ရန် ကြိုတင် Download ပြုလုပ်ထားနိုင်ပါသည်။</p>
+                <div class="premium-card bg-dark-card border border-dark-border p-8 rounded-2xl">
+                    <i class="fa-solid fa-cloud-arrow-down text-brand text-2xl mb-6"></i>
+                    <h3 class="text-xl font-bold text-white mb-3">Offline Vault</h3>
+                    <p class="text-gray-400 text-sm leading-[1.8]">
+                        အင်တာနက်မရှိချိန်တွင်ပါ ကြည့်ရှုနိုင်ရန် မိမိနှစ်သက်ရာ ဇာတ်ကားများကို ကြိုတင် Download ပြုလုပ်ထားနိုင်ပါသည်။
+                    </p>
                 </div>
 
-                <div class="bento-card p-8 md:p-10 md:col-span-5 reveal" style="transition-delay: 150ms;">
-                    <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mb-6 border border-emerald-500/30">
-                        <i class="fa-solid fa-bolt text-emerald-400 text-xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Zero Buffering</h3>
-                    <p class="text-slate-400 font-medium leading-relaxed">နောက်ဆုံးပေါ် Server နည်းပညာများဖြင့် 4K Quality ကိုပင် ထစ်ငေါ့မှုမရှိ ချောမွေ့စွာကြည့်ရှုပါ။</p>
-                </div>
-
-                <div class="bento-card p-8 md:p-10 md:col-span-7 flex flex-col justify-center reveal relative overflow-hidden" style="transition-delay: 200ms;">
-                    <div class="relative z-10 max-w-md">
-                        <h3 class="text-2xl font-bold text-white mb-3">Cinema-grade Audio</h3>
-                        <p class="text-slate-400 font-medium leading-relaxed">Dolby Atmos အထောက်အပံ့ဖြင့် အသံအရည်အသွေးကို ရုပ်ရှင်ရုံကဲ့သို့ အကောင်းဆုံး ခံစားနိုင်ပါသည်။</p>
-                    </div>
-                    <i class="fa-solid fa-headphones absolute -right-4 -bottom-10 text-[180px] text-white/5 transform -rotate-12"></i>
+                <div class="premium-card bg-dark-card border border-dark-border p-8 rounded-2xl">
+                    <i class="fa-solid fa-headphones text-brand text-2xl mb-6"></i>
+                    <h3 class="text-xl font-bold text-white mb-3">Cinema-grade Audio</h3>
+                    <p class="text-gray-400 text-sm leading-[1.8]">
+                        Dolby Atmos အထောက်အပံ့ဖြင့် အသံအရည်အသွေးကို ရုပ်ရှင်ရုံကဲ့သို့ အကောင်းဆုံး ခံစားနိုင်ပါသည်။
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="pricing" class="py-24 px-6 md:px-12 relative z-10 border-t border-white/5">
+    <section id="pricing" class="py-24 px-6 md:px-12 border-t border-dark-border bg-dark-bg">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4">Simple, transparent pricing.</h2>
-                <p class="text-slate-400 text-lg">သင့်အတွက် အသင့်တော်ဆုံး Plan ကို ရွေးချယ်ပါ။ (App အတွင်းငွေချေနိုင်ပါသည်)</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">ရှင်းလင်းသော ဈေးနှုန်းများ</h2>
+                <p class="text-gray-400 text-lg">သင့်အတွက် အသင့်တော်ဆုံး Plan ကို ရွေးချယ်ပါ။</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8 items-center max-w-5xl mx-auto">
-                <div class="bento-card p-8 reveal">
-                    <h3 class="text-slate-400 font-semibold mb-2">Basic</h3>
-                    <div class="flex items-baseline gap-1 mb-6">
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-center">
+                
+                <div class="bg-dark-card border border-dark-border p-8 rounded-3xl premium-card">
+                    <h3 class="text-gray-400 font-medium mb-4">Basic</h3>
+                    <div class="mb-6 flex items-end gap-1">
                         <span class="text-4xl font-bold text-white">3,000</span>
-                        <span class="text-slate-500">MMK/mo</span>
+                        <span class="text-gray-500 text-sm mb-1">MMK / လ</span>
                     </div>
-                    <ul class="space-y-4 mb-8 text-slate-300 text-sm">
-                        <li class="flex gap-3"><i class="fa-solid fa-check text-brand-light mt-0.5"></i> HD 720p Resolution</li>
-                        <li class="flex gap-3"><i class="fa-solid fa-check text-brand-light mt-0.5"></i> Ad-Free Experience</li>
-                        <li class="flex gap-3 text-slate-500"><i class="fa-solid fa-minus mt-0.5"></i> 1 Device Only</li>
+                    <ul class="space-y-4 mb-8 text-gray-300 text-sm">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-gray-500"></i> HD 720p Resolution</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-gray-500"></i> Ad-Free Experience</li>
+                        <li class="flex items-center gap-3 text-gray-500"><i class="fa-solid fa-minus"></i> 1 Device Only</li>
                     </ul>
-                    <button onclick="selectPlan('Basic')" class="w-full py-3 rounded-xl font-semibold bg-surface-hover text-white hover:bg-slate-600 transition-colors">Select Basic</button>
+                    <button class="w-full py-3 rounded-full font-medium bg-[#1A1A1A] text-white hover:bg-[#262626] transition-colors border border-dark-border">Select Basic</button>
                 </div>
 
-                <div class="bento-card p-8 relative transform md:-translate-y-4 border-brand/50 shadow-[0_0_30px_rgba(37,99,235,0.15)] reveal" style="transition-delay: 100ms;">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</div>
-                    <h3 class="text-brand-light font-semibold mb-2">Standard</h3>
-                    <div class="flex items-baseline gap-1 mb-6">
+                <div class="bg-[#121212] border border-brand p-8 rounded-3xl relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(229,9,20,0.1)]">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest">Most Popular</div>
+                    <h3 class="text-brand font-medium mb-4">Standard</h3>
+                    <div class="mb-6 flex items-end gap-1">
                         <span class="text-5xl font-bold text-white">8,000</span>
-                        <span class="text-slate-400">MMK/3mo</span>
+                        <span class="text-gray-500 text-sm mb-2">MMK / ၃ လ</span>
                     </div>
                     <ul class="space-y-4 mb-8 text-white text-sm">
-                        <li class="flex gap-3"><i class="fa-solid fa-check text-brand-light mt-0.5"></i> 4K Ultra HD Quality</li>
-                        <li class="flex gap-3"><i class="fa-solid fa-check text-brand-light mt-0.5"></i> 2 Devices Simultaneously</li>
-                        <li class="flex gap-3"><i class="fa-solid fa-check text-brand-light mt-0.5"></i> Unlimited Downloads</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> 4K Ultra HD Quality</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> 2 Devices Simultaneously</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Unlimited Downloads</li>
                     </ul>
-                    <button onclick="selectPlan('Standard')" class="w-full py-3 rounded-xl font-semibold bg-brand text-white hover:bg-brand-light transition-colors shadow-lg shadow-brand/25">Get Standard</button>
+                    <button class="w-full py-3 rounded-full font-semibold bg-brand text-white hover:bg-brand-hover transition-colors">Get Standard</button>
                 </div>
 
-                <div class="bento-card p-8 reveal" style="transition-delay: 200ms;">
-                    <h3 class="text-yellow-500 font-semibold mb-2">VIP Yearly</h3>
-                    <div class="flex items-baseline gap-1 mb-6">
+                <div class="bg-dark-card border border-dark-border p-8 rounded-3xl premium-card">
+                    <h3 class="text-yellow-500 font-medium mb-4">VIP Yearly</h3>
+                    <div class="mb-6 flex items-end gap-1">
                         <span class="text-4xl font-bold text-white">30,000</span>
-                        <span class="text-slate-500">MMK/yr</span>
+                        <span class="text-gray-500 text-sm mb-1">MMK / နှစ်</span>
                     </div>
-                    <ul class="space-y-4 mb-8 text-slate-300 text-sm">
-                        <li class="flex gap-3"><i class="fa-solid fa-star text-yellow-500 mt-0.5"></i> Priority Server Speed</li>
-                        <li class="flex gap-3"><i class="fa-solid fa-star text-yellow-500 mt-0.5"></i> Custom Profiles</li>
-                        <li class="flex gap-3"><i class="fa-solid fa-star text-yellow-500 mt-0.5"></i> VIP Support Channel</li>
+                    <ul class="space-y-4 mb-8 text-gray-300 text-sm">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-gray-500"></i> Priority Server Speed</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-gray-500"></i> Custom Profiles</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-gray-500"></i> VIP Support Channel</li>
                     </ul>
-                    <button onclick="selectPlan('VIP')" class="w-full py-3 rounded-xl font-semibold bg-surface-hover text-white hover:bg-slate-600 transition-colors">Select VIP</button>
+                    <button class="w-full py-3 rounded-full font-medium bg-[#1A1A1A] text-white hover:bg-[#262626] transition-colors border border-dark-border">Select VIP</button>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <footer class="border-t border-white/5 py-12 px-6 bg-[#020408] mb-16 md:mb-0">
+    <footer class="border-t border-dark-border py-12 px-6 bg-[#030303] pb-24 md:pb-12">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            
             <div class="flex items-center gap-2">
-                <img src="assets/nexus-logo.png" alt="Nexus Logo" class="w-8 h-8 object-contain" onerror="this.style.display='none'">
-                <span class="text-lg font-bold text-white">Nexus TV</span>
+                <i class="fa-solid fa-play text-gray-500 text-xl"></i>
+                <span class="text-lg font-bold text-gray-300">NEXUS TV</span>
             </div>
             
             <div class="flex gap-6">
-                <a href="#" data-social="facebook" class="text-slate-500 hover:text-white transition-colors text-xl"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#" data-social="telegram" class="text-slate-500 hover:text-white transition-colors text-xl"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors text-xl"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors text-xl"><i class="fa-brands fa-telegram"></i></a>
             </div>
             
-            <p class="text-sm text-slate-500">© <span id="current-year"></span> Nexus Entertainment. All rights reserved.</p>
+            <p class="text-sm text-gray-600">© 2026 Nexus Entertainment. All rights reserved.</p>
         </div>
     </footer>
 
-    <div id="mobile-nav" class="fixed bottom-0 left-0 w-full bg-surface-card/90 backdrop-blur-lg border-t border-white/10 z-50 flex justify-around items-center px-2 py-3 md:hidden pb-safe">
-        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-1 text-brand">
+    <div class="fixed bottom-0 left-0 w-full bg-[#050505]/90 backdrop-blur-lg border-t border-dark-border z-50 flex justify-around items-center px-2 py-3 md:hidden pb-safe">
+        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-1.5 text-white">
             <i class="fa-solid fa-house text-lg"></i>
             <span class="text-[10px] font-medium">Home</span>
         </a>
-        <a href="#features" class="flex flex-col items-center gap-1 text-slate-500 hover:text-white">
+        <a href="#features" class="flex flex-col items-center gap-1.5 text-gray-500 hover:text-white transition-colors">
             <i class="fa-solid fa-layer-group text-lg"></i>
             <span class="text-[10px] font-medium">Features</span>
         </a>
-        <a href="#pricing" class="flex flex-col items-center gap-1 text-slate-500 hover:text-white">
+        <a href="#pricing" class="flex flex-col items-center gap-1.5 text-gray-500 hover:text-white transition-colors">
             <i class="fa-solid fa-tags text-lg"></i>
             <span class="text-[10px] font-medium">Plans</span>
         </a>
     </div>
 
-    <script src="index.js"></script>
 </body>
 </html>
