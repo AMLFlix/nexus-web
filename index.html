@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NEXUS - Myanmar Subtitle Movies & Series</title>
     
-    <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -42,7 +41,6 @@
         }
     </script>
 
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -88,7 +86,6 @@
 </head>
 <body class="font-sans relative">
 
-    <!-- Toast Notification -->
     <div id="toast" class="fixed top-8 left-1/2 -translate-x-1/2 flex items-center gap-4 px-6 py-4 rounded-full glass shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-nexus-red/30 transition-all duration-500 transform -translate-y-[200%] opacity-0 z-[100]">
         <div id="toast-icon-bg" class="w-8 h-8 rounded-full flex items-center justify-center bg-nexus-red/20 border border-nexus-red/30">
             <i id="toast-icon" class="fa-solid fa-bell text-nexus-red text-sm"></i>
@@ -96,13 +93,11 @@
         <span id="toast-msg" class="text-sm font-semibold tracking-wider text-white"></span>
     </div>
 
-    <!-- Background Glow -->
     <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
         <div class="absolute w-[800px] h-[800px] -top-[200px] -left-[200px] bg-glow rounded-full animate-pulse-glow"></div>
         <div class="absolute w-[600px] h-[600px] bottom-[10%] right-[5%] bg-glow-2 rounded-full animate-pulse-glow" style="animation-delay: 2s;"></div>
     </div>
 
-    <!-- MOBILE Bottom Navigation -->
     <nav class="md:hidden fixed bottom-0 left-0 w-full glass z-50 flex justify-around items-center px-4 py-3 pb-safe border-t border-nexus-border">
         <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-1 text-nexus-red transition-transform active:scale-95">
             <i class="fa-solid fa-house text-lg"></i>
@@ -122,7 +117,6 @@
         </a>
     </nav>
 
-    <!-- DESKTOP Top Navigation -->
     <nav class="hidden md:flex relative z-50 items-center justify-between px-16 py-8 max-w-7xl mx-auto">
         <div class="text-3xl font-black text-nexus-red italic tracking-tighter hover:scale-105 transition-transform cursor-pointer">NEXUS</div>
         <div class="flex items-center gap-10 text-sm font-semibold text-white/80 uppercase tracking-wider">
@@ -141,7 +135,6 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <section class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 pt-12 pb-24 flex flex-col lg:flex-row items-center gap-12 min-h-[85vh]">
         <div class="flex-1 reveal">
             <div class="inline-flex items-center gap-2 border border-nexus-red/40 text-nexus-red text-[10px] font-bold tracking-widest px-4 py-1.5 rounded-full mb-8 uppercase bg-nexus-red/10 backdrop-blur-sm shadow-[0_0_20px_rgba(229,9,20,0.15)]">
@@ -149,9 +142,9 @@
                 Official App Release
             </div>
             
-            <h1 class="text-5xl md:text-7xl lg:text-[80px] font-black leading-[1.05] mb-6 tracking-tight">
+            <h1 class="text-5xl md:text-7xl lg:text-[80px] font-black leading-[1.05] mb-6 tracking-tight text-white">
                 Myanmar Subtitle <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-nexus-red to-red-500">Movies & Series</span>
+                <span class="text-nexus-red">Movies & Series</span>
             </h1>
             
             <p class="text-nexus-muted text-lg mb-12 max-w-lg leading-relaxed font-medium">
@@ -167,7 +160,7 @@
                         <div class="text-sm tracking-wide">MOBILE APK</div>
                     </div>
                 </button>
-                <button data-action="download-tv" class="group bg-nexus-card border border-nexus-border hover:border-nexus-red/50 hover:bg-nexus-red/10 text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-4 transition-all duration-300 active:scale-95">
+                <button data-action="download-tv" class="group bg-transparent border border-white/20 hover:border-nexus-red/50 hover:bg-nexus-red/10 text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-4 transition-all duration-300 active:scale-95">
                     <i class="fa-solid fa-tv text-2xl text-nexus-muted group-hover:text-nexus-red transition-colors"></i>
                     <div class="text-left leading-tight">
                         <div class="text-[10px] uppercase font-semibold text-nexus-muted group-hover:text-nexus-red transition-colors">Download</div>
@@ -175,24 +168,14 @@
                     </div>
                 </button>
             </div>
-
-            <div class="flex items-center gap-5 p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm inline-flex">
-                <div class="flex -space-x-3">
-                    <img class="w-10 h-10 rounded-full border-2 border-nexus-bg object-cover" src="assets/avatars.png" alt="Users" onerror="this.outerHTML='<div class=\'flex -space-x-2\'><div class=\'w-8 h-8 rounded-full bg-gray-600 border-2 border-black\'></div><div class=\'w-8 h-8 rounded-full bg-gray-500 border-2 border-black\'></div><div class=\'w-8 h-8 rounded-full bg-gray-400 border-2 border-black\'></div></div>'">
-                </div>
-                <div class="text-xs text-nexus-muted leading-relaxed">
-                    Trusted by <strong class="text-white">10,000+</strong><br> movie lovers in Myanmar.
-                </div>
-            </div>
         </div>
 
-        <div class="flex-1 relative lg:h-[600px] flex items-center justify-center reveal" style="transition-delay: 200ms;">
+        <div class="flex-1 relative lg:h-[600px] flex items-center justify-center reveal w-full" style="transition-delay: 200ms;">
             <div class="absolute w-[80%] h-[80%] bg-nexus-red/5 rounded-full blur-3xl z-0"></div>
-            <img src="assets/hero-mockup.png" alt="Nexus App Interface" class="w-full h-auto object-contain z-10 animate-float drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]" onerror="this.outerHTML='<div class=\'w-full aspect-[4/3] bg-nexus-card/50 backdrop-blur border border-nexus-border rounded-3xl flex flex-col items-center justify-center text-nexus-muted z-10 animate-float shadow-2xl\'><i class=\'fa-solid fa-image text-4xl mb-4\'></i><span>Put assets/hero-mockup.png here</span></div>'">
+            <img src="assets/hero-mockup.png" alt="Nexus App Interface" class="w-full max-w-[600px] h-auto object-contain z-10 animate-float drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]" onerror="this.outerHTML='<div class=\'w-full max-w-[600px] aspect-[4/3] border border-nexus-border rounded-3xl flex flex-col items-center justify-center text-nexus-muted z-10 shadow-2xl\'><i class=\'fa-solid fa-image text-4xl mb-4\'></i><span>Put assets/hero-mockup.png here</span></div>'">
         </div>
     </section>
 
-    <!-- APP INFO SECTION -->
     <section id="app-info" class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 py-24 border-t border-nexus-border/50">
         <div class="text-center mb-16 reveal">
             <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-3"><i class="fa-solid fa-sparkles mr-2"></i>App Info</div>
@@ -200,66 +183,64 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal">
-                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner">
-                    <i class="fa-solid fa-closed-captioning text-nexus-muted group-hover:text-nexus-red text-xl transition-colors"></i>
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 transition-all duration-300 shadow-lg reveal">
+                <div class="w-14 h-14 mx-auto border border-nexus-red/30 group-hover:border-nexus-red/50 bg-nexus-bg rounded-xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <i class="fa-solid fa-closed-captioning text-nexus-red text-xl transition-colors"></i>
                 </div>
                 <h3 class="font-bold text-sm mb-3 text-white">Myanmar Subtitles</h3>
                 <p class="text-nexus-muted text-xs leading-relaxed font-medium">Thousands of movies and series perfectly translated.</p>
             </div>
             
-            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal" style="transition-delay: 100ms;">
-                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner">
-                    <div class="border-2 border-nexus-muted group-hover:border-nexus-red rounded uppercase text-[10px] font-black px-1.5 transition-colors text-nexus-muted group-hover:text-nexus-red">4K</div>
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 transition-all duration-300 shadow-lg reveal" style="transition-delay: 100ms;">
+                <div class="w-14 h-14 mx-auto border border-nexus-red/30 group-hover:border-nexus-red/50 bg-nexus-bg rounded-xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <div class="border-2 border-nexus-red rounded uppercase text-[10px] font-black px-1.5 transition-colors text-nexus-red">HD</div>
                 </div>
-                <h3 class="font-bold text-sm mb-3 text-white">Ultra HD Streaming</h3>
-                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Enjoy crystal clear streaming with zero buffering technology.</p>
+                <h3 class="font-bold text-sm mb-3 text-white">HD Streaming</h3>
+                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Enjoy high quality streaming with smooth playback.</p>
             </div>
             
-            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal" style="transition-delay: 200ms;">
-                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner relative overflow-hidden">
-                    <i class="fa-solid fa-fire text-nexus-muted group-hover:text-nexus-red text-xl transition-colors relative z-10"></i>
-                    <div class="absolute bottom-0 w-full h-0 group-hover:h-1/3 bg-nexus-red/20 transition-all duration-300 blur-sm"></div>
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 transition-all duration-300 shadow-lg reveal" style="transition-delay: 200ms;">
+                <div class="w-14 h-14 mx-auto border border-nexus-red/30 group-hover:border-nexus-red/50 bg-nexus-bg rounded-xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <i class="fa-solid fa-fire text-nexus-red text-xl transition-colors"></i>
                 </div>
                 <h3 class="font-bold text-sm mb-3 text-white">Daily Updates</h3>
-                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Fresh trending movies and series added every single day.</p>
+                <p class="text-nexus-muted text-xs leading-relaxed font-medium">New movies and series added every single day.</p>
             </div>
             
-            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal" style="transition-delay: 300ms;">
-                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner">
-                    <i class="fa-solid fa-tv text-nexus-muted group-hover:text-nexus-red text-xl transition-colors"></i>
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 transition-all duration-300 shadow-lg reveal" style="transition-delay: 300ms;">
+                <div class="w-14 h-14 mx-auto border border-nexus-red/30 group-hover:border-nexus-red/50 bg-nexus-bg rounded-xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <i class="fa-solid fa-tv text-nexus-red text-xl transition-colors"></i>
                 </div>
-                <h3 class="font-bold text-sm mb-3 text-white">Android TV Ready</h3>
-                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Optimized for Google TV & Android TV for the big screen.</p>
+                <h3 class="font-bold text-sm mb-3 text-white">Android TV Support</h3>
+                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Watch on your Android TV and enjoy on the big screen.</p>
             </div>
             
-            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 hover:-translate-y-2 transition-all duration-300 shadow-lg reveal" style="transition-delay: 400ms;">
-                <div class="w-14 h-14 mx-auto border-2 border-nexus-border group-hover:border-nexus-red/50 bg-nexus-bg rounded-2xl flex items-center justify-center mb-6 transition-colors shadow-inner">
-                    <i class="fa-solid fa-mobile-screen text-nexus-muted group-hover:text-nexus-red text-xl transition-colors"></i>
+            <div class="group bg-nexus-card border border-nexus-border rounded-2xl p-8 text-center hover:bg-[#111] hover:border-nexus-red/40 transition-all duration-300 shadow-lg reveal" style="transition-delay: 400ms;">
+                <div class="w-14 h-14 mx-auto border border-nexus-red/30 group-hover:border-nexus-red/50 bg-nexus-bg rounded-xl flex items-center justify-center mb-6 transition-colors shadow-inner">
+                    <i class="fa-solid fa-mobile-screen text-nexus-red text-xl transition-colors"></i>
                 </div>
-                <h3 class="font-bold text-sm mb-3 text-white">Mobile Optimized</h3>
-                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Fluid performance on all Android smartphones and tablets.</p>
+                <h3 class="font-bold text-sm mb-3 text-white">Android Phone Support</h3>
+                <p class="text-nexus-muted text-xs leading-relaxed font-medium">Optimized for all Android phones and tablets.</p>
             </div>
         </div>
     </section>
 
-    <!-- DOWNLOAD SECTION -->
     <section id="download" class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 py-24 border-t border-nexus-border/50">
         <div class="text-center mb-16 flex items-center justify-center gap-6 reveal">
             <div class="h-px bg-gradient-to-l from-nexus-border to-transparent flex-1 max-w-[150px]"></div>
             <div>
-                <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-2">Install Now</div>
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Available Platforms</h2>
+                <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-2">Download Nexus</div>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Available on Android</h2>
             </div>
             <div class="h-px bg-gradient-to-r from-nexus-border to-transparent flex-1 max-w-[150px]"></div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="group bg-nexus-card border border-nexus-border hover:border-nexus-red/30 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-10 transition-all duration-500 shadow-2xl reveal relative overflow-hidden">
+            <div class="group bg-nexus-card border border-nexus-border rounded-3xl p-8 flex flex-col md:flex-row items-center gap-10 shadow-2xl reveal relative overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-br from-nexus-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 
-                <div class="w-40 flex-shrink-0 relative z-10">
-                    <img src="assets/phone-mockup.png" alt="Phone" class="w-full h-auto drop-shadow-2xl group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-32 h-64 mx-auto bg-[#111] border border-nexus-border rounded-2xl flex items-center justify-center text-nexus-red text-5xl font-black shadow-inner\'>N</div>'">
+                <div class="w-32 md:w-40 flex-shrink-0 relative z-10">
+                    <img src="assets/phone-mockup.png" alt="Phone" class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-32 h-64 mx-auto border border-nexus-border rounded-2xl flex items-center justify-center text-nexus-red text-5xl font-black shadow-inner\'>N</div>'">
                 </div>
                 
                 <div class="flex-1 w-full relative z-10 text-center md:text-left">
@@ -269,22 +250,22 @@
                     <h3 class="text-3xl font-bold mb-6 text-white tracking-tight">Android Phone</h3>
                     
                     <ul class="space-y-4 text-sm text-nexus-muted mb-8 font-medium inline-block text-left">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Requires Android 8.0+</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Version 1.2 (Stable)</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Tiny Size: 35 MB</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red"></i> Requires Android 8.0+</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red"></i> Version 1.2 (Stable)</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red"></i> Tiny Size: 35 MB</li>
                     </ul>
                     
-                    <button data-action="download-mobile" class="w-full bg-transparent border-2 border-nexus-red text-nexus-red hover:bg-nexus-red hover:text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all active:scale-95">
+                    <button data-action="download-mobile" class="w-full bg-transparent border border-nexus-red text-nexus-red hover:bg-nexus-red hover:text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all active:scale-95">
                         <i class="fa-solid fa-download"></i> DOWNLOAD MOBILE APK
                     </button>
                 </div>
             </div>
 
-            <div class="group bg-nexus-card border border-nexus-border hover:border-nexus-red/30 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-10 transition-all duration-500 shadow-2xl reveal" style="transition-delay: 200ms;">
+            <div class="group bg-nexus-card border border-nexus-border rounded-3xl p-8 flex flex-col md:flex-row items-center gap-10 shadow-2xl reveal" style="transition-delay: 200ms;">
                 <div class="absolute inset-0 bg-gradient-to-bl from-nexus-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
-                <div class="w-56 md:w-64 flex-shrink-0 relative z-10">
-                    <img src="assets/tv-mockup.png" alt="TV" class="w-full h-auto drop-shadow-2xl group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-full aspect-video bg-[#111] border border-nexus-border rounded-xl flex items-center justify-center text-nexus-red text-6xl font-black shadow-inner\'>N</div>'">
+                <div class="w-48 md:w-64 flex-shrink-0 relative z-10">
+                    <img src="assets/tv-mockup.png" alt="TV" class="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500" onerror="this.outerHTML='<div class=\'w-full aspect-video border border-nexus-border rounded-xl flex items-center justify-center text-nexus-red text-6xl font-black shadow-inner\'>N</div>'">
                 </div>
                 
                 <div class="flex-1 w-full relative z-10 text-center md:text-left">
@@ -294,9 +275,9 @@
                     <h3 class="text-3xl font-bold mb-6 text-white tracking-tight">Android TV</h3>
                     
                     <ul class="space-y-4 text-sm text-nexus-muted mb-8 font-medium inline-block text-left">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Android TV & Google TV</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Version 1.2 (Stable)</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red bg-nexus-red/10 p-1 rounded-full text-[10px]"></i> Optimized Size: 28 MB</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red"></i> Android TV & Google TV</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red"></i> Version 1.2 (Stable)</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-nexus-red"></i> Optimized Size: 28 MB</li>
                     </ul>
                     
                     <button data-action="download-tv" class="w-full bg-nexus-red hover:bg-red-700 text-white px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all active:scale-95 shadow-[0_10px_20px_rgba(229,9,20,0.2)] hover:shadow-[0_10px_30px_rgba(229,9,20,0.4)]">
@@ -307,124 +288,106 @@
         </div>
     </section>
 
-    <!-- PAYMENT INFO SECTION -->
     <section id="payment" class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 py-24 border-t border-nexus-border/50">
         <div class="text-center mb-16 reveal">
-            <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-3"><i class="fa-solid fa-crown mr-2"></i>VIP Access</div>
+            <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-3"><i class="fa-solid fa-crown mr-2"></i>Payment Info</div>
             <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Premium Membership</h2>
-            <p class="text-nexus-muted text-sm max-w-xl mx-auto leading-relaxed">Unlock the ultimate cinematic experience. Direct payment accepted via trusted local platforms.</p>
+            <p class="text-nexus-muted text-sm max-w-xl mx-auto leading-relaxed">Unlock premium features and enjoy an enhanced streaming experience.</p>
         </div>
 
         <div class="flex flex-col lg:flex-row gap-16 items-center justify-between">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 flex-1 w-full reveal">
-                <div class="bg-nexus-card border border-nexus-border hover:border-blue-500/50 rounded-2xl p-8 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2 shadow-lg group cursor-pointer relative overflow-hidden" onclick="showToast('KBZ Pay Info: 09123456789 (NexusTV)')">
-                    <div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="w-16 h-16 rounded-full bg-[#0055A5]/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform relative z-10">
-                        <img src="assets/kbz-pay.png" alt="KBZ Pay" class="h-8 object-contain" onerror="this.outerHTML='<div class=\'text-[#0055A5] font-black text-xl italic\'>KBZ</div>'">
+                <div class="bg-nexus-card border border-nexus-border rounded-2xl p-8 flex flex-col items-center justify-center gap-4 group relative overflow-hidden">
+                    <div class="w-16 h-16 flex items-center justify-center mb-2 relative z-10">
+                        <img src="assets/kbz-pay.png" alt="KBZ Pay" class="h-8 object-contain" onerror="this.outerHTML='<div class=\'text-[#0055A5] font-black text-xl italic\'>KBZ Pay</div>'">
                     </div>
-                    <span class="text-sm font-bold text-white tracking-wide relative z-10">KBZ Pay</span>
-                    <span class="absolute bottom-3 text-[9px] text-nexus-muted opacity-0 group-hover:opacity-100 transition-opacity">Click to view Details</span>
+                    <span class="text-sm font-bold text-nexus-muted tracking-wide relative z-10">KBZ Pay</span>
                 </div>
                 
-                <div class="bg-nexus-card border border-nexus-border hover:border-red-600/50 rounded-2xl p-8 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2 shadow-lg group cursor-pointer relative overflow-hidden" onclick="showToast('AYA Pay Info: 09123456789 (NexusTV)')">
-                    <div class="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="w-16 h-16 rounded-full bg-[#E31837]/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform relative z-10">
+                <div class="bg-nexus-card border border-nexus-border rounded-2xl p-8 flex flex-col items-center justify-center gap-4 group relative overflow-hidden">
+                    <div class="w-16 h-16 flex items-center justify-center mb-2 relative z-10">
                         <img src="assets/aya-pay.png" alt="AYA Pay" class="h-8 object-contain" onerror="this.outerHTML='<div class=\'text-[#E31837] font-black text-2xl\'><i class=\'fa-solid fa-p\'></i></div>'">
                     </div>
-                    <span class="text-sm font-bold text-white tracking-wide relative z-10">AYA Pay</span>
-                    <span class="absolute bottom-3 text-[9px] text-nexus-muted opacity-0 group-hover:opacity-100 transition-opacity">Click to view Details</span>
+                    <span class="text-sm font-bold text-nexus-muted tracking-wide relative z-10">AYA Pay</span>
                 </div>
                 
-                <div class="bg-nexus-card border border-yellow-500/30 rounded-2xl p-8 flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:-translate-y-2 shadow-[0_0_40px_rgba(255,204,0,0.1)] group cursor-pointer relative overflow-hidden" onclick="showToast('Wave Pay Info: 09123456789 (NexusTV)')">
-                    <div class="absolute -top-10 -right-10 w-20 h-20 bg-yellow-500/10 rounded-full blur-2xl"></div>
-                    <div class="absolute inset-0 bg-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="w-16 h-16 rounded-full bg-[#FFB800]/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform relative z-10">
+                <div class="bg-nexus-card border border-nexus-border rounded-2xl p-8 flex flex-col items-center justify-center gap-4 shadow-[0_0_40px_rgba(255,204,0,0.05)] group relative overflow-hidden">
+                    <div class="w-16 h-16 flex items-center justify-center mb-2 relative z-10">
                         <img src="assets/wave-pay.png" alt="Wave Pay" class="h-8 object-contain" onerror="this.outerHTML='<div class=\'w-8 h-8 rounded-full bg-[#FFB800]\'></div>'">
                     </div>
-                    <span class="text-sm font-bold text-[#FFB800] tracking-wide relative z-10">Wave Pay</span>
-                    <span class="absolute bottom-3 text-[9px] text-nexus-muted opacity-0 group-hover:opacity-100 transition-opacity">Click to view Details</span>
+                    <span class="text-sm font-bold text-nexus-muted tracking-wide relative z-10">Wave Pay</span>
                 </div>
             </div>
 
-            <div class="lg:w-1/3 w-full bg-nexus-card/50 p-8 rounded-3xl border border-nexus-border reveal" style="transition-delay: 200ms;">
-                <h3 class="text-xl font-bold mb-8 text-white border-b border-nexus-border pb-4">VIP Benefits</h3>
+            <div class="lg:w-1/3 w-full reveal" style="transition-delay: 200ms;">
                 <ul class="space-y-6 text-sm text-nexus-muted font-medium">
-                    <li class="flex items-center gap-4 group">
-                        <div class="w-8 h-8 rounded-full bg-nexus-red/10 flex items-center justify-center border border-nexus-red/20 group-hover:bg-nexus-red group-hover:text-white transition-colors">
-                            <i class="fa-solid fa-ban text-nexus-red group-hover:text-white"></i>
-                        </div>
-                        <span class="group-hover:text-white transition-colors">100% Ad-Free Experience</span>
+                    <li class="flex items-center gap-4">
+                        <i class="fa-regular fa-circle-check text-nexus-red"></i>
+                        <span class="text-white">Ad-Free Experience</span>
                     </li>
-                    <li class="flex items-center gap-4 group">
-                        <div class="w-8 h-8 rounded-full bg-nexus-red/10 flex items-center justify-center border border-nexus-red/20 group-hover:bg-nexus-red group-hover:text-white transition-colors">
-                            <i class="fa-solid fa-bolt text-nexus-red group-hover:text-white"></i>
-                        </div>
-                        <span class="group-hover:text-white transition-colors">Ultra-Fast VIP Servers</span>
+                    <li class="flex items-center gap-4">
+                        <i class="fa-regular fa-circle-check text-nexus-red"></i>
+                        <span class="text-white">Early Access Content</span>
                     </li>
-                    <li class="flex items-center gap-4 group">
-                        <div class="w-8 h-8 rounded-full bg-nexus-red/10 flex items-center justify-center border border-nexus-red/20 group-hover:bg-nexus-red group-hover:text-white transition-colors">
-                            <i class="fa-solid fa-star text-nexus-red group-hover:text-white"></i>
-                        </div>
-                        <span class="group-hover:text-white transition-colors">Early Access to New Series</span>
+                    <li class="flex items-center gap-4">
+                        <i class="fa-regular fa-circle-check text-nexus-red"></i>
+                        <span class="text-white">Faster Streaming Servers</span>
                     </li>
-                    <li class="flex items-center gap-4 group">
-                        <div class="w-8 h-8 rounded-full bg-nexus-red/10 flex items-center justify-center border border-nexus-red/20 group-hover:bg-nexus-red group-hover:text-white transition-colors">
-                            <i class="fa-solid fa-headset text-nexus-red group-hover:text-white"></i>
-                        </div>
-                        <span class="group-hover:text-white transition-colors">24/7 Priority Support</span>
+                    <li class="flex items-center gap-4">
+                        <i class="fa-regular fa-circle-check text-nexus-red"></i>
+                        <span class="text-white">Premium Support</span>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- SOCIAL COMMUNITY SECTION -->
     <section id="social" class="relative z-10 max-w-7xl mx-auto px-6 md:px-16 py-24 border-t border-nexus-border/50 mb-16 md:mb-0">
         <div class="text-center mb-16 flex items-center justify-center gap-6 reveal">
             <div class="h-px bg-gradient-to-l from-nexus-border to-transparent flex-1 max-w-[150px]"></div>
             <div>
-                <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-2">Connect</div>
+                <div class="text-nexus-red text-xs font-bold tracking-[0.2em] uppercase mb-2">Connect with Nexus</div>
                 <h2 class="text-3xl font-bold tracking-tight">Join Our Community</h2>
             </div>
             <div class="h-px bg-gradient-to-r from-nexus-border to-transparent flex-1 max-w-[150px]"></div>
         </div>
 
         <div class="flex flex-wrap justify-center gap-4 reveal" style="transition-delay: 100ms;">
-            <a href="#" data-social="telegram" class="bg-nexus-card border border-nexus-border hover:border-[#229ED9] hover:bg-[#229ED9]/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
-                <div class="w-12 h-12 rounded-full bg-[#229ED9] flex items-center justify-center shadow-[0_0_15px_rgba(34,158,217,0.4)] group-hover:scale-110 transition-transform">
+            <a href="#" data-social="telegram" class="bg-nexus-card border border-nexus-border hover:border-nexus-red/50 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center transition-transform">
                     <i class="fa-brands fa-telegram text-white text-xl"></i>
                 </div>
                 <div class="flex-1">
                     <div class="text-sm font-bold text-white mb-1">Telegram Channel</div>
                     <div class="text-[11px] text-nexus-muted font-medium uppercase tracking-wider">Join Now</div>
                 </div>
-                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-[#229ED9] group-hover:translate-x-1 transition-all"></i>
+                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-white group-hover:translate-x-1 transition-all"></i>
             </a>
 
-            <a href="#" data-social="support" class="bg-nexus-card border border-nexus-border hover:border-nexus-red hover:bg-nexus-red/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
-                <div class="w-12 h-12 rounded-full bg-nexus-red flex items-center justify-center shadow-[0_0_15px_rgba(229,9,20,0.4)] group-hover:scale-110 transition-transform">
+            <a href="#" data-social="support" class="bg-nexus-card border border-nexus-border hover:border-nexus-red/50 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-nexus-red flex items-center justify-center transition-transform">
                     <i class="fa-solid fa-headset text-white text-xl"></i>
                 </div>
                 <div class="flex-1">
                     <div class="text-sm font-bold text-white mb-1">Nexus Care</div>
                     <div class="text-[11px] text-nexus-muted font-medium uppercase tracking-wider">Get Support</div>
                 </div>
-                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-nexus-red group-hover:translate-x-1 transition-all"></i>
+                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-white group-hover:translate-x-1 transition-all"></i>
             </a>
 
-            <a href="#" data-social="facebook" class="bg-nexus-card border border-nexus-border hover:border-[#1877F2] hover:bg-[#1877F2]/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
-                <div class="w-12 h-12 rounded-full bg-[#1877F2] flex items-center justify-center shadow-[0_0_15px_rgba(24,119,242,0.4)] group-hover:scale-110 transition-transform">
+            <a href="#" data-social="facebook" class="bg-nexus-card border border-nexus-border hover:border-nexus-red/50 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center transition-transform">
                     <i class="fa-brands fa-facebook-f text-white text-xl"></i>
                 </div>
                 <div class="flex-1">
                     <div class="text-sm font-bold text-white mb-1">Facebook Page</div>
                     <div class="text-[11px] text-nexus-muted font-medium uppercase tracking-wider">Follow Us</div>
                 </div>
-                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-[#1877F2] group-hover:translate-x-1 transition-all"></i>
+                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-white group-hover:translate-x-1 transition-all"></i>
             </a>
 
-            <a href="#" data-social="tiktok" class="bg-nexus-card border border-nexus-border hover:border-white/50 hover:bg-white/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
-                <div class="w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:scale-110 transition-transform">
+            <a href="#" data-social="tiktok" class="bg-nexus-card border border-nexus-border hover:border-nexus-red/50 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center transition-transform">
                     <i class="fa-brands fa-tiktok text-white text-xl"></i>
                 </div>
                 <div class="flex-1">
@@ -434,38 +397,36 @@
                 <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-white group-hover:translate-x-1 transition-all"></i>
             </a>
 
-            <a href="#" data-social="youtube" class="bg-nexus-card border border-nexus-border hover:border-[#FF0000] hover:bg-[#FF0000]/5 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
-                <div class="w-12 h-12 rounded-full bg-[#FF0000] flex items-center justify-center shadow-[0_0_15px_rgba(255,0,0,0.4)] group-hover:scale-110 transition-transform">
+            <a href="#" data-social="youtube" class="bg-nexus-card border border-nexus-border hover:border-nexus-red/50 rounded-2xl px-6 py-4 flex items-center gap-5 w-full sm:w-[280px] transition-all duration-300 group hover:-translate-y-1 shadow-lg">
+                <div class="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center transition-transform">
                     <i class="fa-brands fa-youtube text-white text-xl"></i>
                 </div>
                 <div class="flex-1">
                     <div class="text-sm font-bold text-white mb-1">YouTube Channel</div>
                     <div class="text-[11px] text-nexus-muted font-medium uppercase tracking-wider">Subscribe</div>
                 </div>
-                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-[#FF0000] group-hover:translate-x-1 transition-all"></i>
+                <i class="fa-solid fa-chevron-right text-sm text-nexus-border group-hover:text-white group-hover:translate-x-1 transition-all"></i>
             </a>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-nexus-border bg-[#020202] relative z-10 pb-20 md:pb-0">
-        <div class="max-w-7xl mx-auto px-6 md:px-16 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+    <footer class="border-t border-nexus-border mt-12 bg-[#020202] relative z-10 pb-20 md:pb-0">
+        <div class="max-w-7xl mx-auto px-6 md:px-16 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="text-center md:text-left">
-                <div class="text-3xl font-black text-nexus-red italic tracking-tighter mb-2">NEXUS</div>
-                <div class="text-[10px] text-nexus-muted mb-4 uppercase tracking-widest font-bold">Watch. Stream. Enjoy.</div>
-                <div class="text-xs text-nexus-muted font-medium">© <span id="year"></span> Nexus Entertainment. All Rights Reserved.</div>
+                <div class="text-2xl font-black text-nexus-red italic tracking-tighter mb-1">NEXUS</div>
+                <div class="text-[10px] text-nexus-muted mb-2 uppercase tracking-wider">Watch. Stream. Enjoy.</div>
+                <div class="text-xs text-nexus-muted">© <span id="year"></span> Nexus. All Rights Reserved.</div>
             </div>
             
-            <div class="hidden md:flex items-center gap-8 text-xs font-bold text-nexus-muted uppercase tracking-wider">
-                <a href="#app-info" class="hover:text-white transition-colors">App Info</a>
-                <a href="#download" class="hover:text-white transition-colors">Download</a>
-                <a href="#payment" class="hover:text-white transition-colors">Payment</a>
-                <a href="#social" class="hover:text-white transition-colors">Community</a>
+            <div class="flex items-center gap-6 text-xs font-medium text-white/80">
+                <a href="#app-info" class="flex items-center gap-2 hover:text-nexus-red transition"><i class="fa-regular fa-circle-info"></i> App Info</a>
+                <a href="#download" class="flex items-center gap-2 hover:text-nexus-red transition"><i class="fa-solid fa-download"></i> Download</a>
+                <a href="#payment" class="flex items-center gap-2 hover:text-nexus-red transition"><i class="fa-regular fa-credit-card"></i> Payment Info</a>
+                <a href="#social" class="flex items-center gap-2 hover:text-nexus-red transition"><i class="fa-solid fa-user-group"></i> Social</a>
             </div>
         </div>
     </footer>
 
-    <!-- EXTERNAL JS ဖိုင်ကို လှမ်းချိတ်ခြင်း -->
     <script src="index.js"></script>
 </body>
 </html>
