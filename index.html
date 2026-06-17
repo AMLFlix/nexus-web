@@ -2,37 +2,24 @@
 <html lang="my" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Nexus TV — Ultra-Premium Immersive Streaming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexus TV | The New Era</title>
     
-    <meta name="theme-color" content="#020205">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            DEFAULT: '#E6A119', // Luxury Cinema Gold / Amber Accent
-                            light: '#F5B942',
-                            dark: '#B87D0A',
-                            surface: 'rgba(230, 161, 25, 0.04)'
-                        },
-                        obsidian: {
-                            bg: '#020205',      // Deepest Cinematic Pure Ink Black
-                            canvas: '#08080E',  // Studio High-Fidelity Deep Canvas
-                            card: '#0D0D16',    // Premium Sleek Plate Surface
-                            border: '#161622',  // Ultra-Fine Razor Border
-                            muted: '#7E7D8A'    // High-End Slate Neutral Gray
-                        }
+                        primary: '#4338ca', // Indigo 700
+                        secondary: '#06b6d4', // Cyan 500
+                        dark: '#0a0a0a',
+                        surface: '#171717',
+                        borderline: '#262626'
                     },
                     fontFamily: {
                         sans: ['Inter', 'Noto Sans Myanmar', 'sans-serif'],
-                    },
-                    letterSpacing: {
-                        ultra: '0.18em',
-                        headline: '-0.02em'
+                        heading: ['Space Grotesk', 'sans-serif']
                     }
                 }
             }
@@ -40,281 +27,261 @@
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Myanmar:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Myanmar:wght@400;500;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     
     <style>
         body { 
-            background-color: #020205; 
-            color: #FFFFFF; 
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            background-color: #0a0a0a; 
+            color: #e5e5e5; 
         }
 
-        /* High-End Backlighting / Cinema Projection Effect */
-        .ambient-projection {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150vw;
-            height: 85vh;
-            background: radial-gradient(circle at 50% -20%, rgba(230, 161, 25, 0.07) 0%, rgba(8, 8, 14, 0.3) 50%, rgba(2, 2, 5, 1) 100%);
-            z-index: 0;
-            pointer-events: none;
+        /* Hide scrollbar but keep functionality */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+
+        /* Custom Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #818cf8 0%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Fluid Studio Navigation Blur */
-        .glass-navigation {
-            background: rgba(2, 2, 5, 0.75);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(22, 22, 34, 0.6);
+        .bg-gradient-glow {
+            background: radial-gradient(circle at center, rgba(67, 56, 202, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
         }
 
-        /* Master-Class Asymmetric Reveal System */
-        .reveal {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, opacity;
+        /* Tab Transitions */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Premium Micro-Interactive Borders */
-        .obsidian-plate {
-            border: 1px solid #161622;
-            background: #08080E;
-            transition: border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .obsidian-plate:hover {
-            border-color: rgba(230, 161, 25, 0.35);
-            background: #0D0D16;
-            transform: translateY(-2px);
+        .tab-content.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Precision Line Height Adjustment for Elegant Burmese Typography */
-        .mm-editorial {
-            line-height: 1.95;
-            letter-spacing: 0.01em;
+        /* Sidebar Glass */
+        .sidebar-glass {
+            background: rgba(23, 23, 23, 0.8);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid #262626;
         }
     </style>
 </head>
-<body class="selection:bg-brand selection:text-obsidian-bg font-sans antialiased">
+<body class="flex flex-col md:flex-row min-h-screen antialiased">
 
-    <div id="toast" class="fixed top-8 left-1/2 -translate-x-1/2 flex items-center gap-4 text-white px-6 py-4 rounded-full bg-obsidian-card/95 backdrop-blur-xl border border-obsidian-border shadow-[0_24px_50px_-12px_rgba(0,0,0,0.9)] transition-all duration-700 transform -translate-y-[250%] opacity-0 z-[100] scale-95">
-        <div id="toast-icon-bg" class="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300">
-            <i id="toast-icon" class="text-xs"></i>
-        </div>
-        <span id="toast-msg" class="text-xs font-semibold tracking-wider uppercase"></span>
+    <div id="toast" class="fixed top-6 right-6 flex items-center gap-3 px-5 py-3 rounded-lg bg-surface border border-borderline shadow-2xl transition-all duration-300 transform translate-x-full opacity-0 z-[100]">
+        <i id="toast-icon" class="text-secondary"></i>
+        <span id="toast-msg" class="text-sm font-medium"></span>
     </div>
 
-    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-500 py-6 px-6 md:px-16">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                <div class="w-5 h-5 bg-brand rounded-sm flex items-center justify-center transition-transform duration-500 group-hover:rotate-90">
-                    <div class="w-1.5 h-1.5 bg-obsidian-bg transform rotate-45"></div>
-                </div>
-                <span class="text-base font-bold tracking-ultra text-white uppercase transition-colors group-hover:text-brand-light">Nexus</span>
-            </div>
-            
-            <div class="hidden md:flex gap-12 text-[11px] tracking-ultra uppercase font-semibold text-obsidian-muted">
-                <a href="#features" class="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand hover:after:w-full after:transition-all">Features</a>
-                <a href="#pricing" class="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand hover:after:w-full after:transition-all">Plans</a>
-            </div>
-            
-            <div class="hidden md:block">
-                <a href="#download-section" class="border border-white/10 bg-white/[0.02] hover:bg-white hover:text-obsidian-bg text-white px-6 py-2.5 rounded-full text-[11px] font-bold tracking-ultra uppercase transition-all duration-300">
-                    Get Started
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <section class="relative min-h-[96svh] flex flex-col items-center justify-center px-6 pt-32 pb-20 text-center overflow-hidden">
-        <div class="ambient-projection"></div>
-
-        <div class="relative z-10 max-w-4xl mx-auto reveal">
-            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-obsidian-border bg-obsidian-canvas/60 mb-10 shadow-inner">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
-                <span class="text-[9px] uppercase font-bold tracking-ultra text-brand-light">Cinema-Grade Quality</span>
-            </div>
-
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.12] mb-8 tracking-headline text-white">
-                ထိုင်ခုံနံပါတ် မလိုပါ။<br>
-                <span class="bg-clip-text text-transparent bg-gradient-to-b from-white via-neutral-100 to-brand-light">ရုပ်ရှင်ရုံတစ်ခုလုံး</span> သင့်လက်ထဲမှာ။
-            </h1>
-            
-            <p class="text-sm sm:text-base md:text-lg text-obsidian-muted max-w-2xl mx-auto mb-14 font-normal mm-editorial">
-                မည်သည့်ကြော်ငြာမှ မပါဝင်ဘဲ <strong class="text-white font-semibold">4K Ultra HD</strong> စစ်စစ်ဖြင့် အကောင်းဆုံးသော ရုပ်ရှင်နှင့် ဇာတ်လမ်းတွဲများကို အိမ်မှာတင် ရုပ်ရှင်ရုံထဲရောက်နေသကဲ့သို့ ခံစားကြည့်ရှုလိုက်ပါ။
-            </p>
-            
-            <div id="download-section" class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto w-full">
-                <button data-download="android" class="w-full bg-white hover:bg-neutral-200 text-obsidian-bg px-8 py-4 rounded-full text-[11px] font-bold tracking-ultra uppercase flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98] shadow-2xl">
-                    <i class="fa-brands fa-android text-sm"></i>
-                    <span>Android Phone</span>
-                </button>
-                
-                <button data-download="tv" class="w-full bg-obsidian-canvas hover:bg-obsidian-card text-white border border-obsidian-border px-8 py-4 rounded-full text-[11px] font-bold tracking-ultra uppercase flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98]">
-                    <i class="fa-solid fa-tv text-sm text-obsidian-muted"></i>
-                    <span>Android TV App</span>
-                </button>
-            </div>
-            
-            <p class="text-[10px] text-obsidian-muted tracking-wider mt-8 font-medium uppercase">
-                <i class="fa-solid fa-shield-check mr-1.5 text-brand/60"></i> Verified Secure • Android 8.0 or above required
-            </p>
-        </div>
-    </section>
-
-    <section id="features" class="py-36 px-6 md:px-16 border-t border-obsidian-border bg-obsidian-canvas relative z-10">
-        <div class="max-w-7xl mx-auto">
-            
-            <div class="mb-24 max-w-2xl reveal">
-                <p class="text-brand text-[10px] font-bold tracking-ultra uppercase mb-4">Core Infrastructure</p>
-                <h2 class="text-3xl md:text-5xl font-bold tracking-headline text-white leading-tight">
-                    ကြည့်ရှုမှု အတွေ့အကြုံကို<br>အဆင့်မြှင့်တင်ပေးမည့် စနစ်များ
-                </h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <div class="obsidian-plate p-10 rounded-2xl reveal">
-                    <div class="w-10 h-10 rounded-lg bg-brand/5 border border-brand/20 flex items-center justify-center mb-10">
-                        <i class="fa-solid fa-arrow-rotate-left text-brand text-xs"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-white tracking-wide mb-4">Seamless Syncing</h3>
-                    <p class="text-obsidian-muted text-xs mm-editorial font-light">
-                        ဖုန်းမှာ ကြည့်လက်စဇာတ်ကားကို Android TV ပေါ်တွင် ရပ်တန့်ခဲ့သည့် မိနစ်အတိအကျမှစ၍ မည်သည့်အဆင်မပြေမှုမျှမရှိဘဲ ချက်ချင်း ဆက်လက်ကြည့်ရှုနိုင်မည့် စနစ်။
-                    </p>
-                </div>
-
-                <div class="obsidian-plate p-10 rounded-2xl reveal" style="transition-delay: 60ms;">
-                    <div class="w-10 h-10 rounded-lg bg-brand/5 border border-brand/20 flex items-center justify-center mb-10">
-                        <i class="fa-solid fa-arrow-down-to-line text-brand text-xs"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-white tracking-wide mb-4">Offline Vault</h3>
-                    <p class="text-obsidian-muted text-xs mm-editorial font-light">
-                        အင်တာနက်လိုင်း မတည်ငြိမ်သည့် အချိန်များတွင်ပါ ကြည့်ရှုနိုင်ရန် မိမိနှစ်သက်သော ရုပ်ရှင်များကို ပကတိမူလ အရည်အသွေးအတိုင်း ကြိုတင်ဒေါင်းလုဒ်ဆွဲ သိမ်းဆည်းထားနိုင်မည်။
-                    </p>
-                </div>
-
-                <div class="obsidian-plate p-10 rounded-2xl reveal" style="transition-delay: 120ms;">
-                    <div class="w-10 h-10 rounded-lg bg-brand/5 border border-brand/20 flex items-center justify-center mb-10">
-                        <i class="fa-solid fa-sliders text-brand text-xs"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-white tracking-wide mb-4">Cinema Audio & Streaming</h3>
-                    <p class="text-obsidian-muted text-xs mm-editorial font-light">
-                        Dolby Atmos အသံစနစ်နှင့် အဆင့်မြင့် High-Speed Server များကြောင့် 4K ရုပ်ထွက်များကိုပါ ထစ်ငေါ့မှု လုံးဝမရှိဘဲ ကြည်လင်ပြတ်သားစွာ ခံစားနိုင်ခြင်း။
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing" class="py-36 px-6 md:px-16 border-t border-obsidian-border bg-obsidian-canvas relative z-10">
-        <div class="max-w-7xl mx-auto">
-            
-            <div class="text-center mb-24 reveal">
-                <p class="text-brand text-[10px] font-bold tracking-ultra uppercase mb-4">Subscription Tiers</p>
-                <h2 class="text-3xl md:text-5xl font-bold tracking-headline text-white">ရှင်းလင်းပြီး ပွင့်လင်းမြင်သာသော စျေးနှုန်းများ</h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
-                
-                <div class="obsidian-plate p-10 rounded-2xl flex flex-col justify-between reveal">
-                    <div>
-                        <span class="text-[9px] tracking-ultra uppercase font-bold text-obsidian-muted block mb-5">Basic Tier</span>
-                        <div class="flex items-baseline gap-1.5 mb-8">
-                            <span class="text-3xl font-extrabold tracking-tight text-white">3,000</span>
-                            <span class="text-obsidian-muted text-xs font-medium">MMK / လ</span>
-                        </div>
-                        <ul class="space-y-4 text-xs font-light text-neutral-300 border-t border-obsidian-border/60 pt-8 mb-10">
-                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-minus text-obsidian-muted text-[10px]"></i> HD 720p Resolution</li>
-                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-minus text-obsidian-muted text-[10px]"></i> Ad-Free Premium Account</li>
-                            <li class="flex items-center gap-3.5 text-obsidian-muted"><i class="fa-solid fa-minus text-obsidian-muted text-[10px]"></i> Mobile Device Access Only</li>
-                        </ul>
-                    </div>
-                    <button class="w-full py-3.5 rounded-full text-[10px] font-bold tracking-ultra uppercase bg-obsidian-bg hover:bg-obsidian-card border border-obsidian-border text-white transition-all duration-300 active:scale-[0.98]">Select Plan</button>
-                </div>
-
-                <div class="border-2 border-brand bg-obsidian-bg p-10 rounded-2xl flex flex-col justify-between relative shadow-[0_30px_70px_-15px_rgba(230,161,25,0.15)] reveal" style="transition-delay: 60ms;">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-obsidian-bg text-[9px] font-extrabold px-5 py-1 rounded-full tracking-ultra uppercase shadow-lg">Most Popular</div>
-                    <div>
-                        <span class="text-[9px] tracking-ultra uppercase font-bold text-brand block mb-5">Standard Tier</span>
-                        <div class="flex items-baseline gap-1.5 mb-8">
-                            <span class="text-4xl font-extrabold tracking-tight text-white">8,000</span>
-                            <span class="text-obsidian-muted text-xs font-medium">MMK / ၃ လ</span>
-                        </div>
-                        <ul class="space-y-4 text-xs font-medium text-white border-t border-obsidian-border/80 pt-8 mb-10">
-                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-check text-brand text-[10px]"></i> Ultra HD 4K Resolution</li>
-                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-check text-brand text-[10px]"></i> Multi-Device (2 Devices Simultaneously)</li>
-                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-check text-brand text-[10px]"></i> Maximum High-Speed Downloads</li>
-                        </ul>
-                    </div>
-                    <button class="w-full py-3.5 rounded-full text-[10px] font-bold tracking-ultra uppercase bg-brand hover:bg-brand-dark text-obsidian-bg transition-all duration-300 active:scale-[0.98] shadow-xl shadow-brand/10">Get Started</button>
-                </div>
-
-                <div class="obsidian-plate p-10 rounded-2xl flex flex-col justify-between reveal" style="transition-delay: 120ms;">
-                    <div>
-                        <span class="text-[9px] tracking-ultra uppercase font-bold text-obsidian-muted block mb-5">VIP Annual Tier</span>
-                        <div class="flex items-baseline gap-1.5 mb-8">
-                            <span class="text-3xl font-extrabold tracking-tight text-white">30,000</span>
-                            <span class="text-obsidian-muted text-xs font-medium">MMK / နှစ်</span>
-                        </div>
-                        <ul class="space-y-4 text-xs font-light text-neutral-300 border-t border-obsidian-border/60 pt-8 mb-10">
-                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-star text-brand text-[9px]"></i> Priority Dedicated Server Network</li>
-                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-star text-brand text-[9px]"></i> Personalized Advanced Profiles</li>
-                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-star text-brand text-[9px]"></i> 24/7 Priority Studio Support</li>
-                        </ul>
-                    </div>
-                    <button class="w-full py-3.5 rounded-full text-[10px] font-bold tracking-ultra uppercase bg-obsidian-bg hover:bg-obsidian-card border border-obsidian-border text-white transition-all duration-300 active:scale-[0.98]">Select Plan</button>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <footer class="border-t border-obsidian-border py-20 px-6 bg-obsidian-bg pb-32 md:pb-20 relative z-10">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-            
-            <div class="flex items-center gap-2">
-                <span class="text-xs font-bold tracking-ultra text-white uppercase">Nexus TV</span>
-            </div>
-            
-            <div class="flex gap-10">
-                <a href="#" data-social="facebook" class="text-obsidian-muted hover:text-white transition-colors text-base"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#" data-social="telegram" class="text-obsidian-muted hover:text-white transition-colors text-base"><i class="fa-brands fa-telegram"></i></a>
-            </div>
-            
-            <p class="text-[11px] text-obsidian-muted tracking-wider font-light uppercase">© <span id="current-year"></span> Nexus Entertainment. Engineered with absolute precision.</p>
-        </div>
-    </footer>
-
-    <div id="mobile-nav" class="fixed bottom-0 left-0 w-full bg-obsidian-bg/80 backdrop-blur-xl border-t border-obsidian-border z-50 flex justify-around items-center px-6 py-4 md:hidden pb-safe">
-        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-1.5 text-brand">
-            <i class="fa-solid fa-compass text-sm"></i>
-            <span class="text-[9px] uppercase tracking-wider font-bold">Discover</span>
+    <aside class="sidebar-glass fixed left-0 top-0 h-screen w-24 hidden md:flex flex-col items-center py-8 z-50 justify-between">
+        <a href="#" class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+            <i class="fa-solid fa-play text-white text-xl"></i>
         </a>
-        <a href="#features" class="flex flex-col items-center gap-1.5 text-obsidian-muted hover:text-white transition-colors">
-            <i class="fa-solid fa-cubes text-sm"></i>
-            <span class="text-[9px] uppercase tracking-wider font-bold">Features</span>
+
+        <nav class="flex flex-col gap-8">
+            <a href="#home" class="group relative flex justify-center" title="Home">
+                <i class="fa-solid fa-house text-neutral-500 group-hover:text-white transition-colors text-xl"></i>
+            </a>
+            <a href="#features" class="group relative flex justify-center" title="Features">
+                <i class="fa-solid fa-layer-group text-neutral-500 group-hover:text-white transition-colors text-xl"></i>
+            </a>
+            <a href="#pricing" class="group relative flex justify-center" title="Plans">
+                <i class="fa-solid fa-tags text-neutral-500 group-hover:text-white transition-colors text-xl"></i>
+            </a>
+        </nav>
+
+        <div class="flex flex-col gap-6">
+            <a href="#" data-social="facebook" class="text-neutral-500 hover:text-[#1877F2] transition-colors"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+            <a href="#" data-social="telegram" class="text-neutral-500 hover:text-[#229ED9] transition-colors"><i class="fa-brands fa-telegram text-lg"></i></a>
+        </div>
+    </aside>
+
+    <main class="w-full md:ml-24 pb-24 md:pb-0 relative">
+        
+        <div class="fixed top-0 left-0 w-full h-full bg-gradient-glow pointer-events-none -z-10"></div>
+
+        <section id="home" class="min-h-screen flex items-center px-6 md:px-20 py-20 relative">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-surface border border-borderline mb-8">
+                    <span class="relative flex h-2.5 w-2.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+                    </span>
+                    <span class="text-xs font-semibold tracking-widest uppercase text-neutral-300">Nexus OS 1.0</span>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-[1.1] mb-8">
+                    Cinematic Reality <br>
+                    <span class="text-gradient">Redefined.</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-neutral-400 mb-12 max-w-xl leading-[1.8]">
+                    ရုပ်ရှင်ရုံတစ်ခုလုံးကို သင့်အိမ်ခန်းထဲ သယ်ဆောင်လာသကဲ့သို့ 4K Ultra HD ရုပ်ထွက်၊ ကြော်ငြာလုံးဝမပါဝင်သော Premium အတွေ့အကြုံ။
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <button data-download="android" class="group relative px-8 py-4 bg-white text-dark rounded-xl font-bold flex items-center justify-center gap-3 overflow-hidden transition-transform active:scale-95">
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-primary/20 to-secondary/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500"></div>
+                        <i class="fa-brands fa-android text-xl"></i>
+                        <span>Download APK</span>
+                    </button>
+                    <button data-download="tv" class="px-8 py-4 bg-surface border border-borderline hover:border-neutral-500 text-white rounded-xl font-bold flex items-center justify-center gap-3 transition-all active:scale-95">
+                        <i class="fa-solid fa-tv text-xl text-neutral-400"></i>
+                        <span>Get TV Version</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-borderline rounded-full opacity-20">
+                <div class="absolute inset-10 border border-primary rounded-full animate-[spin_60s_linear_infinite]"></div>
+                <div class="absolute inset-20 border border-secondary rounded-full animate-[spin_40s_linear_infinite_reverse]"></div>
+            </div>
+        </section>
+
+        <section id="features" class="py-24 px-6 md:px-20 border-t border-borderline">
+            <h2 class="text-3xl md:text-5xl font-heading font-bold mb-16 text-white">The Architecture</h2>
+
+            <div class="flex flex-col gap-12">
+                <div class="flex flex-col md:flex-row items-center gap-10 bg-surface border border-borderline rounded-3xl p-8 md:p-12">
+                    <div class="flex-1">
+                        <div class="w-14 h-14 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-mobile-screen text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-white">Cross-Device Sync</h3>
+                        <p class="text-neutral-400 leading-[1.8]">ဖုန်းမှာကြည့်လက်စ ဇာတ်ကားကို Android TV ပေါ်မှာ အချိန်အတိအကျကနေ ဆက်လက်ကြည့်ရှုနိုင်တဲ့စနစ်။ (No refreshing needed)</p>
+                    </div>
+                    <div class="flex-1 w-full bg-dark h-48 rounded-2xl border border-borderline flex items-center justify-center relative overflow-hidden">
+                        <div class="w-full h-[1px] bg-primary/50 absolute top-1/2 -translate-y-1/2"></div>
+                        <i class="fa-solid fa-arrows-rotate text-4xl text-neutral-700 animate-spin" style="animation-duration: 3s;"></i>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse items-center gap-10 bg-surface border border-borderline rounded-3xl p-8 md:p-12">
+                    <div class="flex-1">
+                        <div class="w-14 h-14 rounded-full bg-secondary/20 flex items-center justify-center mb-6">
+                            <i class="fa-solid fa-bolt text-secondary text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-white">Zero-Buffering Engine</h3>
+                        <p class="text-neutral-400 leading-[1.8]">Dolby Atmos အသံစနစ်နှင့် အဆင့်မြင့် Server နည်းပညာဖြင့် 4K အရည်အသွေးကို လိုင်းမကောင်းချိန်မှာတောင် အကောင်းဆုံး ထိန်းညှိပေးသည်။</p>
+                    </div>
+                    <div class="flex-1 w-full bg-dark h-48 rounded-2xl border border-borderline flex items-center justify-center relative overflow-hidden">
+                        <div class="w-32 h-32 rounded-full border-4 border-secondary/30 border-t-secondary animate-spin"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-24 px-6 md:px-20 border-t border-borderline min-h-screen flex flex-col justify-center">
+            <div class="max-w-4xl w-full mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-5xl font-heading font-bold mb-6 text-white">Choose Your Plan</h2>
+                    <p class="text-neutral-400">ရိုးရှင်းသော ဈေးနှုန်းများ။ အရှုပ်အရှင်းမရှိပါ။</p>
+                </div>
+
+                <div class="flex justify-center mb-10">
+                    <div class="inline-flex bg-surface p-1.5 rounded-xl border border-borderline gap-1">
+                        <button class="tab-btn active px-6 py-3 rounded-lg text-sm font-semibold transition-all bg-dark text-white shadow" data-target="tab-basic">Basic</button>
+                        <button class="tab-btn px-6 py-3 rounded-lg text-sm font-semibold transition-all text-neutral-400 hover:text-white" data-target="tab-standard">Standard</button>
+                        <button class="tab-btn px-6 py-3 rounded-lg text-sm font-semibold transition-all text-neutral-400 hover:text-white" data-target="tab-vip">VIP</button>
+                    </div>
+                </div>
+
+                <div class="bg-surface border border-borderline rounded-3xl p-8 md:p-16 relative overflow-hidden">
+                    
+                    <div id="tab-basic" class="tab-content active">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-borderline pb-8 mb-8">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-2">Basic Tier</h3>
+                                <p class="text-neutral-400">တစ်ကိုယ်တော်ကြည့်ရှုသူများအတွက်။</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-5xl font-heading font-bold text-white">3,000</div>
+                                <div class="text-neutral-500 mt-1">MMK / လ</div>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 mb-10">
+                            <div class="flex items-center gap-3 text-neutral-300"><i class="fa-solid fa-check text-neutral-600"></i> HD 720p Resolution</div>
+                            <div class="flex items-center gap-3 text-neutral-300"><i class="fa-solid fa-check text-neutral-600"></i> 1 Mobile Device</div>
+                            <div class="flex items-center gap-3 text-neutral-300"><i class="fa-solid fa-check text-neutral-600"></i> Ad-Free</div>
+                        </div>
+                        <button class="w-full py-4 bg-white text-dark rounded-xl font-bold transition-transform active:scale-95">Select Basic</button>
+                    </div>
+
+                    <div id="tab-standard" class="tab-content">
+                        <div class="absolute top-0 right-0 bg-secondary text-white text-xs font-bold px-4 py-2 rounded-bl-2xl">MOST POPULAR</div>
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-borderline pb-8 mb-8">
+                            <div>
+                                <h3 class="text-2xl font-bold text-secondary mb-2">Standard Tier</h3>
+                                <p class="text-neutral-400">အိမ်သားများ၊ သူငယ်ချင်းများနှင့် မျှဝေကြည့်ရန်။</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-5xl font-heading font-bold text-white">8,000</div>
+                                <div class="text-secondary mt-1">MMK / ၃ လ</div>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 mb-10">
+                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-check text-secondary"></i> 4K Ultra HD</div>
+                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-check text-secondary"></i> 2 Devices Simultaneously</div>
+                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-check text-secondary"></i> Offline Downloads</div>
+                        </div>
+                        <button class="w-full py-4 bg-secondary text-white rounded-xl font-bold transition-transform active:scale-95 shadow-[0_0_20px_rgba(6,182,212,0.3)]">Get Standard</button>
+                    </div>
+
+                    <div id="tab-vip" class="tab-content">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-b border-borderline pb-8 mb-8">
+                            <div>
+                                <h3 class="text-2xl font-bold text-primary mb-2">VIP Annual</h3>
+                                <p class="text-neutral-400">အကောင်းဆုံး ဝန်ဆောင်မှု အပြည့်အဝရယူရန်။</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-5xl font-heading font-bold text-white">30,000</div>
+                                <div class="text-primary mt-1">MMK / နှစ်</div>
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 mb-10">
+                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-star text-primary"></i> Priority Server Speed</div>
+                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-star text-primary"></i> VIP Custom Profiles</div>
+                            <div class="flex items-center gap-3 text-white"><i class="fa-solid fa-star text-primary"></i> 24/7 Dedicated Support</div>
+                        </div>
+                        <button class="w-full py-4 bg-primary text-white rounded-xl font-bold transition-transform active:scale-95">Upgrade to VIP</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-10 px-6 md:px-20 border-t border-borderline">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-500">
+                <p>© <span id="current-year"></span> Nexus OS. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <div class="md:hidden fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-lg border-t border-borderline z-50 flex justify-around p-4 pb-safe">
+        <a href="#home" class="flex flex-col items-center gap-1 text-white">
+            <i class="fa-solid fa-house"></i>
+            <span class="text-[10px]">Home</span>
         </a>
-        <a href="#pricing" class="flex flex-col items-center gap-1.5 text-obsidian-muted hover:text-white transition-colors">
-            <i class="fa-solid fa-ticket text-sm"></i>
-            <span class="text-[9px] uppercase tracking-wider font-bold">Plans</span>
+        <a href="#features" class="flex flex-col items-center gap-1 text-neutral-500 hover:text-white">
+            <i class="fa-solid fa-layer-group"></i>
+            <span class="text-[10px]">Features</span>
+        </a>
+        <a href="#pricing" class="flex flex-col items-center gap-1 text-neutral-500 hover:text-white">
+            <i class="fa-solid fa-tags"></i>
+            <span class="text-[10px]">Plans</span>
         </a>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            'use strict';
-
-            // Production Infrastructure Links & Configuration
             const CONFIG = {
                 downloads: {
                     android: 'https://app.nexusmm.xyz/android-phone/app-arm64-v8a-release.apk',
@@ -326,106 +293,76 @@
                 }
             };
 
-            // 1. Dynamic Copyright Engine
-            const yearEl = document.getElementById('current-year');
-            if (yearEl) yearEl.textContent = new Date().getFullYear();
+            // Year
+            document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // 2. High-Fidelity Premium Toast Engine
+            // Custom Toast System
             let toastTimer;
-            window.showToast = (msg, type = 'info') => {
+            window.showToast = (msg, isError = false) => {
                 const toast = document.getElementById('toast');
-                const toastMsg = document.getElementById('toast-msg');
-                const toastIconBg = document.getElementById('toast-icon-bg');
-                const toastIcon = document.getElementById('toast-icon');
-                
-                if (!toast || !toastMsg) return;
+                const msgEl = document.getElementById('toast-msg');
+                const iconEl = document.getElementById('toast-icon');
 
-                toastMsg.textContent = msg;
-                
-                // Absolute Premium Theme States
-                if(type === 'success') {
-                    toastIconBg.className = "w-6 h-6 rounded-full flex items-center justify-center bg-emerald-500/10 border border-emerald-500/30";
-                    toastIcon.className = "fa-solid fa-check text-emerald-400 text-[10px]";
-                } else if (type === 'error') {
-                    toastIconBg.className = "w-6 h-6 rounded-full flex items-center justify-center bg-rose-500/10 border border-rose-500/30";
-                    toastIcon.className = "fa-solid fa-triangle-exclamation text-rose-400 text-[10px]";
+                msgEl.textContent = msg;
+                if (isError) {
+                    iconEl.className = "fa-solid fa-circle-exclamation text-red-500";
+                    toast.classList.add('border-red-500/30');
                 } else {
-                    toastIconBg.className = "w-6 h-6 rounded-full flex items-center justify-center bg-brand/10 border border-brand/30";
-                    toastIcon.className = "fa-solid fa-info text-brand-light text-[10px]";
+                    iconEl.className = "fa-solid fa-circle-check text-secondary";
+                    toast.classList.remove('border-red-500/30');
                 }
 
-                // Smooth Refined Entrance Scale & Translate
-                toast.classList.remove('-translate-y-[250%]', 'opacity-0', 'scale-95');
-                toast.classList.add('translate-y-0', 'opacity-100', 'scale-100');
+                toast.classList.remove('translate-x-full', 'opacity-0');
                 
                 clearTimeout(toastTimer);
                 toastTimer = setTimeout(() => {
-                    toast.classList.remove('translate-y-0', 'opacity-100', 'scale-100');
-                    toast.classList.add('-translate-y-[250%]', 'opacity-0', 'scale-95');
-                }, 4000);
+                    toast.classList.add('translate-x-full', 'opacity-0');
+                }, 3000);
             };
 
-            // 3. Hardware App Store & APK Download Interceptors
+            // Tab Switching Logic
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active from all
+                    tabBtns.forEach(b => {
+                        b.classList.remove('bg-dark', 'text-white', 'shadow');
+                        b.classList.add('text-neutral-400');
+                    });
+                    tabContents.forEach(c => c.classList.remove('active'));
+
+                    // Add active to clicked
+                    btn.classList.remove('text-neutral-400');
+                    btn.classList.add('bg-dark', 'text-white', 'shadow');
+                    
+                    const targetId = btn.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+
+            // Handlers
             document.querySelectorAll('[data-download]').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const platformType = btn.getAttribute('data-download');
-                    const url = CONFIG.downloads[platformType];
-                    
-                    if (url) {
-                        const deviceName = platformType === 'tv' ? 'Android TV' : 'Android Phone';
-                        window.showToast(`${deviceName} အတွက် ဒေါင်းလုဒ် စတင်နေပါပြီ...`, 'success');
-                        
-                        setTimeout(() => {
-                            window.location.href = url;
-                        }, 1000);
+                    const platform = btn.getAttribute('data-download');
+                    if (CONFIG.downloads[platform]) {
+                        showToast(`Downloading for ${platform}...`);
+                        setTimeout(() => { window.location.href = CONFIG.downloads[platform]; }, 800);
                     } else {
-                        window.showToast("ဒေါင်းလုဒ်လင့်ခ် မရရှိနိုင်သေးပါ။", 'error');
+                        showToast("Link unavailable.", true);
                     }
                 });
             });
 
-            // 4. Secure External Social Handlers
             document.querySelectorAll('[data-social]').forEach(link => {
                 const platform = link.getAttribute('data-social');
                 if (CONFIG.socials[platform]) {
                     link.href = CONFIG.socials[platform];
                     link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
                 }
             });
-
-            // 5. Sophisticated Scroll Reveal Architecture
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.reveal').forEach(el => {
-                observer.observe(el);
-            });
-
-            // 6. Fluid Cinematic Sticky Navigation Bar Interceptor
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 40) {
-                    navbar.classList.add('glass-navigation', 'py-4', 'shadow-2xl');
-                    navbar.classList.remove('py-6');
-                } else {
-                    navbar.classList.remove('glass-navigation', 'py-4', 'shadow-2xl');
-                    navbar.classList.add('py-6');
-                }
-            }, { passive: true });
         });
     </script>
 </body>
