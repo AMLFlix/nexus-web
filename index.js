@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         socials: {
             facebook: 'https://www.facebook.com/NexusTVMyanmar',
-            telegram: 'https://t.me/NexusSupport'
+            telegram: 'https://t.me/NexusCareOfficial'
         }
     };
 
