@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Nexus TV — Immersive Cinematic Experience</title>
+    <title>Nexus TV — Ultra-Premium Immersive Streaming</title>
     
-    <meta name="theme-color" content="#040408">
+    <meta name="theme-color" content="#020205">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -14,19 +14,25 @@
                 extend: {
                     colors: {
                         brand: {
-                            DEFAULT: '#FF9900', // Luxury Cinema Amber/Gold
-                            light: '#FFB84D',
-                            dark: '#D48000',
+                            DEFAULT: '#E6A119', // Luxury Cinema Gold / Amber Accent
+                            light: '#F5B942',
+                            dark: '#B87D0A',
+                            surface: 'rgba(230, 161, 25, 0.04)'
                         },
-                        cinema: {
-                            bg: '#040408',      // Absolute Pure Midnight Ink
-                            surface: '#0E0D14', // Sleek Slate Surface
-                            border: '#1F1E29',  // Razor-thin Elegant Border
-                            muted: '#8E8D99'    // Sophisticated Gray
+                        obsidian: {
+                            bg: '#020205',      // Deepest Cinematic Pure Ink Black
+                            canvas: '#08080E',  // Studio High-Fidelity Deep Canvas
+                            card: '#0D0D16',    // Premium Sleek Plate Surface
+                            border: '#161622',  // Ultra-Fine Razor Border
+                            muted: '#7E7D8A'    // High-End Slate Neutral Gray
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'Noto Sans Myanmar', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        ultra: '0.18em',
+                        headline: '-0.02em'
                     }
                 }
             }
@@ -34,166 +40,175 @@
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Myanmar:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Myanmar:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body { 
-            background-color: #040408; 
+            background-color: #020205; 
             color: #FFFFFF; 
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Ambient Theatre Backlighting (OLED Glow इफेक्ट) */
-        .theatre-glow {
+        /* High-End Backlighting / Cinema Projection Effect */
+        .ambient-projection {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            max-width: 1400px;
-            height: 600px;
-            background: radial-gradient(circle at 50% -10%, rgba(255, 153, 0, 0.06) 0%, rgba(4, 4, 8, 0) 70%);
+            width: 150vw;
+            height: 85vh;
+            background: radial-gradient(circle at 50% -20%, rgba(230, 161, 25, 0.07) 0%, rgba(8, 8, 14, 0.3) 50%, rgba(2, 2, 5, 1) 100%);
             z-index: 0;
             pointer-events: none;
         }
 
-        /* Premium Glassmorph Navbar */
-        .glass-nav {
-            background: rgba(4, 4, 8, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid #1F1E29;
+        /* Fluid Studio Navigation Blur */
+        .glass-navigation {
+            background: rgba(2, 2, 5, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(22, 22, 34, 0.6);
         }
 
-        /* Editorial Asymmetric Animation Reveal */
+        /* Master-Class Asymmetric Reveal System */
         .reveal {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(25px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Fine UI Border Details */
-        .premium-border {
-            border: 1px solid #1F1E29;
-            transition: border-color 0.4s ease, background 0.4s ease;
+        /* Premium Micro-Interactive Borders */
+        .obsidian-plate {
+            border: 1px solid #161622;
+            background: #08080E;
+            transition: border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .premium-border:hover {
-            border-color: rgba(255, 153, 0, 0.3);
-            background: #12111A;
+        .obsidian-plate:hover {
+            border-color: rgba(230, 161, 25, 0.35);
+            background: #0D0D16;
+            transform: translateY(-2px);
+        }
+
+        /* Precision Line Height Adjustment for Elegant Burmese Typography */
+        .mm-editorial {
+            line-height: 1.95;
+            letter-spacing: 0.01em;
         }
     </style>
 </head>
-<body class="selection:bg-brand selection:text-cinema-bg font-sans antialiased">
+<body class="selection:bg-brand selection:text-obsidian-bg font-sans antialiased">
 
-    <div id="toast" class="fixed top-24 left-1/2 -translate-x-1/2 flex items-center gap-4 text-white px-5 py-3.5 rounded-full bg-cinema-surface/95 backdrop-blur-md border border-cinema-border shadow-2xl transition-all duration-500 transform -translate-y-[200%] opacity-0 z-[100]">
-        <div id="toast-icon-bg" class="w-7 h-7 rounded-full flex items-center justify-center">
+    <div id="toast" class="fixed top-8 left-1/2 -translate-x-1/2 flex items-center gap-4 text-white px-6 py-4 rounded-full bg-obsidian-card/95 backdrop-blur-xl border border-obsidian-border shadow-[0_24px_50px_-12px_rgba(0,0,0,0.9)] transition-all duration-700 transform -translate-y-[250%] opacity-0 z-[100] scale-95">
+        <div id="toast-icon-bg" class="w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300">
             <i id="toast-icon" class="text-xs"></i>
         </div>
-        <span id="toast-msg" class="text-sm font-medium tracking-wide"></span>
+        <span id="toast-msg" class="text-xs font-semibold tracking-wider uppercase"></span>
     </div>
 
-    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-300 py-5 px-6 md:px-16">
+    <nav id="navbar" class="fixed w-full z-50 top-0 transition-all duration-500 py-6 px-6 md:px-16">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2.5 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                <div class="w-6 h-6 bg-brand rounded-sm flex items-center justify-center">
-                    <div class="w-2 h-2 bg-cinema-bg transform rotate-45"></div>
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="w-5 h-5 bg-brand rounded-sm flex items-center justify-center transition-transform duration-500 group-hover:rotate-90">
+                    <div class="w-1.5 h-1.5 bg-obsidian-bg transform rotate-45"></div>
                 </div>
-                <span class="text-lg font-bold tracking-[0.15em] text-white uppercase">Nexus</span>
+                <span class="text-base font-bold tracking-ultra text-white uppercase transition-colors group-hover:text-brand-light">Nexus</span>
             </div>
             
-            <div class="hidden md:flex gap-10 text-[13px] tracking-widest uppercase font-medium text-cinema-muted">
-                <a href="#features" class="hover:text-white transition-colors">Features</a>
-                <a href="#pricing" class="hover:text-white transition-colors">Plans</a>
+            <div class="hidden md:flex gap-12 text-[11px] tracking-ultra uppercase font-semibold text-obsidian-muted">
+                <a href="#features" class="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand hover:after:w-full after:transition-all">Features</a>
+                <a href="#pricing" class="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand hover:after:w-full after:transition-all">Plans</a>
             </div>
             
             <div class="hidden md:block">
-                <a href="#download-section" class="border border-white/20 hover:border-white text-white px-6 py-2 rounded-full text-xs font-semibold tracking-widest uppercase transition-colors">
-                    Get The App
+                <a href="#download-section" class="border border-white/10 bg-white/[0.02] hover:bg-white hover:text-obsidian-bg text-white px-6 py-2.5 rounded-full text-[11px] font-bold tracking-ultra uppercase transition-all duration-300">
+                    Get Started
                 </a>
             </div>
         </div>
     </nav>
 
-    <section class="relative min-h-[95svh] flex flex-col items-center justify-center px-6 pt-32 pb-16 text-center overflow-hidden">
-        <div class="theatre-glow"></div>
+    <section class="relative min-h-[96svh] flex flex-col items-center justify-center px-6 pt-32 pb-20 text-center overflow-hidden">
+        <div class="ambient-projection"></div>
 
         <div class="relative z-10 max-w-4xl mx-auto reveal">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cinema-border bg-cinema-surface/50 mb-8">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
-                <span class="text-[10px] uppercase font-semibold tracking-[0.2em] text-cinema-muted">Now Streaming Live</span>
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-obsidian-border bg-obsidian-canvas/60 mb-10 shadow-inner">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
+                <span class="text-[9px] uppercase font-bold tracking-ultra text-brand-light">Cinema-Grade Quality</span>
             </div>
 
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.15] mb-6 tracking-tight text-white">
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.12] mb-8 tracking-headline text-white">
                 ထိုင်ခုံနံပါတ် မလိုပါ။<br>
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-light">ရုပ်ရှင်ရုံတစ်ခုလုံး</span> သင့်လက်ထဲမှာ။
+                <span class="bg-clip-text text-transparent bg-gradient-to-b from-white via-neutral-100 to-brand-light">ရုပ်ရှင်ရုံတစ်ခုလုံး</span> သင့်လက်ထဲမှာ။
             </h1>
             
-            <p class="text-base md:text-lg text-cinema-muted max-w-2xl mx-auto mb-12 font-normal leading-[1.9]">
-                မည်သည့်ကြော်ငြာမှ မပါဝင်ဘဲ <strong class="text-white font-semibold">4K Ultra HD</strong> ရုပ်ထွက်အကြည်မွမ်းမံမှုဖြင့် သင့်အိမ်ခန်းကို အကောင်းစား ရုပ်ရှင်ရုံတစ်ခုအဖြစ် ပြောင်းလဲလိုက်ပါ။
+            <p class="text-sm sm:text-base md:text-lg text-obsidian-muted max-w-2xl mx-auto mb-14 font-normal mm-editorial">
+                မည်သည့်ကြော်ငြာမှ မပါဝင်ဘဲ <strong class="text-white font-semibold">4K Ultra HD</strong> စစ်စစ်ဖြင့် အကောင်းဆုံးသော ရုပ်ရှင်နှင့် ဇာတ်လမ်းတွဲများကို အိမ်မှာတင် ရုပ်ရှင်ရုံထဲရောက်နေသကဲ့သို့ ခံစားကြည့်ရှုလိုက်ပါ။
             </p>
             
-            <div id="download-section" class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-                <button data-download="android" class="w-full bg-white hover:bg-neutral-200 text-cinema-bg px-8 py-3.5 rounded-full text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-3 transition-colors shadow-lg">
-                    <i class="fa-brands fa-android text-base"></i>
+            <div id="download-section" class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto w-full">
+                <button data-download="android" class="w-full bg-white hover:bg-neutral-200 text-obsidian-bg px-8 py-4 rounded-full text-[11px] font-bold tracking-ultra uppercase flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98] shadow-2xl">
+                    <i class="fa-brands fa-android text-sm"></i>
                     <span>Android Phone</span>
                 </button>
                 
-                <button data-download="tv" class="w-full bg-cinema-surface hover:bg-neutral-900 text-white border border-cinema-border px-8 py-3.5 rounded-full text-xs font-bold tracking-widest uppercase flex items-center justify-center gap-3 transition-colors">
-                    <i class="fa-solid fa-tv text-base text-cinema-muted"></i>
+                <button data-download="tv" class="w-full bg-obsidian-canvas hover:bg-obsidian-card text-white border border-obsidian-border px-8 py-4 rounded-full text-[11px] font-bold tracking-ultra uppercase flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98]">
+                    <i class="fa-solid fa-tv text-sm text-obsidian-muted"></i>
                     <span>Android TV App</span>
                 </button>
             </div>
             
-            <p class="text-[11px] text-cinema-muted tracking-wider mt-6 font-light">
-                <i class="fa-solid fa-shield-halved mr-1 text-brand/70"></i> Verified Secure • Android 8.0 or above required
+            <p class="text-[10px] text-obsidian-muted tracking-wider mt-8 font-medium uppercase">
+                <i class="fa-solid fa-shield-check mr-1.5 text-brand/60"></i> Verified Secure • Android 8.0 or above required
             </p>
         </div>
     </section>
 
-    <section id="features" class="py-32 px-6 md:px-16 border-t border-cinema-border bg-cinema-bg relative z-10">
+    <section id="features" class="py-36 px-6 md:px-16 border-t border-obsidian-border bg-obsidian-canvas relative z-10">
         <div class="max-w-7xl mx-auto">
             
-            <div class="mb-20 reveal">
-                <p class="text-brand text-xs font-semibold tracking-[0.20em] uppercase mb-3">Core Infrastructure</p>
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
+            <div class="mb-24 max-w-2xl reveal">
+                <p class="text-brand text-[10px] font-bold tracking-ultra uppercase mb-4">Core Infrastructure</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-headline text-white leading-tight">
                     ကြည့်ရှုမှု အတွေ့အကြုံကို<br>အဆင့်မြှင့်တင်ပေးမည့် စနစ်များ
                 </h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="premium-border bg-cinema-surface p-8 rounded-xl reveal">
-                    <div class="w-10 h-10 rounded-lg bg-brand/5 border border-brand/20 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-arrow-rotate-left text-brand text-sm"></i>
+                <div class="obsidian-plate p-10 rounded-2xl reveal">
+                    <div class="w-10 h-10 rounded-lg bg-brand/5 border border-brand/20 flex items-center justify-center mb-10">
+                        <i class="fa-solid fa-arrow-rotate-left text-brand text-xs"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-white mb-3">Seamless Syncing</h3>
-                    <p class="text-cinema-muted text-xs leading-[1.9] font-light">
-                        ဖုန်းတွင် ကြည့်လက်စဇာတ်ကားကို Android TV ပေါ်တွင် မှတ်သားထားစရာမလိုဘဲ ရပ်တန့်ခဲ့သည့် မိနစ်မှစ၍ အလွယ်တကူ ဆက်လက်ကြည့်ရှုနိုင်ပါသည်။
+                    <h3 class="text-base font-bold text-white tracking-wide mb-4">Seamless Syncing</h3>
+                    <p class="text-obsidian-muted text-xs mm-editorial font-light">
+                        ဖုန်းမှာ ကြည့်လက်စဇာတ်ကားကို Android TV ပေါ်တွင် ရပ်တန့်ခဲ့သည့် မိနစ်အတိအကျမှစ၍ မည်သည့်အဆင်မပြေမှုမျှမရှိဘဲ ချက်ချင်း ဆက်လက်ကြည့်ရှုနိုင်မည့် စနစ်။
                     </p>
                 </div>
 
-                <div class="premium-border bg-cinema-surface p-8 rounded-xl reveal" style="transition-delay: 50ms;">
-                    <div class="w-10 h-10 rounded-lg bg-brand/5 border border-brand/20 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-arrow-down-to-line text-brand text-sm"></i>
+                <div class="obsidian-plate p-10 rounded-2xl reveal" style="transition-delay: 60ms;">
+                    <div class="w-10 h-10 rounded-lg bg-brand/5 border border-brand/20 flex items-center justify-center mb-10">
+                        <i class="fa-solid fa-arrow-down-to-line text-brand text-xs"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-white mb-3">Offline Vault</h3>
-                    <p class="text-cinema-muted text-xs leading-[1.9] font-light">
-                        အင်တာနက် လိုင်းမကောင်းချိန် သို့မဟုတ် ခရီးသွားနေချိန်များတွင် အဆင်ပြေပြေ ကြည့်ရှုနိုင်ရန် မိမိနှစ်သက်ရာကို ကြိုတင် သိမ်းဆည်းထားနိုင်ပါသည်။
+                    <h3 class="text-base font-bold text-white tracking-wide mb-4">Offline Vault</h3>
+                    <p class="text-obsidian-muted text-xs mm-editorial font-light">
+                        အင်တာနက်လိုင်း မတည်ငြိမ်သည့် အချိန်များတွင်ပါ ကြည့်ရှုနိုင်ရန် မိမိနှစ်သက်သော ရုပ်ရှင်များကို ပကတိမူလ အရည်အသွေးအတိုင်း ကြိုတင်ဒေါင်းလုဒ်ဆွဲ သိမ်းဆည်းထားနိုင်မည်။
                     </p>
                 </div>
 
-                <div class="premium-border bg-cinema-surface p-8 rounded-xl reveal" style="transition-delay: 100ms;">
-                    <div class="w-10 h-10 rounded-lg bg-brand/5 border border-brand/20 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-sliders text-brand text-sm"></i>
+                <div class="obsidian-plate p-10 rounded-2xl reveal" style="transition-delay: 120ms;">
+                    <div class="w-10 h-10 rounded-lg bg-brand/5 border border-brand/20 flex items-center justify-center mb-10">
+                        <i class="fa-solid fa-sliders text-brand text-xs"></i>
                     </div>
-                    <h3 class="text-lg font-semibold text-white mb-3">Cinema Audio & Buffering</h3>
-                    <p class="text-cinema-muted text-xs leading-[1.9] font-light">
-                        Dolby Atmos အသံစနစ်နှင့် နောက်ဆုံးပေါ် သီးသန့် High-speed Server များကြောင့် 4K ရုပ်ထွက်ကိုပင် စောင့်ဆိုင်းစရာမလိုဘဲ ငြိမ့်ညောင်းစွာ ကြည့်ရှုနိုင်မည်။
+                    <h3 class="text-base font-bold text-white tracking-wide mb-4">Cinema Audio & Streaming</h3>
+                    <p class="text-obsidian-muted text-xs mm-editorial font-light">
+                        Dolby Atmos အသံစနစ်နှင့် အဆင့်မြင့် High-Speed Server များကြောင့် 4K ရုပ်ထွက်များကိုပါ ထစ်ငေါ့မှု လုံးဝမရှိဘဲ ကြည်လင်ပြတ်သားစွာ ခံစားနိုင်ခြင်း။
                     </p>
                 </div>
 
@@ -201,99 +216,217 @@
         </div>
     </section>
 
-    <section id="pricing" class="py-32 px-6 md:px-16 border-t border-cinema-border bg-cinema-bg relative z-10">
+    <section id="pricing" class="py-36 px-6 md:px-16 border-t border-obsidian-border bg-obsidian-canvas relative z-10">
         <div class="max-w-7xl mx-auto">
             
-            <div class="text-center mb-20 reveal">
-                <p class="text-brand text-xs font-semibold tracking-[0.20em] uppercase mb-3">Subscription Tiers</p>
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white">ရိုးရှင်းပြီး ပွင့်လင်းမြင်သာသော ဈေးနှုန်းများ</h2>
+            <div class="text-center mb-24 reveal">
+                <p class="text-brand text-[10px] font-bold tracking-ultra uppercase mb-4">Subscription Tiers</p>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-headline text-white">ရှင်းလင်းပြီး ပွင့်လင်းမြင်သာသော စျေးနှုန်းများ</h2>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
                 
-                <div class="premium-border bg-cinema-surface p-8 rounded-2xl flex flex-col justify-between reveal">
+                <div class="obsidian-plate p-10 rounded-2xl flex flex-col justify-between reveal">
                     <div>
-                        <span class="text-[10px] tracking-widest uppercase font-semibold text-cinema-muted block mb-4">Basic Tier</span>
-                        <div class="flex items-baseline gap-1 mb-6">
-                            <span class="text-3xl font-bold tracking-tight text-white">3,000</span>
-                            <span class="text-cinema-muted text-xs font-light">MMK / လ</span>
+                        <span class="text-[9px] tracking-ultra uppercase font-bold text-obsidian-muted block mb-5">Basic Tier</span>
+                        <div class="flex items-baseline gap-1.5 mb-8">
+                            <span class="text-3xl font-extrabold tracking-tight text-white">3,000</span>
+                            <span class="text-obsidian-muted text-xs font-medium">MMK / လ</span>
                         </div>
-                        <ul class="space-y-4 text-xs font-light text-neutral-300 border-t border-cinema-border/50 pt-6 mb-8">
-                            <li class="flex items-center gap-3"><i class="fa-solid fa-minus text-cinema-muted"></i> HD 720p Quality</li>
-                            <li class="flex items-center gap-3"><i class="fa-solid fa-minus text-cinema-muted"></i> Ad-Free Content</li>
-                            <li class="flex items-center gap-3 text-cinema-muted"><i class="fa-solid fa-minus"></i> Mobile Only (1 Device)</li>
+                        <ul class="space-y-4 text-xs font-light text-neutral-300 border-t border-obsidian-border/60 pt-8 mb-10">
+                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-minus text-obsidian-muted text-[10px]"></i> HD 720p Resolution</li>
+                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-minus text-obsidian-muted text-[10px]"></i> Ad-Free Premium Account</li>
+                            <li class="flex items-center gap-3.5 text-obsidian-muted"><i class="fa-solid fa-minus text-obsidian-muted text-[10px]"></i> Mobile Device Access Only</li>
                         </ul>
                     </div>
-                    <button class="w-full py-3 rounded-full text-xs font-bold tracking-widest uppercase bg-cinema-bg hover:bg-neutral-900 border border-cinema-border text-white transition-colors">Select Plan</button>
+                    <button class="w-full py-3.5 rounded-full text-[10px] font-bold tracking-ultra uppercase bg-obsidian-bg hover:bg-obsidian-card border border-obsidian-border text-white transition-all duration-300 active:scale-[0.98]">Select Plan</button>
                 </div>
 
-                <div class="border-2 border-brand bg-cinema-surface p-8 rounded-2xl flex flex-col justify-between relative shadow-2xl reveal" style="transition-delay: 50ms;">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-cinema-bg text-[9px] font-bold px-4 py-0.5 rounded-full tracking-widest uppercase">Most Popular</div>
+                <div class="border-2 border-brand bg-obsidian-bg p-10 rounded-2xl flex flex-col justify-between relative shadow-[0_30px_70px_-15px_rgba(230,161,25,0.15)] reveal" style="transition-delay: 60ms;">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-obsidian-bg text-[9px] font-extrabold px-5 py-1 rounded-full tracking-ultra uppercase shadow-lg">Most Popular</div>
                     <div>
-                        <span class="text-[10px] tracking-widest uppercase font-semibold text-brand block mb-4">Standard Tier</span>
-                        <div class="flex items-baseline gap-1 mb-6">
-                            <span class="text-4xl font-bold tracking-tight text-white">8,000</span>
-                            <span class="text-cinema-muted text-xs font-light">MMK / ၃ လ</span>
+                        <span class="text-[9px] tracking-ultra uppercase font-bold text-brand block mb-5">Standard Tier</span>
+                        <div class="flex items-baseline gap-1.5 mb-8">
+                            <span class="text-4xl font-extrabold tracking-tight text-white">8,000</span>
+                            <span class="text-obsidian-muted text-xs font-medium">MMK / ၃ လ</span>
                         </div>
-                        <ul class="space-y-4 text-xs font-light text-white border-t border-cinema-border/50 pt-6 mb-8">
-                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Ultra HD 4K Resolution</li>
-                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> Simultaneous Viewing (2 Devices)</li>
-                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand"></i> High-Speed Downloads</li>
+                        <ul class="space-y-4 text-xs font-medium text-white border-t border-obsidian-border/80 pt-8 mb-10">
+                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-check text-brand text-[10px]"></i> Ultra HD 4K Resolution</li>
+                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-check text-brand text-[10px]"></i> Multi-Device (2 Devices Simultaneously)</li>
+                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-check text-brand text-[10px]"></i> Maximum High-Speed Downloads</li>
                         </ul>
                     </div>
-                    <button class="w-full py-3 rounded-full text-xs font-bold tracking-widest uppercase bg-brand hover:bg-brand-dark text-cinema-bg transition-colors shadow-lg shadow-brand/10">Get Started</button>
+                    <button class="w-full py-3.5 rounded-full text-[10px] font-bold tracking-ultra uppercase bg-brand hover:bg-brand-dark text-obsidian-bg transition-all duration-300 active:scale-[0.98] shadow-xl shadow-brand/10">Get Started</button>
                 </div>
 
-                <div class="premium-border bg-cinema-surface p-8 rounded-2xl flex flex-col justify-between reveal" style="transition-delay: 100ms;">
+                <div class="obsidian-plate p-10 rounded-2xl flex flex-col justify-between reveal" style="transition-delay: 120ms;">
                     <div>
-                        <span class="text-[10px] tracking-widest uppercase font-semibold text-cinema-muted block mb-4">VIP Annual Tier</span>
-                        <div class="flex items-baseline gap-1 mb-6">
-                            <span class="text-3xl font-bold tracking-tight text-white">30,000</span>
-                            <span class="text-cinema-muted text-xs font-light">MMK / နှစ်</span>
+                        <span class="text-[9px] tracking-ultra uppercase font-bold text-obsidian-muted block mb-5">VIP Annual Tier</span>
+                        <div class="flex items-baseline gap-1.5 mb-8">
+                            <span class="text-3xl font-extrabold tracking-tight text-white">30,000</span>
+                            <span class="text-obsidian-muted text-xs font-medium">MMK / နှစ်</span>
                         </div>
-                        <ul class="space-y-4 text-xs font-light text-neutral-300 border-t border-cinema-border/50 pt-6 mb-8">
-                            <li class="flex items-center gap-3"><i class="fa-solid fa-star text-brand text-[10px]"></i> Maximum Server Speed Priority</li>
-                            <li class="flex items-center gap-3"><i class="fa-solid fa-star text-brand text-[10px]"></i> Multiple Custom Profiles</li>
-                            <li class="flex items-center gap-3"><i class="fa-solid fa-star text-brand text-[10px]"></i> 24/7 Dedicated Support</li>
+                        <ul class="space-y-4 text-xs font-light text-neutral-300 border-t border-obsidian-border/60 pt-8 mb-10">
+                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-star text-brand text-[9px]"></i> Priority Dedicated Server Network</li>
+                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-star text-brand text-[9px]"></i> Personalized Advanced Profiles</li>
+                            <li class="flex items-center gap-3.5"><i class="fa-solid fa-star text-brand text-[9px]"></i> 24/7 Priority Studio Support</li>
                         </ul>
                     </div>
-                    <button class="w-full py-3 rounded-full text-xs font-bold tracking-widest uppercase bg-cinema-bg hover:bg-neutral-900 border border-cinema-border text-white transition-colors">Select Plan</button>
+                    <button class="w-full py-3.5 rounded-full text-[10px] font-bold tracking-ultra uppercase bg-obsidian-bg hover:bg-obsidian-card border border-obsidian-border text-white transition-all duration-300 active:scale-[0.98]">Select Plan</button>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <footer class="border-t border-cinema-border py-16 px-6 bg-cinema-bg pb-28 md:pb-16 relative z-10">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <footer class="border-t border-obsidian-border py-20 px-6 bg-obsidian-bg pb-32 md:pb-20 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
             
             <div class="flex items-center gap-2">
-                <span class="text-sm font-bold tracking-[0.2em] text-white uppercase">Nexus TV</span>
+                <span class="text-xs font-bold tracking-ultra text-white uppercase">Nexus TV</span>
             </div>
             
-            <div class="flex gap-8">
-                <a href="#" data-social="facebook" class="text-cinema-muted hover:text-white transition-colors text-lg"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="#" data-social="telegram" class="text-cinema-muted hover:text-white transition-colors text-lg"><i class="fa-brands fa-telegram"></i></a>
+            <div class="flex gap-10">
+                <a href="#" data-social="facebook" class="text-obsidian-muted hover:text-white transition-colors text-base"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" data-social="telegram" class="text-obsidian-muted hover:text-white transition-colors text-base"><i class="fa-brands fa-telegram"></i></a>
             </div>
             
-            <p class="text-xs text-cinema-muted font-light">© <span id="current-year"></span> Nexus Entertainment. Engineered with precision.</p>
+            <p class="text-[11px] text-obsidian-muted tracking-wider font-light uppercase">© <span id="current-year"></span> Nexus Entertainment. Engineered with absolute precision.</p>
         </div>
     </footer>
 
-    <div id="mobile-nav" class="fixed bottom-0 left-0 w-full bg-cinema-bg/80 backdrop-blur-xl border-t border-cinema-border z-50 flex justify-around items-center px-4 py-3.5 md:hidden pb-safe">
-        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-1 text-brand">
-            <i class="fa-solid fa-compass text-base"></i>
-            <span class="text-[9px] uppercase tracking-wider font-semibold">Discover</span>
+    <div id="mobile-nav" class="fixed bottom-0 left-0 w-full bg-obsidian-bg/80 backdrop-blur-xl border-t border-obsidian-border z-50 flex justify-around items-center px-6 py-4 md:hidden pb-safe">
+        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-1.5 text-brand">
+            <i class="fa-solid fa-compass text-sm"></i>
+            <span class="text-[9px] uppercase tracking-wider font-bold">Discover</span>
         </a>
-        <a href="#features" class="flex flex-col items-center gap-1 text-cinema-muted hover:text-white transition-colors">
-            <i class="fa-solid fa-cubes text-base"></i>
-            <span class="text-[9px] uppercase tracking-wider font-semibold">Features</span>
+        <a href="#features" class="flex flex-col items-center gap-1.5 text-obsidian-muted hover:text-white transition-colors">
+            <i class="fa-solid fa-cubes text-sm"></i>
+            <span class="text-[9px] uppercase tracking-wider font-bold">Features</span>
         </a>
-        <a href="#pricing" class="flex flex-col items-center gap-1 text-cinema-muted hover:text-white transition-colors">
-            <i class="fa-solid fa-ticket text-base"></i>
-            <span class="text-[9px] uppercase tracking-wider font-semibold">Plans</span>
+        <a href="#pricing" class="flex flex-col items-center gap-1.5 text-obsidian-muted hover:text-white transition-colors">
+            <i class="fa-solid fa-ticket text-sm"></i>
+            <span class="text-[9px] uppercase tracking-wider font-bold">Plans</span>
         </a>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            'use strict';
+
+            // Production Infrastructure Links & Configuration
+            const CONFIG = {
+                downloads: {
+                    android: 'https://app.nexusmm.xyz/android-phone/app-arm64-v8a-release.apk',
+                    tv: 'https://app.nexusmm.xyz/android-tv/app-release.apk'
+                },
+                socials: {
+                    facebook: 'https://www.facebook.com/NexusTVMyanmar',
+                    telegram: 'https://t.me/NexusCareOfficial'
+                }
+            };
+
+            // 1. Dynamic Copyright Engine
+            const yearEl = document.getElementById('current-year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+            // 2. High-Fidelity Premium Toast Engine
+            let toastTimer;
+            window.showToast = (msg, type = 'info') => {
+                const toast = document.getElementById('toast');
+                const toastMsg = document.getElementById('toast-msg');
+                const toastIconBg = document.getElementById('toast-icon-bg');
+                const toastIcon = document.getElementById('toast-icon');
+                
+                if (!toast || !toastMsg) return;
+
+                toastMsg.textContent = msg;
+                
+                // Absolute Premium Theme States
+                if(type === 'success') {
+                    toastIconBg.className = "w-6 h-6 rounded-full flex items-center justify-center bg-emerald-500/10 border border-emerald-500/30";
+                    toastIcon.className = "fa-solid fa-check text-emerald-400 text-[10px]";
+                } else if (type === 'error') {
+                    toastIconBg.className = "w-6 h-6 rounded-full flex items-center justify-center bg-rose-500/10 border border-rose-500/30";
+                    toastIcon.className = "fa-solid fa-triangle-exclamation text-rose-400 text-[10px]";
+                } else {
+                    toastIconBg.className = "w-6 h-6 rounded-full flex items-center justify-center bg-brand/10 border border-brand/30";
+                    toastIcon.className = "fa-solid fa-info text-brand-light text-[10px]";
+                }
+
+                // Smooth Refined Entrance Scale & Translate
+                toast.classList.remove('-translate-y-[250%]', 'opacity-0', 'scale-95');
+                toast.classList.add('translate-y-0', 'opacity-100', 'scale-100');
+                
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100', 'scale-100');
+                    toast.classList.add('-translate-y-[250%]', 'opacity-0', 'scale-95');
+                }, 4000);
+            };
+
+            // 3. Hardware App Store & APK Download Interceptors
+            document.querySelectorAll('[data-download]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const platformType = btn.getAttribute('data-download');
+                    const url = CONFIG.downloads[platformType];
+                    
+                    if (url) {
+                        const deviceName = platformType === 'tv' ? 'Android TV' : 'Android Phone';
+                        window.showToast(`${deviceName} အတွက် ဒေါင်းလုဒ် စတင်နေပါပြီ...`, 'success');
+                        
+                        setTimeout(() => {
+                            window.location.href = url;
+                        }, 1000);
+                    } else {
+                        window.showToast("ဒေါင်းလုဒ်လင့်ခ် မရရှိနိုင်သေးပါ။", 'error');
+                    }
+                });
+            });
+
+            // 4. Secure External Social Handlers
+            document.querySelectorAll('[data-social]').forEach(link => {
+                const platform = link.getAttribute('data-social');
+                if (CONFIG.socials[platform]) {
+                    link.href = CONFIG.socials[platform];
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                }
+            });
+
+            // 5. Sophisticated Scroll Reveal Architecture
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            // 6. Fluid Cinematic Sticky Navigation Bar Interceptor
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    navbar.classList.add('glass-navigation', 'py-4', 'shadow-2xl');
+                    navbar.classList.remove('py-6');
+                } else {
+                    navbar.classList.remove('glass-navigation', 'py-4', 'shadow-2xl');
+                    navbar.classList.add('py-6');
+                }
+            }, { passive: true });
+        });
+    </script>
 </body>
 </html>
