@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Configuration (URLs တွေ ပြင်ရန်)
     const CONFIG = {
         downloads: {
-            'download-mobile': 'https://app.nexusmm.xyz/android-phone/app-arm64-v8a-release-version1.0.1.apk',
+            'download-mobile': 'https://app.nexusmm.xyz/android-phone/nexus-2.0-app-release.apk',
             'download-tv': 'https://app.nexusmm.xyz/android-tv/androidtv.apk'
         },
         socials: {
